@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementTime.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -36,13 +36,13 @@ public:
 	MeasurementTime(TypeHeader header,
 	                TypeTimestamp time_of_validity,
 	                int32_t time_of_validity_attosec,
-	                xt::pyarray<uint8_t> clock_id,
-	                xt::pyarray<int64_t> elapsed_nsec,
-	                xt::pyarray<int32_t> elapsed_attosec,
+	                xt::pytensor<uint8_t, 1> clock_id,
+	                xt::pytensor<int64_t, 1> elapsed_nsec,
+	                xt::pytensor<int32_t, 1> elapsed_attosec,
 	                uint8_t digits_of_precision,
-	                xt::pyarray<double> covariance,
+	                xt::pytensor<double, 2> covariance,
 	                Aspn23MeasurementTimeErrorModel error_model,
-	                xt::pyarray<double> error_model_params,
+	                xt::pytensor<double, 1> error_model_params,
 	                std::vector<TypeIntegrity> integrity);
 
 	~MeasurementTime();
@@ -162,7 +162,7 @@ public:
 	 * 6 = BeiDou System Time
 	 * 7-50: Reserved for future additional time scale representations.
 	 */
-	xt::pyarray<uint8_t> get_clock_id() const;
+	xt::pytensor<uint8_t, 1> get_clock_id() const;
 
 	/**
 	 * Identifier for clock/timing source for each measurement. See clock_identifiers.md for a full
@@ -176,21 +176,21 @@ public:
 	 * 6 = BeiDou System Time
 	 * 7-50: Reserved for future additional time scale representations.
 	 */
-	void set_clock_id(xt::pyarray<uint8_t>);
+	void set_clock_id(xt::pytensor<uint8_t, 1>);
 
 	/**
 	 * Whole number nanoseconds elapsed since each clock's zero epoch. If negative, whole number
 	 * nanoseconds until each clock's zero epoch. Additionally, the timestamp's digits of precision
 	 * are included as `digits_of_precision`.
 	 */
-	xt::pyarray<int64_t> get_elapsed_nsec() const;
+	xt::pytensor<int64_t, 1> get_elapsed_nsec() const;
 
 	/**
 	 * Whole number nanoseconds elapsed since each clock's zero epoch. If negative, whole number
 	 * nanoseconds until each clock's zero epoch. Additionally, the timestamp's digits of precision
 	 * are included as `digits_of_precision`.
 	 */
-	void set_elapsed_nsec(xt::pyarray<int64_t>);
+	void set_elapsed_nsec(xt::pytensor<int64_t, 1>);
 
 	/**
 	 * Whole number of attoseconds used to provide additional observation fidelity. This is only
@@ -209,7 +209,7 @@ public:
 	 * should be taken when constructing the observation components to be sure the summation
 	 * produces the desired result.
 	 */
-	xt::pyarray<int32_t> get_elapsed_attosec() const;
+	xt::pytensor<int32_t, 1> get_elapsed_attosec() const;
 
 	/**
 	 * Whole number of attoseconds used to provide additional observation fidelity. This is only
@@ -228,7 +228,7 @@ public:
 	 * should be taken when constructing the observation components to be sure the summation
 	 * produces the desired result.
 	 */
-	void set_elapsed_attosec(xt::pyarray<int32_t>);
+	void set_elapsed_attosec(xt::pytensor<int32_t, 1>);
 
 	/**
 	 * Defines how many decimal digits of precision are represented in the observation after the
@@ -253,7 +253,7 @@ public:
 	 * measurements should be included in the overall errors for the respective time measurements as
 	 * expressed in the covariance matrix. Dimensions of covariance must be num_obs²
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Measurement error variance or covariance depending on measurement dimension in the absolute
@@ -262,7 +262,7 @@ public:
 	 * measurements should be included in the overall errors for the respective time measurements as
 	 * expressed in the covariance matrix. Dimensions of covariance must be num_obs²
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -284,12 +284,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

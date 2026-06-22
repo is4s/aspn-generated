@@ -8,7 +8,7 @@
 #include <aspn23/TypeDirection2DToPoint.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -42,7 +42,7 @@ public:
 	                       bool has_observation_characteristics,
 	                       TypeImageFeature observation_characteristics,
 	                       Aspn23TypeDirection2DToPointErrorModel error_model,
-	                       xt::xarray<double> error_model_params,
+	                       xt::xtensor<double, 1> error_model_params,
 	                       std::vector<TypeIntegrity> integrity);
 
 	~TypeDirection2DToPoint();
@@ -146,12 +146,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::xarray<double> get_error_model_params() const;
+	xt::xtensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::xarray<double>);
+	void set_error_model_params(xt::xtensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

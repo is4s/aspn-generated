@@ -13,10 +13,10 @@ MeasurementAngularVelocity::MeasurementAngularVelocity(
     TypeTimestamp time_of_validity,
     Aspn23MeasurementAngularVelocityReferenceFrame reference_frame,
     Aspn23MeasurementAngularVelocityImuType imu_type,
-    xt::pyarray<double> meas,
-    xt::pyarray<double> covariance,
+    xt::pytensor<double, 1> meas,
+    xt::pytensor<double, 2> covariance,
     Aspn23MeasurementAngularVelocityErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -284,26 +284,26 @@ void MeasurementAngularVelocity::set_imu_type(Aspn23MeasurementAngularVelocityIm
 	c_struct->imu_type = imu_type;
 }
 
-xt::pyarray<double> MeasurementAngularVelocity::get_meas() const {
+xt::pytensor<double, 1> MeasurementAngularVelocity::get_meas() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->meas[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementAngularVelocity::set_meas(xt::pyarray<double> meas) {
+void MeasurementAngularVelocity::set_meas(xt::pytensor<double, 1> meas) {
 	nullptr_check();
 	memcpy(c_struct->meas, meas.data(), 3 * sizeof(double));
 }
 
-xt::pyarray<double> MeasurementAngularVelocity::get_covariance() const {
+xt::pytensor<double, 2> MeasurementAngularVelocity::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {3, 3};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void MeasurementAngularVelocity::set_covariance(xt::pyarray<double> covariance) {
+void MeasurementAngularVelocity::set_covariance(xt::pytensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 3 * 3 * sizeof(double));
 }
@@ -324,7 +324,7 @@ uint16_t MeasurementAngularVelocity::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementAngularVelocity::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementAngularVelocity::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -332,7 +332,8 @@ xt::pyarray<double> MeasurementAngularVelocity::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementAngularVelocity::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MeasurementAngularVelocity::set_error_model_params(
+    xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

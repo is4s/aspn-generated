@@ -8,7 +8,7 @@
 #include <aspn23/TypeDirection3DToPoint.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -37,12 +37,12 @@ public:
 
 	TypeDirection3DToPoint(TypeRemotePoint remote_point,
 	                       Aspn23TypeDirection3DToPointReferenceFrame reference_frame,
-	                       xt::pyarray<double> obs,
-	                       xt::pyarray<double> covariance,
+	                       xt::pytensor<double, 1> obs,
+	                       xt::pytensor<double, 2> covariance,
 	                       bool has_observation_characteristics,
 	                       TypeImageFeature observation_characteristics,
 	                       Aspn23TypeDirection3DToPointErrorModel error_model,
-	                       xt::pyarray<double> error_model_params,
+	                       xt::pytensor<double, 1> error_model_params,
 	                       std::vector<TypeIntegrity> integrity);
 
 	~TypeDirection3DToPoint();
@@ -89,22 +89,22 @@ public:
 	/**
 	 * 3D direction to the remote point as defined in reference_frame.
 	 */
-	xt::pyarray<double> get_obs() const;
+	xt::pytensor<double, 1> get_obs() const;
 
 	/**
 	 * 3D direction to the remote point as defined in reference_frame.
 	 */
-	void set_obs(xt::pyarray<double>);
+	void set_obs(xt::pytensor<double, 1>);
 
 	/**
 	 * Covariance of the direction measurement as defined in reference_frame.
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Covariance of the direction measurement as defined in reference_frame.
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Switch for whether observation_characteristics is valid or not.
@@ -146,12 +146,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

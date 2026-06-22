@@ -12,7 +12,7 @@ MetadataImu::MetadataImu(TypeMetadataheader info,
                          TypeTimestamp time_of_validity,
                          TypeMounting mounting,
                          Aspn23MetadataImuErrorModel error_model,
-                         xt::pyarray<double> error_model_params)
+                         xt::pytensor<double, 1> error_model_params)
     : TypeHeader(info.get_header()) {
 	auto info_prep             = info.get_aspn_c();
 	auto time_of_validity_prep = time_of_validity.get_aspn_c();
@@ -212,7 +212,7 @@ uint16_t MetadataImu::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MetadataImu::get_error_model_params() const {
+xt::pytensor<double, 1> MetadataImu::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -220,7 +220,7 @@ xt::pyarray<double> MetadataImu::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MetadataImu::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MetadataImu::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

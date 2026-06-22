@@ -8,10 +8,11 @@
 
 namespace aspn23_xtensor {
 
-TypeMounting::TypeMounting(xt::xarray<double> lever_arm,
-                           xt::xarray<double> lever_arm_sigma,
-                           xt::xarray<double> orientation_quaternion,
-                           xt::xarray<double> orientation_tilt_error_covariance) {
+TypeMounting::TypeMounting(
+    xt::xtensor_fixed<double, xt::xshape<3>> lever_arm,
+    xt::xtensor_fixed<double, xt::xshape<3>> lever_arm_sigma,
+    xt::xtensor_fixed<double, xt::xshape<4>> orientation_quaternion,
+    xt::xtensor_fixed<double, xt::xshape<3, 3>> orientation_tilt_error_covariance) {
 
 	double lever_arm_prep[3];
 	for (size_t ii = 0; ii < 3; ii++) lever_arm_prep[ii] = lever_arm(ii);
@@ -137,43 +138,45 @@ void TypeMounting::reset_aspn_c(Aspn23TypeMounting* replacement_struct, bool tak
 	this->c_struct       = replacement_struct;
 }
 
-xt::xarray<double> TypeMounting::get_lever_arm() const {
+xt::xtensor_fixed<double, xt::xshape<3>> TypeMounting::get_lever_arm() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->lever_arm[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_lever_arm(xt::xarray<double> lever_arm) {
+void TypeMounting::set_lever_arm(xt::xtensor_fixed<double, xt::xshape<3>> lever_arm) {
 	nullptr_check();
 	memcpy(c_struct->lever_arm, lever_arm.data(), 3 * sizeof(double));
 }
 
-xt::xarray<double> TypeMounting::get_lever_arm_sigma() const {
+xt::xtensor_fixed<double, xt::xshape<3>> TypeMounting::get_lever_arm_sigma() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->lever_arm_sigma[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_lever_arm_sigma(xt::xarray<double> lever_arm_sigma) {
+void TypeMounting::set_lever_arm_sigma(xt::xtensor_fixed<double, xt::xshape<3>> lever_arm_sigma) {
 	nullptr_check();
 	memcpy(c_struct->lever_arm_sigma, lever_arm_sigma.data(), 3 * sizeof(double));
 }
 
-xt::xarray<double> TypeMounting::get_orientation_quaternion() const {
+xt::xtensor_fixed<double, xt::xshape<4>> TypeMounting::get_orientation_quaternion() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {4};
 	return xt::adapt(&c_struct->orientation_quaternion[0], 4, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_orientation_quaternion(xt::xarray<double> orientation_quaternion) {
+void TypeMounting::set_orientation_quaternion(
+    xt::xtensor_fixed<double, xt::xshape<4>> orientation_quaternion) {
 	nullptr_check();
 	memcpy(c_struct->orientation_quaternion, orientation_quaternion.data(), 4 * sizeof(double));
 }
 
-xt::xarray<double> TypeMounting::get_orientation_tilt_error_covariance() const {
+xt::xtensor_fixed<double, xt::xshape<3, 3>> TypeMounting::get_orientation_tilt_error_covariance()
+    const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {3, 3};
@@ -181,7 +184,7 @@ xt::xarray<double> TypeMounting::get_orientation_tilt_error_covariance() const {
 }
 
 void TypeMounting::set_orientation_tilt_error_covariance(
-    xt::xarray<double> orientation_tilt_error_covariance) {
+    xt::xtensor_fixed<double, xt::xshape<3, 3>> orientation_tilt_error_covariance) {
 	nullptr_check();
 	memcpy(c_struct->orientation_tilt_error_covariance,
 	       orientation_tilt_error_covariance.data(),

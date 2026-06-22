@@ -13,12 +13,12 @@ TypeSatnavSvData::TypeSatnavSvData(int16_t prn,
                                    Aspn23TypeSatnavSvDataEphemerisType ephemeris_type,
                                    TypeSatnavTime sv_data_time,
                                    Aspn23TypeSatnavSvDataCoordinateFrame coordinate_frame,
-                                   xt::xarray<double> sv_pos,
-                                   xt::xarray<double> sv_vel,
+                                   xt::xtensor_fixed<double, xt::xshape<3>> sv_pos,
+                                   xt::xtensor_fixed<double, xt::xshape<3>> sv_vel,
                                    double sv_clock_bias,
                                    double sv_clock_drift,
                                    Aspn23TypeSatnavSvDataGroupDelayEnum group_delay_enum,
-                                   xt::xarray<float> group_delay_vector) {
+                                   xt::xtensor_fixed<float, xt::xshape<4>> group_delay_vector) {
 	auto satellite_system_prep = satellite_system.get_aspn_c();
 	auto sv_data_time_prep     = sv_data_time.get_aspn_c();
 	double sv_pos_prep[3];
@@ -205,26 +205,26 @@ void TypeSatnavSvData::set_coordinate_frame(
 	c_struct->coordinate_frame = coordinate_frame;
 }
 
-xt::xarray<double> TypeSatnavSvData::get_sv_pos() const {
+xt::xtensor_fixed<double, xt::xshape<3>> TypeSatnavSvData::get_sv_pos() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->sv_pos[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeSatnavSvData::set_sv_pos(xt::xarray<double> sv_pos) {
+void TypeSatnavSvData::set_sv_pos(xt::xtensor_fixed<double, xt::xshape<3>> sv_pos) {
 	nullptr_check();
 	memcpy(c_struct->sv_pos, sv_pos.data(), 3 * sizeof(double));
 }
 
-xt::xarray<double> TypeSatnavSvData::get_sv_vel() const {
+xt::xtensor_fixed<double, xt::xshape<3>> TypeSatnavSvData::get_sv_vel() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->sv_vel[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeSatnavSvData::set_sv_vel(xt::xarray<double> sv_vel) {
+void TypeSatnavSvData::set_sv_vel(xt::xtensor_fixed<double, xt::xshape<3>> sv_vel) {
 	nullptr_check();
 	memcpy(c_struct->sv_vel, sv_vel.data(), 3 * sizeof(double));
 }
@@ -259,14 +259,15 @@ void TypeSatnavSvData::set_group_delay_enum(Aspn23TypeSatnavSvDataGroupDelayEnum
 	c_struct->group_delay_enum = group_delay_enum;
 }
 
-xt::xarray<float> TypeSatnavSvData::get_group_delay_vector() const {
+xt::xtensor_fixed<float, xt::xshape<4>> TypeSatnavSvData::get_group_delay_vector() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {4};
 	return xt::adapt(&c_struct->group_delay_vector[0], 4, xt::no_ownership(), shape);
 }
 
-void TypeSatnavSvData::set_group_delay_vector(xt::xarray<float> group_delay_vector) {
+void TypeSatnavSvData::set_group_delay_vector(
+    xt::xtensor_fixed<float, xt::xshape<4>> group_delay_vector) {
 	nullptr_check();
 	memcpy(c_struct->group_delay_vector, group_delay_vector.data(), 4 * sizeof(float));
 }

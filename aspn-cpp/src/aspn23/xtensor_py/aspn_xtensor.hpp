@@ -7,6 +7,9 @@
 #include <functional>
 #include <memory>
 
+// xtensor
+#include <xtensor/containers/xfixed.hpp>
+
 #include <aspn23/aspn.h>
 #include "TypeDirection2DToPoint.hpp"
 #include "TypeDirection3DToPoint.hpp"
@@ -125,3 +128,32 @@ std::shared_ptr<aspn23_xtensor::AspnBase> copy_message(
     std::shared_ptr<aspn23_xtensor::AspnBase> parent);
 
 }  // namespace aspn23_xtensor
+
+namespace xt {
+
+/**
+ * Operator for comparing `xt::fixed_shape` type.
+ *
+ * This function is needed to allow for fine-grain tensor typing in ASPN
+ * messages.  For some reason, xtensor doesn't have a built in `==` operator
+ * for `xt::fixed_shape` type, causing the debug build of NavTK to fail
+ * because of xtensor shape asserts.  This is a known issue in xtensor
+ * (see https://github.com/xtensor-stack/xtensor/issues/2376).
+ */
+template <size_t... I1, size_t... I2>
+constexpr bool operator==(const fixed_shape<I1...>&, const fixed_shape<I2...>&) {
+	if constexpr (sizeof...(I1) != sizeof...(I2)) {
+		return false;
+	} else {
+		constexpr size_t shape1[] = {I1...};
+		constexpr size_t shape2[] = {I2...};
+
+		for (size_t i = 0; i < sizeof...(I1); i++) {
+			if (shape1[i] != shape2[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
+}  // namespace xt

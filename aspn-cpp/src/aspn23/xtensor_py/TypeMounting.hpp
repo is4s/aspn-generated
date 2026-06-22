@@ -8,7 +8,7 @@
 #include <aspn23/TypeMounting.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -33,10 +33,10 @@ public:
 	 */
 	TypeMounting(Aspn23TypeMounting* c_struct, bool take_ownership = true);
 
-	TypeMounting(xt::pyarray<double> lever_arm,
-	             xt::pyarray<double> lever_arm_sigma,
-	             xt::pyarray<double> orientation_quaternion,
-	             xt::pyarray<double> orientation_tilt_error_covariance);
+	TypeMounting(xt::pytensor<double, 1> lever_arm,
+	             xt::pytensor<double, 1> lever_arm_sigma,
+	             xt::pytensor<double, 1> orientation_quaternion,
+	             xt::pytensor<double, 2> orientation_tilt_error_covariance);
 
 	~TypeMounting();
 
@@ -62,22 +62,22 @@ public:
 	/**
 	 * 3x1 lever arm vector describing the sensor position in the platform body frame.
 	 */
-	xt::pyarray<double> get_lever_arm() const;
+	xt::pytensor<double, 1> get_lever_arm() const;
 
 	/**
 	 * 3x1 lever arm vector describing the sensor position in the platform body frame.
 	 */
-	void set_lever_arm(xt::pyarray<double>);
+	void set_lever_arm(xt::pytensor<double, 1>);
 
 	/**
 	 * 3x1 lever arm uncertainty vector as standard deviations in the platform body frame.
 	 */
-	xt::pyarray<double> get_lever_arm_sigma() const;
+	xt::pytensor<double, 1> get_lever_arm_sigma() const;
 
 	/**
 	 * 3x1 lever arm uncertainty vector as standard deviations in the platform body frame.
 	 */
-	void set_lever_arm_sigma(xt::pyarray<double>);
+	void set_lever_arm_sigma(xt::pytensor<double, 1>);
 
 	/**
 	 * Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2),
@@ -89,7 +89,7 @@ public:
 	 * the case that orientation is meaningless, for example, in the case of an RF antenna mounting.
 	 * See "conventions" documentation for more detailed information.
 	 */
-	xt::pyarray<double> get_orientation_quaternion() const;
+	xt::pytensor<double, 1> get_orientation_quaternion() const;
 
 	/**
 	 * Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2),
@@ -101,7 +101,7 @@ public:
 	 * the case that orientation is meaningless, for example, in the case of an RF antenna mounting.
 	 * See "conventions" documentation for more detailed information.
 	 */
-	void set_orientation_quaternion(xt::pyarray<double>);
+	void set_orientation_quaternion(xt::pytensor<double, 1>);
 
 	/**
 	 * Tilt error covariance matrix. This matrix represents the uncertainty in the "tilt errors"
@@ -113,7 +113,7 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	xt::pyarray<double> get_orientation_tilt_error_covariance() const;
+	xt::pytensor<double, 2> get_orientation_tilt_error_covariance() const;
 
 	/**
 	 * Tilt error covariance matrix. This matrix represents the uncertainty in the "tilt errors"
@@ -125,7 +125,7 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	void set_orientation_tilt_error_covariance(xt::pyarray<double>);
+	void set_orientation_tilt_error_covariance(xt::pytensor<double, 2>);
 
 private:
 	Aspn23TypeMounting* c_struct;

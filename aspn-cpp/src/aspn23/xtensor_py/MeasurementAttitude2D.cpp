@@ -12,10 +12,10 @@ MeasurementAttitude2D::MeasurementAttitude2D(
     TypeHeader header,
     TypeTimestamp time_of_validity,
     Aspn23MeasurementAttitude2DReferenceFrame reference_frame,
-    xt::pyarray<double> attitude2d,
-    xt::pyarray<double> covariance,
+    xt::pytensor<double, 1> attitude2d,
+    xt::pytensor<double, 2> covariance,
     Aspn23MeasurementAttitude2DErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -263,26 +263,26 @@ void MeasurementAttitude2D::set_reference_frame(
 	c_struct->reference_frame = reference_frame;
 }
 
-xt::pyarray<double> MeasurementAttitude2D::get_attitude2d() const {
+xt::pytensor<double, 1> MeasurementAttitude2D::get_attitude2d() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {2};
 	return xt::adapt(&c_struct->attitude2d[0], 2, xt::no_ownership(), shape);
 }
 
-void MeasurementAttitude2D::set_attitude2d(xt::pyarray<double> attitude2d) {
+void MeasurementAttitude2D::set_attitude2d(xt::pytensor<double, 1> attitude2d) {
 	nullptr_check();
 	memcpy(c_struct->attitude2d, attitude2d.data(), 2 * sizeof(double));
 }
 
-xt::pyarray<double> MeasurementAttitude2D::get_covariance() const {
+xt::pytensor<double, 2> MeasurementAttitude2D::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {2, 2};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void MeasurementAttitude2D::set_covariance(xt::pyarray<double> covariance) {
+void MeasurementAttitude2D::set_covariance(xt::pytensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 2 * 2 * sizeof(double));
 }
@@ -302,7 +302,7 @@ uint16_t MeasurementAttitude2D::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementAttitude2D::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementAttitude2D::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -310,7 +310,7 @@ xt::pyarray<double> MeasurementAttitude2D::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementAttitude2D::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MeasurementAttitude2D::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

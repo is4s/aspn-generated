@@ -14,7 +14,7 @@ MeasurementSatnavSubframe::MeasurementSatnavSubframe(TypeHeader header,
                                                      int32_t prn,
                                                      TypeSatnavSatelliteSystem satellite_system,
                                                      int32_t freq_slot_id,
-                                                     xt::pyarray<int8_t> data_vector,
+                                                     xt::pytensor<int8_t, 1> data_vector,
                                                      std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -279,14 +279,14 @@ uint16_t MeasurementSatnavSubframe::get_num_bytes() const {
 	return c_struct->num_bytes;
 }
 
-xt::pyarray<int8_t> MeasurementSatnavSubframe::get_data_vector() const {
+xt::pytensor<int8_t, 1> MeasurementSatnavSubframe::get_data_vector() const {
 	nullptr_check();
 	if (c_struct->data_vector == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_bytes};
 	return xt::adapt(c_struct->data_vector, c_struct->num_bytes, xt::no_ownership(), shape);
 }
 
-void MeasurementSatnavSubframe::set_data_vector(xt::pyarray<int8_t> data_vector) {
+void MeasurementSatnavSubframe::set_data_vector(xt::pytensor<int8_t, 1> data_vector) {
 	nullptr_check();
 	memcpy(c_struct->data_vector, data_vector.data(), c_struct->num_bytes * sizeof(int8_t));
 	c_struct->num_bytes = data_vector.size();

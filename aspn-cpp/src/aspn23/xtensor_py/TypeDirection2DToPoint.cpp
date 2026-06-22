@@ -15,7 +15,7 @@ TypeDirection2DToPoint::TypeDirection2DToPoint(TypeRemotePoint remote_point,
                                                bool has_observation_characteristics,
                                                TypeImageFeature observation_characteristics,
                                                Aspn23TypeDirection2DToPointErrorModel error_model,
-                                               xt::pyarray<double> error_model_params,
+                                               xt::pytensor<double, 1> error_model_params,
                                                std::vector<TypeIntegrity> integrity) {
 	auto remote_point_prep                = remote_point.get_aspn_c();
 	auto observation_characteristics_prep = observation_characteristics.get_aspn_c();
@@ -228,7 +228,7 @@ uint16_t TypeDirection2DToPoint::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> TypeDirection2DToPoint::get_error_model_params() const {
+xt::pytensor<double, 1> TypeDirection2DToPoint::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -236,7 +236,7 @@ xt::pyarray<double> TypeDirection2DToPoint::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void TypeDirection2DToPoint::set_error_model_params(xt::pyarray<double> error_model_params) {
+void TypeDirection2DToPoint::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

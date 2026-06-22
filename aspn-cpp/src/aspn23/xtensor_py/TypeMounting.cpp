@@ -8,10 +8,10 @@
 
 namespace aspn23_xtensor {
 
-TypeMounting::TypeMounting(xt::pyarray<double> lever_arm,
-                           xt::pyarray<double> lever_arm_sigma,
-                           xt::pyarray<double> orientation_quaternion,
-                           xt::pyarray<double> orientation_tilt_error_covariance) {
+TypeMounting::TypeMounting(xt::pytensor<double, 1> lever_arm,
+                           xt::pytensor<double, 1> lever_arm_sigma,
+                           xt::pytensor<double, 1> orientation_quaternion,
+                           xt::pytensor<double, 2> orientation_tilt_error_covariance) {
 
 	double lever_arm_prep[3];
 	for (size_t ii = 0; ii < 3; ii++) lever_arm_prep[ii] = lever_arm(ii);
@@ -137,43 +137,43 @@ void TypeMounting::reset_aspn_c(Aspn23TypeMounting* replacement_struct, bool tak
 	this->c_struct       = replacement_struct;
 }
 
-xt::pyarray<double> TypeMounting::get_lever_arm() const {
+xt::pytensor<double, 1> TypeMounting::get_lever_arm() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->lever_arm[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_lever_arm(xt::pyarray<double> lever_arm) {
+void TypeMounting::set_lever_arm(xt::pytensor<double, 1> lever_arm) {
 	nullptr_check();
 	memcpy(c_struct->lever_arm, lever_arm.data(), 3 * sizeof(double));
 }
 
-xt::pyarray<double> TypeMounting::get_lever_arm_sigma() const {
+xt::pytensor<double, 1> TypeMounting::get_lever_arm_sigma() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->lever_arm_sigma[0], 3, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_lever_arm_sigma(xt::pyarray<double> lever_arm_sigma) {
+void TypeMounting::set_lever_arm_sigma(xt::pytensor<double, 1> lever_arm_sigma) {
 	nullptr_check();
 	memcpy(c_struct->lever_arm_sigma, lever_arm_sigma.data(), 3 * sizeof(double));
 }
 
-xt::pyarray<double> TypeMounting::get_orientation_quaternion() const {
+xt::pytensor<double, 1> TypeMounting::get_orientation_quaternion() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {4};
 	return xt::adapt(&c_struct->orientation_quaternion[0], 4, xt::no_ownership(), shape);
 }
 
-void TypeMounting::set_orientation_quaternion(xt::pyarray<double> orientation_quaternion) {
+void TypeMounting::set_orientation_quaternion(xt::pytensor<double, 1> orientation_quaternion) {
 	nullptr_check();
 	memcpy(c_struct->orientation_quaternion, orientation_quaternion.data(), 4 * sizeof(double));
 }
 
-xt::pyarray<double> TypeMounting::get_orientation_tilt_error_covariance() const {
+xt::pytensor<double, 2> TypeMounting::get_orientation_tilt_error_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {3, 3};
@@ -181,7 +181,7 @@ xt::pyarray<double> TypeMounting::get_orientation_tilt_error_covariance() const 
 }
 
 void TypeMounting::set_orientation_tilt_error_covariance(
-    xt::pyarray<double> orientation_tilt_error_covariance) {
+    xt::pytensor<double, 2> orientation_tilt_error_covariance) {
 	nullptr_check();
 	memcpy(c_struct->orientation_tilt_error_covariance,
 	       orientation_tilt_error_covariance.data(),

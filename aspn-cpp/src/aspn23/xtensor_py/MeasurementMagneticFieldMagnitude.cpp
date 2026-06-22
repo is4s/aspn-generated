@@ -14,7 +14,7 @@ MeasurementMagneticFieldMagnitude::MeasurementMagneticFieldMagnitude(
     double field_strength,
     double variance,
     Aspn23MeasurementMagneticFieldMagnitudeErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -269,7 +269,7 @@ uint16_t MeasurementMagneticFieldMagnitude::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementMagneticFieldMagnitude::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementMagneticFieldMagnitude::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -278,7 +278,7 @@ xt::pyarray<double> MeasurementMagneticFieldMagnitude::get_error_model_params() 
 }
 
 void MeasurementMagneticFieldMagnitude::set_error_model_params(
-    xt::pyarray<double> error_model_params) {
+    xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

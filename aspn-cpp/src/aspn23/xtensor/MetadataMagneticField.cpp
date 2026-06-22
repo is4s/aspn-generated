@@ -11,8 +11,8 @@ namespace aspn23_xtensor {
 MetadataMagneticField::MetadataMagneticField(TypeMetadataheader info,
                                              TypeTimestamp time_of_validity,
                                              TypeMounting mounting,
-                                             xt::xarray<double> k,
-                                             xt::xarray<double> b)
+                                             xt::xtensor<double, 2> k,
+                                             xt::xtensor<double, 1> b)
     : TypeHeader(info.get_header()) {
 	auto info_prep             = info.get_aspn_c();
 	auto time_of_validity_prep = time_of_validity.get_aspn_c();
@@ -208,7 +208,7 @@ uint8_t MetadataMagneticField::get_num_meas() const {
 	return c_struct->num_meas;
 }
 
-xt::xarray<double> MetadataMagneticField::get_k() const {
+xt::xtensor<double, 2> MetadataMagneticField::get_k() const {
 	nullptr_check();
 	if (c_struct->k == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_meas, c_struct->num_meas};
@@ -216,21 +216,21 @@ xt::xarray<double> MetadataMagneticField::get_k() const {
 	    c_struct->k, c_struct->num_meas * c_struct->num_meas, xt::no_ownership(), shape);
 }
 
-void MetadataMagneticField::set_k(xt::xarray<double> k) {
+void MetadataMagneticField::set_k(xt::xtensor<double, 2> k) {
 	nullptr_check();
 	memcpy(c_struct->k, k.data(), c_struct->num_meas * c_struct->num_meas * sizeof(double));
 
 	c_struct->num_meas = k.dimension() == 2 ? k.shape()[1] : 0;
 }
 
-xt::xarray<double> MetadataMagneticField::get_b() const {
+xt::xtensor<double, 1> MetadataMagneticField::get_b() const {
 	nullptr_check();
 	if (c_struct->b == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_meas};
 	return xt::adapt(c_struct->b, c_struct->num_meas, xt::no_ownership(), shape);
 }
 
-void MetadataMagneticField::set_b(xt::xarray<double> b) {
+void MetadataMagneticField::set_b(xt::xtensor<double, 1> b) {
 	nullptr_check();
 	memcpy(c_struct->b, b.data(), c_struct->num_meas * sizeof(double));
 	c_struct->num_meas = b.size();

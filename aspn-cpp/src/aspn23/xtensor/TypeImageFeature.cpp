@@ -13,7 +13,7 @@ TypeImageFeature::TypeImageFeature(double response,
                                    double size,
                                    uint16_t class_id,
                                    uint16_t octave,
-                                   xt::xarray<uint8_t> descriptor) {
+                                   xt::xtensor<uint8_t, 1> descriptor) {
 
 	this->c_struct = aspn23_type_image_feature_new(
 	    response, orientation, size, class_id, octave, descriptor.size(), descriptor.data());
@@ -145,14 +145,14 @@ uint16_t TypeImageFeature::get_descriptor_size() const {
 	return c_struct->descriptor_size;
 }
 
-xt::xarray<uint8_t> TypeImageFeature::get_descriptor() const {
+xt::xtensor<uint8_t, 1> TypeImageFeature::get_descriptor() const {
 	nullptr_check();
 	if (c_struct->descriptor == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->descriptor_size};
 	return xt::adapt(c_struct->descriptor, c_struct->descriptor_size, xt::no_ownership(), shape);
 }
 
-void TypeImageFeature::set_descriptor(xt::xarray<uint8_t> descriptor) {
+void TypeImageFeature::set_descriptor(xt::xtensor<uint8_t, 1> descriptor) {
 	nullptr_check();
 	memcpy(c_struct->descriptor, descriptor.data(), c_struct->descriptor_size * sizeof(uint8_t));
 	c_struct->descriptor_size = descriptor.size();

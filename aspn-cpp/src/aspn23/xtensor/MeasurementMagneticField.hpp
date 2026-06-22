@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementMagneticField.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -39,9 +39,9 @@ public:
 	                         double x_field_strength,
 	                         double y_field_strength,
 	                         double z_field_strength,
-	                         xt::xarray<double> covariance,
+	                         xt::xtensor<double, 2> covariance,
 	                         Aspn23MeasurementMagneticFieldErrorModel error_model,
-	                         xt::xarray<double> error_model_params,
+	                         xt::xtensor<double, 1> error_model_params,
 	                         std::vector<TypeIntegrity> integrity);
 
 	~MeasurementMagneticField();
@@ -140,13 +140,13 @@ public:
 	 * Measurement error variance or covariance depending on measurement dimension.
 	 * Dimensions of covariance must be num_meas²
 	 */
-	xt::xarray<double> get_covariance() const;
+	xt::xtensor<double, 2> get_covariance() const;
 
 	/**
 	 * Measurement error variance or covariance depending on measurement dimension.
 	 * Dimensions of covariance must be num_meas²
 	 */
-	void set_covariance(xt::xarray<double>);
+	void set_covariance(xt::xtensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -168,12 +168,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::xarray<double> get_error_model_params() const;
+	xt::xtensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::xarray<double>);
+	void set_error_model_params(xt::xtensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

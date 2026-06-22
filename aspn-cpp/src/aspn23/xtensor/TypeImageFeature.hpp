@@ -8,7 +8,7 @@
 #include <aspn23/TypeImageFeature.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -35,7 +35,7 @@ public:
 	                 double size,
 	                 uint16_t class_id,
 	                 uint16_t octave,
-	                 xt::xarray<uint8_t> descriptor);
+	                 xt::xtensor<uint8_t, 1> descriptor);
 
 	~TypeImageFeature();
 
@@ -126,12 +126,12 @@ public:
 	/**
 	 * Feature descriptor.
 	 */
-	xt::xarray<uint8_t> get_descriptor() const;
+	xt::xtensor<uint8_t, 1> get_descriptor() const;
 
 	/**
 	 * Feature descriptor.
 	 */
-	void set_descriptor(xt::xarray<uint8_t>);
+	void set_descriptor(xt::xtensor<uint8_t, 1>);
 
 private:
 	Aspn23TypeImageFeature* c_struct;

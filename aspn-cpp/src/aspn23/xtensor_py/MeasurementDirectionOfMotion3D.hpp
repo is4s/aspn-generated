@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementDirectionOfMotion3D.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -38,11 +38,11 @@ public:
 	    TypeHeader header,
 	    TypeTimestamp time_of_validity,
 	    Aspn23MeasurementDirectionOfMotion3DReferenceFrame reference_frame,
-	    xt::pyarray<double> obs,
-	    xt::pyarray<double> error_vector,
-	    xt::pyarray<double> covariance,
+	    xt::pytensor<double, 1> obs,
+	    xt::pytensor<double, 1> error_vector,
+	    xt::pytensor<double, 2> covariance,
 	    Aspn23MeasurementDirectionOfMotion3DErrorModel error_model,
-	    xt::pyarray<double> error_model_params,
+	    xt::pytensor<double, 1> error_model_params,
 	    std::vector<TypeIntegrity> integrity);
 
 	~MeasurementDirectionOfMotion3D();
@@ -115,38 +115,38 @@ public:
 	/**
 	 * Direction of motion represented as a unit vector.
 	 */
-	xt::pyarray<double> get_obs() const;
+	xt::pytensor<double, 1> get_obs() const;
 
 	/**
 	 * Direction of motion represented as a unit vector.
 	 */
-	void set_obs(xt::pyarray<double>);
+	void set_obs(xt::pytensor<double, 1>);
 
 	/**
 	 * Error is expressed as rotation uncertainty about two axes, error_vector and and a second
 	 * error vector that is orthogonal to both the obs vector and the error_vector.
 	 */
-	xt::pyarray<double> get_error_vector() const;
+	xt::pytensor<double, 1> get_error_vector() const;
 
 	/**
 	 * Error is expressed as rotation uncertainty about two axes, error_vector and and a second
 	 * error vector that is orthogonal to both the obs vector and the error_vector.
 	 */
-	void set_error_vector(xt::pyarray<double>);
+	void set_error_vector(xt::pytensor<double, 1>);
 
 	/**
 	 * Error is expressed as rotation uncertainty about the following two axes: 1) error_vector, and
 	 * 2) a second error vector that is orthogonal to both the obs direction vector and the
 	 * error_vector.
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Error is expressed as rotation uncertainty about the following two axes: 1) error_vector, and
 	 * 2) a second error vector that is orthogonal to both the obs direction vector and the
 	 * error_vector.
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -168,12 +168,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

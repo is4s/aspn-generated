@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementPositionVelocityAttitude.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -49,10 +49,10 @@ public:
 	    double v1,
 	    double v2,
 	    double v3,
-	    xt::pyarray<double> quaternion,
-	    xt::pyarray<double> covariance,
+	    xt::pytensor<double, 1> quaternion,
+	    xt::pytensor<double, 2> covariance,
 	    Aspn23MeasurementPositionVelocityAttitudeErrorModel error_model,
-	    xt::pyarray<double> error_model_params,
+	    xt::pytensor<double, 1> error_model_params,
 	    std::vector<TypeIntegrity> integrity);
 
 	~MeasurementPositionVelocityAttitude();
@@ -196,7 +196,7 @@ public:
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
 	 */
-	xt::pyarray<double> get_quaternion() const;
+	xt::pytensor<double, 1> get_quaternion() const;
 
 	/**
 	 * Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2),
@@ -206,7 +206,7 @@ public:
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
 	 */
-	void set_quaternion(xt::pyarray<double>);
+	void set_quaternion(xt::pytensor<double, 1>);
 
 	/**
 	 * Dimension of measurement provided. In this sense, num_meas is the number of measurement terms
@@ -221,7 +221,7 @@ public:
 	 * quaternion (which takes 10 terms total to describe) is num_meas = 9. A second example is a
 	 * 3-D position and 3-D velocity is num_meas = 6. Dimensions of covariance must be num_meas²
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Measurement error variance or covariance depending on measurement dimension. NOTE: Attitude
@@ -230,7 +230,7 @@ public:
 	 * quaternion (which takes 10 terms total to describe) is num_meas = 9. A second example is a
 	 * 3-D position and 3-D velocity is num_meas = 6. Dimensions of covariance must be num_meas²
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -252,12 +252,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

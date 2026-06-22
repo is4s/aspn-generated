@@ -15,7 +15,7 @@ MeasurementDirectionOfMotion2D::MeasurementDirectionOfMotion2D(
     double obs,
     double variance,
     Aspn23MeasurementDirectionOfMotion2DErrorModel error_model,
-    xt::xarray<double> error_model_params,
+    xt::xtensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -285,7 +285,7 @@ uint16_t MeasurementDirectionOfMotion2D::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementDirectionOfMotion2D::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementDirectionOfMotion2D::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -293,7 +293,8 @@ xt::xarray<double> MeasurementDirectionOfMotion2D::get_error_model_params() cons
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementDirectionOfMotion2D::set_error_model_params(xt::xarray<double> error_model_params) {
+void MeasurementDirectionOfMotion2D::set_error_model_params(
+    xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

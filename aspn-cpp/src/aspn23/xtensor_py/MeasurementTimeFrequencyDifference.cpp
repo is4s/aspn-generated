@@ -18,9 +18,9 @@ MeasurementTimeFrequencyDifference::MeasurementTimeFrequencyDifference(
     int32_t time_diff_attosec,
     uint8_t digits_of_precision,
     double freq_diff,
-    xt::pyarray<double> covariance,
+    xt::pytensor<double, 2> covariance,
     Aspn23MeasurementTimeFrequencyDifferenceErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -341,14 +341,14 @@ void MeasurementTimeFrequencyDifference::set_freq_diff(double freq_diff) {
 	c_struct->freq_diff = freq_diff;
 }
 
-xt::pyarray<double> MeasurementTimeFrequencyDifference::get_covariance() const {
+xt::pytensor<double, 2> MeasurementTimeFrequencyDifference::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {2, 2};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void MeasurementTimeFrequencyDifference::set_covariance(xt::pyarray<double> covariance) {
+void MeasurementTimeFrequencyDifference::set_covariance(xt::pytensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 2 * 2 * sizeof(double));
 }
@@ -370,7 +370,7 @@ uint16_t MeasurementTimeFrequencyDifference::get_num_error_model_params() const 
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementTimeFrequencyDifference::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementTimeFrequencyDifference::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -379,7 +379,7 @@ xt::pyarray<double> MeasurementTimeFrequencyDifference::get_error_model_params()
 }
 
 void MeasurementTimeFrequencyDifference::set_error_model_params(
-    xt::pyarray<double> error_model_params) {
+    xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

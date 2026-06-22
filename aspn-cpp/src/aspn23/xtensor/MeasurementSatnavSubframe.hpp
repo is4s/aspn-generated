@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementSatnavSubframe.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -41,7 +41,7 @@ public:
 	                          int32_t prn,
 	                          TypeSatnavSatelliteSystem satellite_system,
 	                          int32_t freq_slot_id,
-	                          xt::xarray<int8_t> data_vector,
+	                          xt::xtensor<int8_t, 1> data_vector,
 	                          std::vector<TypeIntegrity> integrity);
 
 	~MeasurementSatnavSubframe();
@@ -150,13 +150,13 @@ public:
 	 * num_bytes sized array of raw subframe message collected by the sensor. The underlying type
 	 * and shape of the data vector is given by satnav_msg_id.
 	 */
-	xt::xarray<int8_t> get_data_vector() const;
+	xt::xtensor<int8_t, 1> get_data_vector() const;
 
 	/**
 	 * num_bytes sized array of raw subframe message collected by the sensor. The underlying type
 	 * and shape of the data vector is given by satnav_msg_id.
 	 */
-	void set_data_vector(xt::xarray<int8_t>);
+	void set_data_vector(xt::xtensor<int8_t, 1>);
 
 	/**
 	 * Number of integrity values.
