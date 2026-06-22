@@ -8,7 +8,7 @@
 #include <aspn23/TypeSatnavSvData.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -37,12 +37,12 @@ public:
 	                 Aspn23TypeSatnavSvDataEphemerisType ephemeris_type,
 	                 TypeSatnavTime sv_data_time,
 	                 Aspn23TypeSatnavSvDataCoordinateFrame coordinate_frame,
-	                 xt::xarray<double> sv_pos,
-	                 xt::xarray<double> sv_vel,
+	                 xt::xtensor_fixed<double, xt::xshape<3>> sv_pos,
+	                 xt::xtensor_fixed<double, xt::xshape<3>> sv_vel,
 	                 double sv_clock_bias,
 	                 double sv_clock_drift,
 	                 Aspn23TypeSatnavSvDataGroupDelayEnum group_delay_enum,
-	                 xt::xarray<float> group_delay_vector);
+	                 xt::xtensor_fixed<float, xt::xshape<4>> group_delay_vector);
 
 	~TypeSatnavSvData();
 
@@ -127,25 +127,25 @@ public:
 	 * Satellite position in frame specified by coordinate_frame at time specified by
 	 * sv_data_time_week_number and sv_data_time_seconds_of_week.
 	 */
-	xt::xarray<double> get_sv_pos() const;
+	xt::xtensor_fixed<double, xt::xshape<3>> get_sv_pos() const;
 
 	/**
 	 * Satellite position in frame specified by coordinate_frame at time specified by
 	 * sv_data_time_week_number and sv_data_time_seconds_of_week.
 	 */
-	void set_sv_pos(xt::xarray<double>);
+	void set_sv_pos(xt::xtensor_fixed<double, xt::xshape<3>>);
 
 	/**
 	 * Satellite velocity in frame specified by coordinate_frame at time specified by
 	 * sv_data_time_week_number and sv_data_time_seconds_of_week.
 	 */
-	xt::xarray<double> get_sv_vel() const;
+	xt::xtensor_fixed<double, xt::xshape<3>> get_sv_vel() const;
 
 	/**
 	 * Satellite velocity in frame specified by coordinate_frame at time specified by
 	 * sv_data_time_week_number and sv_data_time_seconds_of_week.
 	 */
-	void set_sv_vel(xt::xarray<double>);
+	void set_sv_vel(xt::xtensor_fixed<double, xt::xshape<3>>);
 
 	/**
 	 * Satellite clock bias at the sv_data_time, used to correct the satellite time like delta_t_sv
@@ -187,13 +187,13 @@ public:
 	 * Group delay terms, with interpretation provided by group_delay_enum. (Need to verify that
 	 * four is sufficient for all ephemeris.)
 	 */
-	xt::xarray<float> get_group_delay_vector() const;
+	xt::xtensor_fixed<float, xt::xshape<4>> get_group_delay_vector() const;
 
 	/**
 	 * Group delay terms, with interpretation provided by group_delay_enum. (Need to verify that
 	 * four is sufficient for all ephemeris.)
 	 */
-	void set_group_delay_vector(xt::xarray<float>);
+	void set_group_delay_vector(xt::xtensor_fixed<float, xt::xshape<4>>);
 
 private:
 	Aspn23TypeSatnavSvData* c_struct;

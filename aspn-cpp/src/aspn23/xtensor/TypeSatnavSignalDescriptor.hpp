@@ -8,7 +8,7 @@
 #include <aspn23/TypeSatnavSignalDescriptor.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes

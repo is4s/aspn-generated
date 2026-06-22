@@ -15,7 +15,7 @@ MeasurementRangeRateToPoint::MeasurementRangeRateToPoint(
     double obs,
     double variance,
     Aspn23MeasurementRangeRateToPointErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -286,7 +286,7 @@ uint16_t MeasurementRangeRateToPoint::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementRangeRateToPoint::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementRangeRateToPoint::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -294,7 +294,8 @@ xt::pyarray<double> MeasurementRangeRateToPoint::get_error_model_params() const 
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementRangeRateToPoint::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MeasurementRangeRateToPoint::set_error_model_params(
+    xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

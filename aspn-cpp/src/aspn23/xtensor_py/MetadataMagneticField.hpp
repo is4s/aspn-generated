@@ -8,7 +8,7 @@
 #include <aspn23/MetadataMagneticField.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -51,8 +51,8 @@ public:
 	MetadataMagneticField(TypeMetadataheader info,
 	                      TypeTimestamp time_of_validity,
 	                      TypeMounting mounting,
-	                      xt::pyarray<double> k,
-	                      xt::pyarray<double> b);
+	                      xt::pytensor<double, 2> k,
+	                      xt::pytensor<double, 1> b);
 
 	~MetadataMagneticField();
 
@@ -132,7 +132,7 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	xt::pyarray<double> get_k() const;
+	xt::pytensor<double, 2> get_k() const;
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of soft iron, scale
@@ -141,21 +141,21 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	void set_k(xt::pyarray<double>);
+	void set_k(xt::pytensor<double, 2>);
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
 	 */
-	xt::pyarray<double> get_b() const;
+	xt::pytensor<double, 1> get_b() const;
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
 	 */
-	void set_b(xt::pyarray<double>);
+	void set_b(xt::pytensor<double, 1>);
 
 private:
 	Aspn23MetadataMagneticField* c_struct;

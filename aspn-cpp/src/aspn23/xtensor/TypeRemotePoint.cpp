@@ -15,7 +15,7 @@ TypeRemotePoint::TypeRemotePoint(
     double position1,
     double position2,
     double position3,
-    xt::xarray<double> position_covariance) {
+    xt::xtensor<double, 2> position_covariance) {
 
 	this->c_struct = aspn23_type_remote_point_new(
 	    included_terms,
@@ -171,7 +171,7 @@ uint8_t TypeRemotePoint::get_num_position_components() const {
 	return c_struct->num_position_components;
 }
 
-xt::xarray<double> TypeRemotePoint::get_position_covariance() const {
+xt::xtensor<double, 2> TypeRemotePoint::get_position_covariance() const {
 	nullptr_check();
 	if (c_struct->position_covariance == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_position_components,
@@ -182,7 +182,7 @@ xt::xarray<double> TypeRemotePoint::get_position_covariance() const {
 	                 shape);
 }
 
-void TypeRemotePoint::set_position_covariance(xt::xarray<double> position_covariance) {
+void TypeRemotePoint::set_position_covariance(xt::xtensor<double, 2> position_covariance) {
 	nullptr_check();
 	memcpy(c_struct->position_covariance,
 	       position_covariance.data(),

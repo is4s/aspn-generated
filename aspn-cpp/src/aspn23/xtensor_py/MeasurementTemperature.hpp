@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementTemperature.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -38,7 +38,7 @@ public:
 	                       double temperature,
 	                       double variance,
 	                       Aspn23MeasurementTemperatureErrorModel error_model,
-	                       xt::pyarray<double> error_model_params,
+	                       xt::pytensor<double, 1> error_model_params,
 	                       std::vector<TypeIntegrity> integrity);
 
 	~MeasurementTemperature();
@@ -137,12 +137,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

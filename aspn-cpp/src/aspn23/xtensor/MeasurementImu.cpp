@@ -11,8 +11,8 @@ namespace aspn23_xtensor {
 MeasurementImu::MeasurementImu(TypeHeader header,
                                TypeTimestamp time_of_validity,
                                Aspn23MeasurementImuImuType imu_type,
-                               xt::xarray<double> meas_accel,
-                               xt::xarray<double> meas_gyro,
+                               xt::xtensor_fixed<double, xt::xshape<3>> meas_accel,
+                               xt::xtensor_fixed<double, xt::xshape<3>> meas_gyro,
                                std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -245,26 +245,26 @@ void MeasurementImu::set_imu_type(Aspn23MeasurementImuImuType imu_type) {
 	c_struct->imu_type = imu_type;
 }
 
-xt::xarray<double> MeasurementImu::get_meas_accel() const {
+xt::xtensor_fixed<double, xt::xshape<3>> MeasurementImu::get_meas_accel() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->meas_accel[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementImu::set_meas_accel(xt::xarray<double> meas_accel) {
+void MeasurementImu::set_meas_accel(xt::xtensor_fixed<double, xt::xshape<3>> meas_accel) {
 	nullptr_check();
 	memcpy(c_struct->meas_accel, meas_accel.data(), 3 * sizeof(double));
 }
 
-xt::xarray<double> MeasurementImu::get_meas_gyro() const {
+xt::xtensor_fixed<double, xt::xshape<3>> MeasurementImu::get_meas_gyro() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->meas_gyro[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementImu::set_meas_gyro(xt::xarray<double> meas_gyro) {
+void MeasurementImu::set_meas_gyro(xt::xtensor_fixed<double, xt::xshape<3>> meas_gyro) {
 	nullptr_check();
 	memcpy(c_struct->meas_gyro, meas_gyro.data(), 3 * sizeof(double));
 }

@@ -12,10 +12,10 @@ MeasurementAttitude3D::MeasurementAttitude3D(
     TypeHeader header,
     TypeTimestamp time_of_validity,
     Aspn23MeasurementAttitude3DReferenceFrame reference_frame,
-    xt::pyarray<double> quaternion,
-    xt::pyarray<double> tilt_error_covariance,
+    xt::pytensor<double, 1> quaternion,
+    xt::pytensor<double, 2> tilt_error_covariance,
     Aspn23MeasurementAttitude3DErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -266,26 +266,27 @@ void MeasurementAttitude3D::set_reference_frame(
 	c_struct->reference_frame = reference_frame;
 }
 
-xt::pyarray<double> MeasurementAttitude3D::get_quaternion() const {
+xt::pytensor<double, 1> MeasurementAttitude3D::get_quaternion() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {4};
 	return xt::adapt(&c_struct->quaternion[0], 4, xt::no_ownership(), shape);
 }
 
-void MeasurementAttitude3D::set_quaternion(xt::pyarray<double> quaternion) {
+void MeasurementAttitude3D::set_quaternion(xt::pytensor<double, 1> quaternion) {
 	nullptr_check();
 	memcpy(c_struct->quaternion, quaternion.data(), 4 * sizeof(double));
 }
 
-xt::pyarray<double> MeasurementAttitude3D::get_tilt_error_covariance() const {
+xt::pytensor<double, 2> MeasurementAttitude3D::get_tilt_error_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {3, 3};
 	return xt::adapt(&c_struct->tilt_error_covariance[0][0], shape);
 }
 
-void MeasurementAttitude3D::set_tilt_error_covariance(xt::pyarray<double> tilt_error_covariance) {
+void MeasurementAttitude3D::set_tilt_error_covariance(
+    xt::pytensor<double, 2> tilt_error_covariance) {
 	nullptr_check();
 	memcpy(c_struct->tilt_error_covariance, tilt_error_covariance.data(), 3 * 3 * sizeof(double));
 }
@@ -305,7 +306,7 @@ uint16_t MeasurementAttitude3D::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementAttitude3D::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementAttitude3D::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -313,7 +314,7 @@ xt::pyarray<double> MeasurementAttitude3D::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementAttitude3D::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MeasurementAttitude3D::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

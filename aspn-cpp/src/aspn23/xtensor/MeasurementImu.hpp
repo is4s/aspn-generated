@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementImu.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -37,8 +37,8 @@ public:
 	MeasurementImu(TypeHeader header,
 	               TypeTimestamp time_of_validity,
 	               Aspn23MeasurementImuImuType imu_type,
-	               xt::xarray<double> meas_accel,
-	               xt::xarray<double> meas_gyro,
+	               xt::xtensor_fixed<double, xt::xshape<3>> meas_accel,
+	               xt::xtensor_fixed<double, xt::xshape<3>> meas_gyro,
 	               std::vector<TypeIntegrity> integrity);
 
 	~MeasurementImu();
@@ -110,22 +110,22 @@ public:
 	/**
 	 * Accelerometer (specific force) measurements in 3 axes per enumerated definition.
 	 */
-	xt::xarray<double> get_meas_accel() const;
+	xt::xtensor_fixed<double, xt::xshape<3>> get_meas_accel() const;
 
 	/**
 	 * Accelerometer (specific force) measurements in 3 axes per enumerated definition.
 	 */
-	void set_meas_accel(xt::xarray<double>);
+	void set_meas_accel(xt::xtensor_fixed<double, xt::xshape<3>>);
 
 	/**
 	 * Gyroscope measurements in 3 axes per enumerated definition.
 	 */
-	xt::xarray<double> get_meas_gyro() const;
+	xt::xtensor_fixed<double, xt::xshape<3>> get_meas_gyro() const;
 
 	/**
 	 * Gyroscope measurements in 3 axes per enumerated definition.
 	 */
-	void set_meas_gyro(xt::xarray<double>);
+	void set_meas_gyro(xt::xtensor_fixed<double, xt::xshape<3>>);
 
 	/**
 	 * Number of integrity values.

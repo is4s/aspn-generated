@@ -8,7 +8,7 @@
 #include <aspn23/TypeIntegrity.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes

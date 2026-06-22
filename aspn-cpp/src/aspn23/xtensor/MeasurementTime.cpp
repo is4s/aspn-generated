@@ -11,13 +11,13 @@ namespace aspn23_xtensor {
 MeasurementTime::MeasurementTime(TypeHeader header,
                                  TypeTimestamp time_of_validity,
                                  int32_t time_of_validity_attosec,
-                                 xt::xarray<uint8_t> clock_id,
-                                 xt::xarray<int64_t> elapsed_nsec,
-                                 xt::xarray<int32_t> elapsed_attosec,
+                                 xt::xtensor<uint8_t, 1> clock_id,
+                                 xt::xtensor<int64_t, 1> elapsed_nsec,
+                                 xt::xtensor<int32_t, 1> elapsed_attosec,
                                  uint8_t digits_of_precision,
-                                 xt::xarray<double> covariance,
+                                 xt::xtensor<double, 2> covariance,
                                  Aspn23MeasurementTimeErrorModel error_model,
-                                 xt::xarray<double> error_model_params,
+                                 xt::xtensor<double, 1> error_model_params,
                                  std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -254,40 +254,40 @@ uint8_t MeasurementTime::get_num_obs() const {
 	return c_struct->num_obs;
 }
 
-xt::xarray<uint8_t> MeasurementTime::get_clock_id() const {
+xt::xtensor<uint8_t, 1> MeasurementTime::get_clock_id() const {
 	nullptr_check();
 	if (c_struct->clock_id == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_obs};
 	return xt::adapt(c_struct->clock_id, c_struct->num_obs, xt::no_ownership(), shape);
 }
 
-void MeasurementTime::set_clock_id(xt::xarray<uint8_t> clock_id) {
+void MeasurementTime::set_clock_id(xt::xtensor<uint8_t, 1> clock_id) {
 	nullptr_check();
 	memcpy(c_struct->clock_id, clock_id.data(), c_struct->num_obs * sizeof(uint8_t));
 	c_struct->num_obs = clock_id.size();
 }
 
-xt::xarray<int64_t> MeasurementTime::get_elapsed_nsec() const {
+xt::xtensor<int64_t, 1> MeasurementTime::get_elapsed_nsec() const {
 	nullptr_check();
 	if (c_struct->elapsed_nsec == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_obs};
 	return xt::adapt(c_struct->elapsed_nsec, c_struct->num_obs, xt::no_ownership(), shape);
 }
 
-void MeasurementTime::set_elapsed_nsec(xt::xarray<int64_t> elapsed_nsec) {
+void MeasurementTime::set_elapsed_nsec(xt::xtensor<int64_t, 1> elapsed_nsec) {
 	nullptr_check();
 	memcpy(c_struct->elapsed_nsec, elapsed_nsec.data(), c_struct->num_obs * sizeof(int64_t));
 	c_struct->num_obs = elapsed_nsec.size();
 }
 
-xt::xarray<int32_t> MeasurementTime::get_elapsed_attosec() const {
+xt::xtensor<int32_t, 1> MeasurementTime::get_elapsed_attosec() const {
 	nullptr_check();
 	if (c_struct->elapsed_attosec == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_obs};
 	return xt::adapt(c_struct->elapsed_attosec, c_struct->num_obs, xt::no_ownership(), shape);
 }
 
-void MeasurementTime::set_elapsed_attosec(xt::xarray<int32_t> elapsed_attosec) {
+void MeasurementTime::set_elapsed_attosec(xt::xtensor<int32_t, 1> elapsed_attosec) {
 	nullptr_check();
 	memcpy(c_struct->elapsed_attosec, elapsed_attosec.data(), c_struct->num_obs * sizeof(int32_t));
 	c_struct->num_obs = elapsed_attosec.size();
@@ -303,7 +303,7 @@ void MeasurementTime::set_digits_of_precision(uint8_t digits_of_precision) {
 	c_struct->digits_of_precision = digits_of_precision;
 }
 
-xt::xarray<double> MeasurementTime::get_covariance() const {
+xt::xtensor<double, 2> MeasurementTime::get_covariance() const {
 	nullptr_check();
 	if (c_struct->covariance == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_obs, c_struct->num_obs};
@@ -311,7 +311,7 @@ xt::xarray<double> MeasurementTime::get_covariance() const {
 	    c_struct->covariance, c_struct->num_obs * c_struct->num_obs, xt::no_ownership(), shape);
 }
 
-void MeasurementTime::set_covariance(xt::xarray<double> covariance) {
+void MeasurementTime::set_covariance(xt::xtensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance,
 	       covariance.data(),
@@ -335,7 +335,7 @@ uint16_t MeasurementTime::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementTime::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementTime::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -343,7 +343,7 @@ xt::xarray<double> MeasurementTime::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementTime::set_error_model_params(xt::xarray<double> error_model_params) {
+void MeasurementTime::set_error_model_params(xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

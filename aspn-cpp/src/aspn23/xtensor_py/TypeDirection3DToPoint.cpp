@@ -11,12 +11,12 @@ namespace aspn23_xtensor {
 TypeDirection3DToPoint::TypeDirection3DToPoint(
     TypeRemotePoint remote_point,
     Aspn23TypeDirection3DToPointReferenceFrame reference_frame,
-    xt::pyarray<double> obs,
-    xt::pyarray<double> covariance,
+    xt::pytensor<double, 1> obs,
+    xt::pytensor<double, 2> covariance,
     bool has_observation_characteristics,
     TypeImageFeature observation_characteristics,
     Aspn23TypeDirection3DToPointErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity) {
 	auto remote_point_prep = remote_point.get_aspn_c();
 	double obs_prep[2];
@@ -192,26 +192,26 @@ void TypeDirection3DToPoint::set_reference_frame(
 	c_struct->reference_frame = reference_frame;
 }
 
-xt::pyarray<double> TypeDirection3DToPoint::get_obs() const {
+xt::pytensor<double, 1> TypeDirection3DToPoint::get_obs() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {2};
 	return xt::adapt(&c_struct->obs[0], 2, xt::no_ownership(), shape);
 }
 
-void TypeDirection3DToPoint::set_obs(xt::pyarray<double> obs) {
+void TypeDirection3DToPoint::set_obs(xt::pytensor<double, 1> obs) {
 	nullptr_check();
 	memcpy(c_struct->obs, obs.data(), 2 * sizeof(double));
 }
 
-xt::pyarray<double> TypeDirection3DToPoint::get_covariance() const {
+xt::pytensor<double, 2> TypeDirection3DToPoint::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {2, 2};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void TypeDirection3DToPoint::set_covariance(xt::pyarray<double> covariance) {
+void TypeDirection3DToPoint::set_covariance(xt::pytensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 2 * 2 * sizeof(double));
 }
@@ -256,7 +256,7 @@ uint16_t TypeDirection3DToPoint::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> TypeDirection3DToPoint::get_error_model_params() const {
+xt::pytensor<double, 1> TypeDirection3DToPoint::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -264,7 +264,7 @@ xt::pyarray<double> TypeDirection3DToPoint::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void TypeDirection3DToPoint::set_error_model_params(xt::pyarray<double> error_model_params) {
+void TypeDirection3DToPoint::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementAngularVelocity.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -38,10 +38,10 @@ public:
 	                           TypeTimestamp time_of_validity,
 	                           Aspn23MeasurementAngularVelocityReferenceFrame reference_frame,
 	                           Aspn23MeasurementAngularVelocityImuType imu_type,
-	                           xt::xarray<double> meas,
-	                           xt::xarray<double> covariance,
+	                           xt::xtensor_fixed<double, xt::xshape<3>> meas,
+	                           xt::xtensor_fixed<double, xt::xshape<3, 3>> covariance,
 	                           Aspn23MeasurementAngularVelocityErrorModel error_model,
-	                           xt::xarray<double> error_model_params,
+	                           xt::xtensor<double, 1> error_model_params,
 	                           std::vector<TypeIntegrity> integrity);
 
 	~MeasurementAngularVelocity();
@@ -124,22 +124,22 @@ public:
 	/**
 	 * Angular velocity in 3 axes per enumerated definition.
 	 */
-	xt::xarray<double> get_meas() const;
+	xt::xtensor_fixed<double, xt::xshape<3>> get_meas() const;
 
 	/**
 	 * Angular velocity in 3 axes per enumerated definition.
 	 */
-	void set_meas(xt::xarray<double>);
+	void set_meas(xt::xtensor_fixed<double, xt::xshape<3>>);
 
 	/**
 	 * Measurement error covariance.
 	 */
-	xt::xarray<double> get_covariance() const;
+	xt::xtensor_fixed<double, xt::xshape<3, 3>> get_covariance() const;
 
 	/**
 	 * Measurement error covariance.
 	 */
-	void set_covariance(xt::xarray<double>);
+	void set_covariance(xt::xtensor_fixed<double, xt::xshape<3, 3>>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -161,12 +161,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::xarray<double> get_error_model_params() const;
+	xt::xtensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::xarray<double>);
+	void set_error_model_params(xt::xtensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

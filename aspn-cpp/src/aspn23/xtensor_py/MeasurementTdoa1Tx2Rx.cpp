@@ -15,7 +15,7 @@ MeasurementTdoa1Tx2Rx::MeasurementTdoa1Tx2Rx(TypeHeader header,
                                              double obs,
                                              double variance,
                                              Aspn23MeasurementTdoa1Tx2RxErrorModel error_model,
-                                             xt::pyarray<double> error_model_params,
+                                             xt::pytensor<double, 1> error_model_params,
                                              std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                      = header.get_aspn_c();
@@ -299,7 +299,7 @@ uint16_t MeasurementTdoa1Tx2Rx::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementTdoa1Tx2Rx::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementTdoa1Tx2Rx::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -307,7 +307,7 @@ xt::pyarray<double> MeasurementTdoa1Tx2Rx::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementTdoa1Tx2Rx::set_error_model_params(xt::pyarray<double> error_model_params) {
+void MeasurementTdoa1Tx2Rx::set_error_model_params(xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

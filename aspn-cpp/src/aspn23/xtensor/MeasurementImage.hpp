@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementImage.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -39,9 +39,9 @@ public:
 	                 uint32_t width,
 	                 bool is_bigendian,
 	                 Aspn23MeasurementImageImageType image_type,
-	                 xt::xarray<uint8_t> image_data,
+	                 xt::xtensor<uint8_t, 1> image_data,
 	                 Aspn23MeasurementImageCameraModel camera_model,
-	                 xt::xarray<double> model_coefficients,
+	                 xt::xtensor<double, 1> model_coefficients,
 	                 std::vector<TypeIntegrity> integrity);
 
 	~MeasurementImage();
@@ -175,12 +175,12 @@ public:
 	/**
 	 * Stores the encoded image. Interpretation varies based on the image_type.
 	 */
-	xt::xarray<uint8_t> get_image_data() const;
+	xt::xtensor<uint8_t, 1> get_image_data() const;
 
 	/**
 	 * Stores the encoded image. Interpretation varies based on the image_type.
 	 */
-	void set_image_data(xt::xarray<uint8_t>);
+	void set_image_data(xt::xtensor<uint8_t, 1>);
 
 	/**
 	 * The model used to map 3D points in the world to 2D points on the image plane
@@ -200,12 +200,12 @@ public:
 	/**
 	 * The camera model parameters, size depending on the distortion model.
 	 */
-	xt::xarray<double> get_model_coefficients() const;
+	xt::xtensor<double, 1> get_model_coefficients() const;
 
 	/**
 	 * The camera model parameters, size depending on the distortion model.
 	 */
-	void set_model_coefficients(xt::xarray<double>);
+	void set_model_coefficients(xt::xtensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

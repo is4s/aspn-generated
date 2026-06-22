@@ -8,7 +8,7 @@
 #include <aspn23/TypeRemotePoint.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -38,7 +38,7 @@ public:
 	                double position1,
 	                double position2,
 	                double position3,
-	                xt::pyarray<double> position_covariance);
+	                xt::pytensor<double, 2> position_covariance);
 
 	~TypeRemotePoint();
 
@@ -142,13 +142,13 @@ public:
 	 * Position error covariance (or variance depending on num_position_components) as defined in
 	 * position_reference_frame.
 	 */
-	xt::pyarray<double> get_position_covariance() const;
+	xt::pytensor<double, 2> get_position_covariance() const;
 
 	/**
 	 * Position error covariance (or variance depending on num_position_components) as defined in
 	 * position_reference_frame.
 	 */
-	void set_position_covariance(xt::pyarray<double>);
+	void set_position_covariance(xt::pytensor<double, 2>);
 
 private:
 	Aspn23TypeRemotePoint* c_struct;

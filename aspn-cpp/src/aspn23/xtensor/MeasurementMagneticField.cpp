@@ -14,9 +14,9 @@ MeasurementMagneticField::MeasurementMagneticField(
     double x_field_strength,
     double y_field_strength,
     double z_field_strength,
-    xt::xarray<double> covariance,
+    xt::xtensor<double, 2> covariance,
     Aspn23MeasurementMagneticFieldErrorModel error_model,
-    xt::xarray<double> error_model_params,
+    xt::xtensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -274,7 +274,7 @@ void MeasurementMagneticField::set_z_field_strength(double z_field_strength) {
 	c_struct->z_field_strength = z_field_strength;
 }
 
-xt::xarray<double> MeasurementMagneticField::get_covariance() const {
+xt::xtensor<double, 2> MeasurementMagneticField::get_covariance() const {
 	nullptr_check();
 	if (c_struct->covariance == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_meas, c_struct->num_meas};
@@ -282,7 +282,7 @@ xt::xarray<double> MeasurementMagneticField::get_covariance() const {
 	    c_struct->covariance, c_struct->num_meas * c_struct->num_meas, xt::no_ownership(), shape);
 }
 
-void MeasurementMagneticField::set_covariance(xt::xarray<double> covariance) {
+void MeasurementMagneticField::set_covariance(xt::xtensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance,
 	       covariance.data(),
@@ -307,7 +307,7 @@ uint16_t MeasurementMagneticField::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementMagneticField::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementMagneticField::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -315,7 +315,7 @@ xt::xarray<double> MeasurementMagneticField::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementMagneticField::set_error_model_params(xt::xarray<double> error_model_params) {
+void MeasurementMagneticField::set_error_model_params(xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

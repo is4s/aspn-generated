@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementVelocity.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -40,9 +40,9 @@ public:
 	                    double x,
 	                    double y,
 	                    double z,
-	                    xt::pyarray<double> covariance,
+	                    xt::pytensor<double, 2> covariance,
 	                    Aspn23MeasurementVelocityErrorModel error_model,
-	                    xt::pyarray<double> error_model_params,
+	                    xt::pytensor<double, 1> error_model_params,
 	                    std::vector<TypeIntegrity> integrity);
 
 	~MeasurementVelocity();
@@ -156,13 +156,13 @@ public:
 	 * Measurement error covariance or variance depending on measurement dimension. Dimensions of
 	 * covariance must be num_meas²
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Measurement error covariance or variance depending on measurement dimension. Dimensions of
 	 * covariance must be num_meas²
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -184,12 +184,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

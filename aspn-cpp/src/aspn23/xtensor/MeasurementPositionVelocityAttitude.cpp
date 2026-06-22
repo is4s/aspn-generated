@@ -18,10 +18,10 @@ MeasurementPositionVelocityAttitude::MeasurementPositionVelocityAttitude(
     double v1,
     double v2,
     double v3,
-    xt::xarray<double> quaternion,
-    xt::xarray<double> covariance,
+    xt::xtensor_fixed<double, xt::xshape<4>> quaternion,
+    xt::xtensor<double, 2> covariance,
     Aspn23MeasurementPositionVelocityAttitudeErrorModel error_model,
-    xt::xarray<double> error_model_params,
+    xt::xtensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -347,14 +347,16 @@ void MeasurementPositionVelocityAttitude::set_v3(double v3) {
 	c_struct->v3 = v3;
 }
 
-xt::xarray<double> MeasurementPositionVelocityAttitude::get_quaternion() const {
+xt::xtensor_fixed<double, xt::xshape<4>> MeasurementPositionVelocityAttitude::get_quaternion()
+    const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {4};
 	return xt::adapt(&c_struct->quaternion[0], 4, xt::no_ownership(), shape);
 }
 
-void MeasurementPositionVelocityAttitude::set_quaternion(xt::xarray<double> quaternion) {
+void MeasurementPositionVelocityAttitude::set_quaternion(
+    xt::xtensor_fixed<double, xt::xshape<4>> quaternion) {
 	nullptr_check();
 	memcpy(c_struct->quaternion, quaternion.data(), 4 * sizeof(double));
 }
@@ -364,7 +366,7 @@ uint8_t MeasurementPositionVelocityAttitude::get_num_meas() const {
 	return c_struct->num_meas;
 }
 
-xt::xarray<double> MeasurementPositionVelocityAttitude::get_covariance() const {
+xt::xtensor<double, 2> MeasurementPositionVelocityAttitude::get_covariance() const {
 	nullptr_check();
 	if (c_struct->covariance == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_meas, c_struct->num_meas};
@@ -372,7 +374,7 @@ xt::xarray<double> MeasurementPositionVelocityAttitude::get_covariance() const {
 	    c_struct->covariance, c_struct->num_meas * c_struct->num_meas, xt::no_ownership(), shape);
 }
 
-void MeasurementPositionVelocityAttitude::set_covariance(xt::xarray<double> covariance) {
+void MeasurementPositionVelocityAttitude::set_covariance(xt::xtensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance,
 	       covariance.data(),
@@ -398,7 +400,7 @@ uint16_t MeasurementPositionVelocityAttitude::get_num_error_model_params() const
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementPositionVelocityAttitude::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementPositionVelocityAttitude::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -407,7 +409,7 @@ xt::xarray<double> MeasurementPositionVelocityAttitude::get_error_model_params()
 }
 
 void MeasurementPositionVelocityAttitude::set_error_model_params(
-    xt::xarray<double> error_model_params) {
+    xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

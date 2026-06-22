@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementAttitude2D.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -37,10 +37,10 @@ public:
 	MeasurementAttitude2D(TypeHeader header,
 	                      TypeTimestamp time_of_validity,
 	                      Aspn23MeasurementAttitude2DReferenceFrame reference_frame,
-	                      xt::pyarray<double> attitude2d,
-	                      xt::pyarray<double> covariance,
+	                      xt::pytensor<double, 1> attitude2d,
+	                      xt::pytensor<double, 2> covariance,
 	                      Aspn23MeasurementAttitude2DErrorModel error_model,
-	                      xt::pyarray<double> error_model_params,
+	                      xt::pytensor<double, 1> error_model_params,
 	                      std::vector<TypeIntegrity> integrity);
 
 	~MeasurementAttitude2D();
@@ -112,22 +112,22 @@ public:
 	/**
 	 * Two-dimensional, local level, geographic attitude.
 	 */
-	xt::pyarray<double> get_attitude2d() const;
+	xt::pytensor<double, 1> get_attitude2d() const;
 
 	/**
 	 * Two-dimensional, local level, geographic attitude.
 	 */
-	void set_attitude2d(xt::pyarray<double>);
+	void set_attitude2d(xt::pytensor<double, 1>);
 
 	/**
 	 * Covariance of the measurement.
 	 */
-	xt::pyarray<double> get_covariance() const;
+	xt::pytensor<double, 2> get_covariance() const;
 
 	/**
 	 * Covariance of the measurement.
 	 */
-	void set_covariance(xt::pyarray<double>);
+	void set_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -149,12 +149,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

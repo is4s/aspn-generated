@@ -14,9 +14,9 @@ MeasurementImage::MeasurementImage(TypeHeader header,
                                    uint32_t width,
                                    bool is_bigendian,
                                    Aspn23MeasurementImageImageType image_type,
-                                   xt::xarray<uint8_t> image_data,
+                                   xt::xtensor<uint8_t, 1> image_data,
                                    Aspn23MeasurementImageCameraModel camera_model,
-                                   xt::xarray<double> model_coefficients,
+                                   xt::xtensor<double, 1> model_coefficients,
                                    std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -281,14 +281,14 @@ uint64_t MeasurementImage::get_image_data_length() const {
 	return c_struct->image_data_length;
 }
 
-xt::xarray<uint8_t> MeasurementImage::get_image_data() const {
+xt::xtensor<uint8_t, 1> MeasurementImage::get_image_data() const {
 	nullptr_check();
 	if (c_struct->image_data == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->image_data_length};
 	return xt::adapt(c_struct->image_data, c_struct->image_data_length, xt::no_ownership(), shape);
 }
 
-void MeasurementImage::set_image_data(xt::xarray<uint8_t> image_data) {
+void MeasurementImage::set_image_data(xt::xtensor<uint8_t, 1> image_data) {
 	nullptr_check();
 	memcpy(c_struct->image_data, image_data.data(), c_struct->image_data_length * sizeof(uint8_t));
 	c_struct->image_data_length = image_data.size();
@@ -309,7 +309,7 @@ uint8_t MeasurementImage::get_num_model_coefficients() const {
 	return c_struct->num_model_coefficients;
 }
 
-xt::xarray<double> MeasurementImage::get_model_coefficients() const {
+xt::xtensor<double, 1> MeasurementImage::get_model_coefficients() const {
 	nullptr_check();
 	if (c_struct->model_coefficients == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_model_coefficients};
@@ -317,7 +317,7 @@ xt::xarray<double> MeasurementImage::get_model_coefficients() const {
 	    c_struct->model_coefficients, c_struct->num_model_coefficients, xt::no_ownership(), shape);
 }
 
-void MeasurementImage::set_model_coefficients(xt::xarray<double> model_coefficients) {
+void MeasurementImage::set_model_coefficients(xt::xtensor<double, 1> model_coefficients) {
 	nullptr_check();
 	memcpy(c_struct->model_coefficients,
 	       model_coefficients.data(),

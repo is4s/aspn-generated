@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementTimeFrequencyDifference.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -45,9 +45,9 @@ public:
 	    int32_t time_diff_attosec,
 	    uint8_t digits_of_precision,
 	    double freq_diff,
-	    xt::xarray<double> covariance,
+	    xt::xtensor_fixed<double, xt::xshape<2, 2>> covariance,
 	    Aspn23MeasurementTimeFrequencyDifferenceErrorModel error_model,
-	    xt::xarray<double> error_model_params,
+	    xt::xtensor<double, 1> error_model_params,
 	    std::vector<TypeIntegrity> integrity);
 
 	~MeasurementTimeFrequencyDifference();
@@ -280,14 +280,14 @@ public:
 	 * element has units of sec^2, the [1,1] element has units of Hertz^2, and the off-diagonal
 	 * terms have units of sec*Hertz.
 	 */
-	xt::xarray<double> get_covariance() const;
+	xt::xtensor_fixed<double, xt::xshape<2, 2>> get_covariance() const;
 
 	/**
 	 * Covariance information for the time/frequency measurement. Using zero-indexing, the [0,0]
 	 * element has units of sec^2, the [1,1] element has units of Hertz^2, and the off-diagonal
 	 * terms have units of sec*Hertz.
 	 */
-	void set_covariance(xt::xarray<double>);
+	void set_covariance(xt::xtensor_fixed<double, xt::xshape<2, 2>>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -309,12 +309,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::xarray<double> get_error_model_params() const;
+	xt::xtensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::xarray<double>);
+	void set_error_model_params(xt::xtensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

@@ -16,9 +16,9 @@ MeasurementDeltaPosition::MeasurementDeltaPosition(
     double term1,
     double term2,
     double term3,
-    xt::xarray<double> covariance,
+    xt::xtensor<double, 2> covariance,
     Aspn23MeasurementDeltaPositionErrorModel error_model,
-    xt::xarray<double> error_model_params,
+    xt::xtensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep                    = header.get_aspn_c();
@@ -303,7 +303,7 @@ void MeasurementDeltaPosition::set_term3(double term3) {
 	c_struct->term3 = term3;
 }
 
-xt::xarray<double> MeasurementDeltaPosition::get_covariance() const {
+xt::xtensor<double, 2> MeasurementDeltaPosition::get_covariance() const {
 	nullptr_check();
 	if (c_struct->covariance == nullptr) return {};
 	std::vector<std::size_t> shape = {c_struct->num_meas, c_struct->num_meas};
@@ -311,7 +311,7 @@ xt::xarray<double> MeasurementDeltaPosition::get_covariance() const {
 	    c_struct->covariance, c_struct->num_meas * c_struct->num_meas, xt::no_ownership(), shape);
 }
 
-void MeasurementDeltaPosition::set_covariance(xt::xarray<double> covariance) {
+void MeasurementDeltaPosition::set_covariance(xt::xtensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance,
 	       covariance.data(),
@@ -336,7 +336,7 @@ uint16_t MeasurementDeltaPosition::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementDeltaPosition::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementDeltaPosition::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -344,7 +344,7 @@ xt::xarray<double> MeasurementDeltaPosition::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementDeltaPosition::set_error_model_params(xt::xarray<double> error_model_params) {
+void MeasurementDeltaPosition::set_error_model_params(xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

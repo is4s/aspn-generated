@@ -8,7 +8,7 @@
 #include <aspn23/TypeImageFeature.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -35,7 +35,7 @@ public:
 	                 double size,
 	                 uint16_t class_id,
 	                 uint16_t octave,
-	                 xt::pyarray<uint8_t> descriptor);
+	                 xt::pytensor<uint8_t, 1> descriptor);
 
 	~TypeImageFeature();
 
@@ -126,12 +126,12 @@ public:
 	/**
 	 * Feature descriptor.
 	 */
-	xt::pyarray<uint8_t> get_descriptor() const;
+	xt::pytensor<uint8_t, 1> get_descriptor() const;
 
 	/**
 	 * Feature descriptor.
 	 */
-	void set_descriptor(xt::pyarray<uint8_t>);
+	void set_descriptor(xt::pytensor<uint8_t, 1>);
 
 private:
 	Aspn23TypeImageFeature* c_struct;

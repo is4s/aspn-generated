@@ -8,7 +8,7 @@
 #include <aspn23/MeasurementAttitude3D.h>
 
 // xtensor
-#include <xtensor-python/pyarray.hpp>
+#include <xtensor-python/pytensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -38,10 +38,10 @@ public:
 	MeasurementAttitude3D(TypeHeader header,
 	                      TypeTimestamp time_of_validity,
 	                      Aspn23MeasurementAttitude3DReferenceFrame reference_frame,
-	                      xt::pyarray<double> quaternion,
-	                      xt::pyarray<double> tilt_error_covariance,
+	                      xt::pytensor<double, 1> quaternion,
+	                      xt::pytensor<double, 2> tilt_error_covariance,
 	                      Aspn23MeasurementAttitude3DErrorModel error_model,
-	                      xt::pyarray<double> error_model_params,
+	                      xt::pytensor<double, 1> error_model_params,
 	                      std::vector<TypeIntegrity> integrity);
 
 	~MeasurementAttitude3D();
@@ -118,7 +118,7 @@ public:
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
 	 */
-	xt::pyarray<double> get_quaternion() const;
+	xt::pytensor<double, 1> get_quaternion() const;
 
 	/**
 	 * Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2),
@@ -128,7 +128,7 @@ public:
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
 	 */
-	void set_quaternion(xt::pyarray<double>);
+	void set_quaternion(xt::pytensor<double, 1>);
 
 	/**
 	 * Tilt error covariance matrix. This matrix represents the uncertainty in the "tilt errors"
@@ -137,7 +137,7 @@ public:
 	 * are expressed in the reference frame (ECI, ECEF, or NED). See "conventions" documentation for
 	 * more detailed information.
 	 */
-	xt::pyarray<double> get_tilt_error_covariance() const;
+	xt::pytensor<double, 2> get_tilt_error_covariance() const;
 
 	/**
 	 * Tilt error covariance matrix. This matrix represents the uncertainty in the "tilt errors"
@@ -146,7 +146,7 @@ public:
 	 * are expressed in the reference frame (ECI, ECEF, or NED). See "conventions" documentation for
 	 * more detailed information.
 	 */
-	void set_tilt_error_covariance(xt::pyarray<double>);
+	void set_tilt_error_covariance(xt::pytensor<double, 2>);
 
 	/**
 	 * Defines an optional error model for other than zero-mean, additive, white Gaussian noise
@@ -168,12 +168,12 @@ public:
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	xt::pyarray<double> get_error_model_params() const;
+	xt::pytensor<double, 1> get_error_model_params() const;
 
 	/**
 	 * Error model parameters that characterize the optional error model.
 	 */
-	void set_error_model_params(xt::pyarray<double>);
+	void set_error_model_params(xt::pytensor<double, 1>);
 
 	/**
 	 * Number of integrity values.

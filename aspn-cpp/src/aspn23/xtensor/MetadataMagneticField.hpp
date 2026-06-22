@@ -8,7 +8,7 @@
 #include <aspn23/MetadataMagneticField.h>
 
 // xtensor
-#include <xtensor/containers/xarray.hpp>
+#include <xtensor/containers/xtensor.hpp>
 #include <xtensor/containers/xadapt.hpp>
 
 // ASPN-C++ includes
@@ -51,8 +51,8 @@ public:
 	MetadataMagneticField(TypeMetadataheader info,
 	                      TypeTimestamp time_of_validity,
 	                      TypeMounting mounting,
-	                      xt::xarray<double> k,
-	                      xt::xarray<double> b);
+	                      xt::xtensor<double, 2> k,
+	                      xt::xtensor<double, 1> b);
 
 	~MetadataMagneticField();
 
@@ -132,7 +132,7 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	xt::xarray<double> get_k() const;
+	xt::xtensor<double, 2> get_k() const;
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of soft iron, scale
@@ -141,21 +141,21 @@ public:
 	 *
 	 * This matrix must contain all real numbers or all NaNs.
 	 */
-	void set_k(xt::xarray<double>);
+	void set_k(xt::xtensor<double, 2>);
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
 	 */
-	xt::xarray<double> get_b() const;
+	xt::xtensor<double, 1> get_b() const;
 
 	/**
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
 	 */
-	void set_b(xt::xarray<double>);
+	void set_b(xt::xtensor<double, 1>);
 
 private:
 	Aspn23MetadataMagneticField* c_struct;

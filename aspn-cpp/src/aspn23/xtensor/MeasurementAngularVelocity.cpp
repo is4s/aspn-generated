@@ -13,10 +13,10 @@ MeasurementAngularVelocity::MeasurementAngularVelocity(
     TypeTimestamp time_of_validity,
     Aspn23MeasurementAngularVelocityReferenceFrame reference_frame,
     Aspn23MeasurementAngularVelocityImuType imu_type,
-    xt::xarray<double> meas,
-    xt::xarray<double> covariance,
+    xt::xtensor_fixed<double, xt::xshape<3>> meas,
+    xt::xtensor_fixed<double, xt::xshape<3, 3>> covariance,
     Aspn23MeasurementAngularVelocityErrorModel error_model,
-    xt::xarray<double> error_model_params,
+    xt::xtensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -284,26 +284,27 @@ void MeasurementAngularVelocity::set_imu_type(Aspn23MeasurementAngularVelocityIm
 	c_struct->imu_type = imu_type;
 }
 
-xt::xarray<double> MeasurementAngularVelocity::get_meas() const {
+xt::xtensor_fixed<double, xt::xshape<3>> MeasurementAngularVelocity::get_meas() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->meas[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementAngularVelocity::set_meas(xt::xarray<double> meas) {
+void MeasurementAngularVelocity::set_meas(xt::xtensor_fixed<double, xt::xshape<3>> meas) {
 	nullptr_check();
 	memcpy(c_struct->meas, meas.data(), 3 * sizeof(double));
 }
 
-xt::xarray<double> MeasurementAngularVelocity::get_covariance() const {
+xt::xtensor_fixed<double, xt::xshape<3, 3>> MeasurementAngularVelocity::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {3, 3};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void MeasurementAngularVelocity::set_covariance(xt::xarray<double> covariance) {
+void MeasurementAngularVelocity::set_covariance(
+    xt::xtensor_fixed<double, xt::xshape<3, 3>> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 3 * 3 * sizeof(double));
 }
@@ -324,7 +325,7 @@ uint16_t MeasurementAngularVelocity::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::xarray<double> MeasurementAngularVelocity::get_error_model_params() const {
+xt::xtensor<double, 1> MeasurementAngularVelocity::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -332,7 +333,7 @@ xt::xarray<double> MeasurementAngularVelocity::get_error_model_params() const {
 	    c_struct->error_model_params, c_struct->num_error_model_params, xt::no_ownership(), shape);
 }
 
-void MeasurementAngularVelocity::set_error_model_params(xt::xarray<double> error_model_params) {
+void MeasurementAngularVelocity::set_error_model_params(xt::xtensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),

@@ -12,11 +12,11 @@ MeasurementDirectionOfMotion3D::MeasurementDirectionOfMotion3D(
     TypeHeader header,
     TypeTimestamp time_of_validity,
     Aspn23MeasurementDirectionOfMotion3DReferenceFrame reference_frame,
-    xt::pyarray<double> obs,
-    xt::pyarray<double> error_vector,
-    xt::pyarray<double> covariance,
+    xt::pytensor<double, 1> obs,
+    xt::pytensor<double, 1> error_vector,
+    xt::pytensor<double, 2> covariance,
     Aspn23MeasurementDirectionOfMotion3DErrorModel error_model,
-    xt::pyarray<double> error_model_params,
+    xt::pytensor<double, 1> error_model_params,
     std::vector<TypeIntegrity> integrity)
     : TypeHeader(header) {
 	auto header_prep           = header.get_aspn_c();
@@ -288,38 +288,38 @@ void MeasurementDirectionOfMotion3D::set_reference_frame(
 	c_struct->reference_frame = reference_frame;
 }
 
-xt::pyarray<double> MeasurementDirectionOfMotion3D::get_obs() const {
+xt::pytensor<double, 1> MeasurementDirectionOfMotion3D::get_obs() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->obs[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementDirectionOfMotion3D::set_obs(xt::pyarray<double> obs) {
+void MeasurementDirectionOfMotion3D::set_obs(xt::pytensor<double, 1> obs) {
 	nullptr_check();
 	memcpy(c_struct->obs, obs.data(), 3 * sizeof(double));
 }
 
-xt::pyarray<double> MeasurementDirectionOfMotion3D::get_error_vector() const {
+xt::pytensor<double, 1> MeasurementDirectionOfMotion3D::get_error_vector() const {
 	nullptr_check();
 
 	std::vector<uint64_t> shape = {3};
 	return xt::adapt(&c_struct->error_vector[0], 3, xt::no_ownership(), shape);
 }
 
-void MeasurementDirectionOfMotion3D::set_error_vector(xt::pyarray<double> error_vector) {
+void MeasurementDirectionOfMotion3D::set_error_vector(xt::pytensor<double, 1> error_vector) {
 	nullptr_check();
 	memcpy(c_struct->error_vector, error_vector.data(), 3 * sizeof(double));
 }
 
-xt::pyarray<double> MeasurementDirectionOfMotion3D::get_covariance() const {
+xt::pytensor<double, 2> MeasurementDirectionOfMotion3D::get_covariance() const {
 	nullptr_check();
 
 	std::vector<std::size_t> shape = {2, 2};
 	return xt::adapt(&c_struct->covariance[0][0], shape);
 }
 
-void MeasurementDirectionOfMotion3D::set_covariance(xt::pyarray<double> covariance) {
+void MeasurementDirectionOfMotion3D::set_covariance(xt::pytensor<double, 2> covariance) {
 	nullptr_check();
 	memcpy(c_struct->covariance, covariance.data(), 2 * 2 * sizeof(double));
 }
@@ -341,7 +341,7 @@ uint16_t MeasurementDirectionOfMotion3D::get_num_error_model_params() const {
 	return c_struct->num_error_model_params;
 }
 
-xt::pyarray<double> MeasurementDirectionOfMotion3D::get_error_model_params() const {
+xt::pytensor<double, 1> MeasurementDirectionOfMotion3D::get_error_model_params() const {
 	nullptr_check();
 	if (c_struct->error_model_params == nullptr) return {};
 	std::vector<uint64_t> shape = {c_struct->num_error_model_params};
@@ -350,7 +350,7 @@ xt::pyarray<double> MeasurementDirectionOfMotion3D::get_error_model_params() con
 }
 
 void MeasurementDirectionOfMotion3D::set_error_model_params(
-    xt::pyarray<double> error_model_params) {
+    xt::pytensor<double, 1> error_model_params) {
 	nullptr_check();
 	memcpy(c_struct->error_model_params,
 	       error_model_params.data(),
