@@ -207,142 +207,159 @@ from aspn23.type_satnav_sv_data import (
 )
 from aspn23.type_satnav_time import TypeSatnavTime, TypeSatnavTimeTimeReference
 from aspn23.type_timestamp import TypeTimestamp
-
-from .measurement_accumulated_distance_traveled import (
+from aspn23_lcm.measurement_accumulated_distance_traveled import (
     measurement_accumulated_distance_traveled as LcmMeasurementAccumulatedDistanceTraveled,
 )
-from .measurement_altitude import measurement_altitude as LcmMeasurementAltitude
-from .measurement_angular_velocity import (
+from aspn23_lcm.measurement_altitude import (
+    measurement_altitude as LcmMeasurementAltitude,
+)
+from aspn23_lcm.measurement_angular_velocity import (
     measurement_angular_velocity as LcmMeasurementAngularVelocity,
 )
-from .measurement_angular_velocity_1d import (
+from aspn23_lcm.measurement_angular_velocity_1d import (
     measurement_angular_velocity_1d as LcmMeasurementAngularVelocity1D,
 )
-from .measurement_attitude_2d import measurement_attitude_2d as LcmMeasurementAttitude2D
-from .measurement_attitude_3d import measurement_attitude_3d as LcmMeasurementAttitude3D
-from .measurement_barometer import measurement_barometer as LcmMeasurementBarometer
-from .measurement_delta_position import (
+from aspn23_lcm.measurement_attitude_2d import (
+    measurement_attitude_2d as LcmMeasurementAttitude2D,
+)
+from aspn23_lcm.measurement_attitude_3d import (
+    measurement_attitude_3d as LcmMeasurementAttitude3D,
+)
+from aspn23_lcm.measurement_barometer import (
+    measurement_barometer as LcmMeasurementBarometer,
+)
+from aspn23_lcm.measurement_delta_position import (
     measurement_delta_position as LcmMeasurementDeltaPosition,
 )
-from .measurement_delta_range import measurement_delta_range as LcmMeasurementDeltaRange
-from .measurement_delta_range_to_point import (
+from aspn23_lcm.measurement_delta_range import (
+    measurement_delta_range as LcmMeasurementDeltaRange,
+)
+from aspn23_lcm.measurement_delta_range_to_point import (
     measurement_delta_range_to_point as LcmMeasurementDeltaRangeToPoint,
 )
-from .measurement_direction_2d_to_points import (
+from aspn23_lcm.measurement_direction_2d_to_points import (
     measurement_direction_2d_to_points as LcmMeasurementDirection2DToPoints,
 )
-from .measurement_direction_3d_to_points import (
+from aspn23_lcm.measurement_direction_3d_to_points import (
     measurement_direction_3d_to_points as LcmMeasurementDirection3DToPoints,
 )
-from .measurement_direction_of_motion_2d import (
+from aspn23_lcm.measurement_direction_of_motion_2d import (
     measurement_direction_of_motion_2d as LcmMeasurementDirectionOfMotion2D,
 )
-from .measurement_direction_of_motion_3d import (
+from aspn23_lcm.measurement_direction_of_motion_3d import (
     measurement_direction_of_motion_3d as LcmMeasurementDirectionOfMotion3D,
 )
-from .measurement_frequency_difference import (
+from aspn23_lcm.measurement_frequency_difference import (
     measurement_frequency_difference as LcmMeasurementFrequencyDifference,
 )
-from .measurement_heading import measurement_heading as LcmMeasurementHeading
-from .measurement_image import measurement_image as LcmMeasurementImage
-from .measurement_IMU import measurement_IMU as LcmMeasurementImu
-from .measurement_magnetic_field import (
+from aspn23_lcm.measurement_heading import measurement_heading as LcmMeasurementHeading
+from aspn23_lcm.measurement_image import measurement_image as LcmMeasurementImage
+from aspn23_lcm.measurement_IMU import measurement_IMU as LcmMeasurementImu
+from aspn23_lcm.measurement_magnetic_field import (
     measurement_magnetic_field as LcmMeasurementMagneticField,
 )
-from .measurement_magnetic_field_magnitude import (
+from aspn23_lcm.measurement_magnetic_field_magnitude import (
     measurement_magnetic_field_magnitude as LcmMeasurementMagneticFieldMagnitude,
 )
-from .measurement_position import measurement_position as LcmMeasurementPosition
-from .measurement_position_attitude import (
+from aspn23_lcm.measurement_position import (
+    measurement_position as LcmMeasurementPosition,
+)
+from aspn23_lcm.measurement_position_attitude import (
     measurement_position_attitude as LcmMeasurementPositionAttitude,
 )
-from .measurement_position_velocity_attitude import (
+from aspn23_lcm.measurement_position_velocity_attitude import (
     measurement_position_velocity_attitude as LcmMeasurementPositionVelocityAttitude,
 )
-from .measurement_range_rate_to_point import (
+from aspn23_lcm.measurement_range_rate_to_point import (
     measurement_range_rate_to_point as LcmMeasurementRangeRateToPoint,
 )
-from .measurement_range_to_point import (
+from aspn23_lcm.measurement_range_to_point import (
     measurement_range_to_point as LcmMeasurementRangeToPoint,
 )
-from .measurement_satnav import measurement_satnav as LcmMeasurementSatnav
-from .measurement_satnav_subframe import (
+from aspn23_lcm.measurement_satnav import measurement_satnav as LcmMeasurementSatnav
+from aspn23_lcm.measurement_satnav_subframe import (
     measurement_satnav_subframe as LcmMeasurementSatnavSubframe,
 )
-from .measurement_satnav_with_sv_data import (
+from aspn23_lcm.measurement_satnav_with_sv_data import (
     measurement_satnav_with_sv_data as LcmMeasurementSatnavWithSvData,
 )
-from .measurement_specific_force_1d import (
+from aspn23_lcm.measurement_specific_force_1d import (
     measurement_specific_force_1d as LcmMeasurementSpecificForce1D,
 )
-from .measurement_speed import measurement_speed as LcmMeasurementSpeed
-from .measurement_TDOA_1Tx_2Rx import (
+from aspn23_lcm.measurement_speed import measurement_speed as LcmMeasurementSpeed
+from aspn23_lcm.measurement_TDOA_1Tx_2Rx import (
     measurement_TDOA_1Tx_2Rx as LcmMeasurementTdoa1Tx2Rx,
 )
-from .measurement_TDOA_2Tx_1Rx import (
+from aspn23_lcm.measurement_TDOA_2Tx_1Rx import (
     measurement_TDOA_2Tx_1Rx as LcmMeasurementTdoa2Tx1Rx,
 )
-from .measurement_temperature import (
+from aspn23_lcm.measurement_temperature import (
     measurement_temperature as LcmMeasurementTemperature,
 )
-from .measurement_time import measurement_time as LcmMeasurementTime
-from .measurement_time_difference import (
+from aspn23_lcm.measurement_time import measurement_time as LcmMeasurementTime
+from aspn23_lcm.measurement_time_difference import (
     measurement_time_difference as LcmMeasurementTimeDifference,
 )
-from .measurement_time_frequency_difference import (
+from aspn23_lcm.measurement_time_frequency_difference import (
     measurement_time_frequency_difference as LcmMeasurementTimeFrequencyDifference,
 )
-from .measurement_velocity import measurement_velocity as LcmMeasurementVelocity
-from .metadata_BeiDou_ephemeris import (
+from aspn23_lcm.measurement_velocity import (
+    measurement_velocity as LcmMeasurementVelocity,
+)
+from aspn23_lcm.metadata_BeiDou_ephemeris import (
     metadata_BeiDou_ephemeris as LcmMetadataBeidouEphemeris,
 )
-from .metadata_Galileo_ephemeris import (
+from aspn23_lcm.metadata_Galileo_ephemeris import (
     metadata_Galileo_ephemeris as LcmMetadataGalileoEphemeris,
 )
-from .metadata_generic import metadata_generic as LcmMetadataGeneric
-from .metadata_GLONASS_ephemeris import (
+from aspn23_lcm.metadata_generic import metadata_generic as LcmMetadataGeneric
+from aspn23_lcm.metadata_GLONASS_ephemeris import (
     metadata_GLONASS_ephemeris as LcmMetadataGlonassEphemeris,
 )
-from .metadata_GPS_Cnav_ephemeris import (
+from aspn23_lcm.metadata_GPS_Cnav_ephemeris import (
     metadata_GPS_Cnav_ephemeris as LcmMetadataGpsCnavEphemeris,
 )
-from .metadata_GPS_iono_utc_parameters import (
+from aspn23_lcm.metadata_GPS_iono_utc_parameters import (
     metadata_GPS_iono_utc_parameters as LcmMetadataGpsIonoUtcParameters,
 )
-from .metadata_GPS_Lnav_ephemeris import (
+from aspn23_lcm.metadata_GPS_Lnav_ephemeris import (
     metadata_GPS_Lnav_ephemeris as LcmMetadataGpsLnavEphemeris,
 )
-from .metadata_GPS_Mnav_ephemeris import (
+from aspn23_lcm.metadata_GPS_Mnav_ephemeris import (
     metadata_GPS_Mnav_ephemeris as LcmMetadataGpsMnavEphemeris,
 )
-from .metadata_image_features import metadata_image_features as LcmMetadataImageFeatures
-from .metadata_IMU import metadata_IMU as LcmMetadataImu
-from .metadata_magnetic_field import metadata_magnetic_field as LcmMetadataMagneticField
-from .metadata_satnav_obs import metadata_satnav_obs as LcmMetadataSatnavObs
-from .type_direction_2d_to_point import (
+from aspn23_lcm.metadata_image_features import (
+    metadata_image_features as LcmMetadataImageFeatures,
+)
+from aspn23_lcm.metadata_IMU import metadata_IMU as LcmMetadataImu
+from aspn23_lcm.metadata_magnetic_field import (
+    metadata_magnetic_field as LcmMetadataMagneticField,
+)
+from aspn23_lcm.metadata_satnav_obs import metadata_satnav_obs as LcmMetadataSatnavObs
+from aspn23_lcm.type_direction_2d_to_point import (
     type_direction_2d_to_point as LcmTypeDirection2DToPoint,
 )
-from .type_direction_3d_to_point import (
+from aspn23_lcm.type_direction_3d_to_point import (
     type_direction_3d_to_point as LcmTypeDirection3DToPoint,
 )
-from .type_header import type_header as LcmTypeHeader
-from .type_image_feature import type_image_feature as LcmTypeImageFeature
-from .type_integrity import type_integrity as LcmTypeIntegrity
-from .type_kepler_orbit import type_kepler_orbit as LcmTypeKeplerOrbit
-from .type_metadataheader import type_metadataheader as LcmTypeMetadataheader
-from .type_mounting import type_mounting as LcmTypeMounting
-from .type_remote_point import type_remote_point as LcmTypeRemotePoint
-from .type_satnav_clock import type_satnav_clock as LcmTypeSatnavClock
-from .type_satnav_obs import type_satnav_obs as LcmTypeSatnavObs
-from .type_satnav_satellite_system import (
+from aspn23_lcm.type_header import type_header as LcmTypeHeader
+from aspn23_lcm.type_image_feature import type_image_feature as LcmTypeImageFeature
+from aspn23_lcm.type_integrity import type_integrity as LcmTypeIntegrity
+from aspn23_lcm.type_kepler_orbit import type_kepler_orbit as LcmTypeKeplerOrbit
+from aspn23_lcm.type_metadataheader import type_metadataheader as LcmTypeMetadataheader
+from aspn23_lcm.type_mounting import type_mounting as LcmTypeMounting
+from aspn23_lcm.type_remote_point import type_remote_point as LcmTypeRemotePoint
+from aspn23_lcm.type_satnav_clock import type_satnav_clock as LcmTypeSatnavClock
+from aspn23_lcm.type_satnav_obs import type_satnav_obs as LcmTypeSatnavObs
+from aspn23_lcm.type_satnav_satellite_system import (
     type_satnav_satellite_system as LcmTypeSatnavSatelliteSystem,
 )
-from .type_satnav_signal_descriptor import (
+from aspn23_lcm.type_satnav_signal_descriptor import (
     type_satnav_signal_descriptor as LcmTypeSatnavSignalDescriptor,
 )
-from .type_satnav_sv_data import type_satnav_sv_data as LcmTypeSatnavSvData
-from .type_satnav_time import type_satnav_time as LcmTypeSatnavTime
-from .type_timestamp import type_timestamp as LcmTypeTimestamp
+from aspn23_lcm.type_satnav_sv_data import type_satnav_sv_data as LcmTypeSatnavSvData
+from aspn23_lcm.type_satnav_time import type_satnav_time as LcmTypeSatnavTime
+from aspn23_lcm.type_timestamp import type_timestamp as LcmTypeTimestamp
 
 
 def type_direction_2d_to_point_to_lcm(
