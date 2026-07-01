@@ -26,7 +26,7 @@ uint64_t __aspn23_lcm_type_image_feature_hash_recursive(const __lcm_hash_ptr *p)
     cp.v = __aspn23_lcm_type_image_feature_get_hash;
     (void) cp;
 
-    uint64_t hash = (uint64_t)0x961ed1e790449286LL
+    uint64_t hash = (uint64_t)0xb7044cccc86ac036LL
          + __int8_t_hash_recursive(&cp)
          + __double_hash_recursive(&cp)
          + __double_hash_recursive(&cp)
@@ -34,7 +34,7 @@ uint64_t __aspn23_lcm_type_image_feature_hash_recursive(const __lcm_hash_ptr *p)
          + __int32_t_hash_recursive(&cp)
          + __int32_t_hash_recursive(&cp)
          + __int32_t_hash_recursive(&cp)
-         + __int16_t_hash_recursive(&cp)
+         + __byte_hash_recursive(&cp)
         ;
 
     return (hash<<1) + ((hash>>63)&1);
@@ -78,7 +78,7 @@ int __aspn23_lcm_type_image_feature_encode_array(void *buf, int offset, int maxl
         thislen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].descriptor_size), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        thislen = __int16_t_encode_array(buf, offset + pos, maxlen - pos, p[element].descriptor, p[element].descriptor_size);
+        thislen = __byte_encode_array(buf, offset + pos, maxlen - pos, p[element].descriptor, p[element].descriptor_size);
         if (thislen < 0) return thislen; else pos += thislen;
 
     }
@@ -118,7 +118,7 @@ int __aspn23_lcm_type_image_feature_encoded_array_size(const aspn23_lcm_type_ima
 
         size += __int32_t_encoded_array_size(&(p[element].descriptor_size), 1);
 
-        size += __int16_t_encoded_array_size(p[element].descriptor, p[element].descriptor_size);
+        size += __byte_encoded_array_size(p[element].descriptor, p[element].descriptor_size);
 
     }
     return size;
@@ -156,8 +156,8 @@ int __aspn23_lcm_type_image_feature_decode_array(const void *buf, int offset, in
         thislen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].descriptor_size), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        p[element].descriptor = (int16_t*) lcm_malloc(sizeof(int16_t) * p[element].descriptor_size);
-        thislen = __int16_t_decode_array(buf, offset + pos, maxlen - pos, p[element].descriptor, p[element].descriptor_size);
+        p[element].descriptor = (uint8_t*) lcm_malloc(sizeof(uint8_t) * p[element].descriptor_size);
+        thislen = __byte_decode_array(buf, offset + pos, maxlen - pos, p[element].descriptor, p[element].descriptor_size);
         if (thislen < 0) return thislen; else pos += thislen;
 
     }
@@ -184,7 +184,7 @@ int __aspn23_lcm_type_image_feature_decode_array_cleanup(aspn23_lcm_type_image_f
 
         __int32_t_decode_array_cleanup(&(p[element].descriptor_size), 1);
 
-        __int16_t_decode_array_cleanup(p[element].descriptor, p[element].descriptor_size);
+        __byte_decode_array_cleanup(p[element].descriptor, p[element].descriptor_size);
         if (p[element].descriptor) free(p[element].descriptor);
 
     }
@@ -231,8 +231,8 @@ int __aspn23_lcm_type_image_feature_clone_array(const aspn23_lcm_type_image_feat
 
         __int32_t_clone_array(&(p[element].descriptor_size), &(q[element].descriptor_size), 1);
 
-        q[element].descriptor = (int16_t*) lcm_malloc(sizeof(int16_t) * q[element].descriptor_size);
-        __int16_t_clone_array(p[element].descriptor, q[element].descriptor, p[element].descriptor_size);
+        q[element].descriptor = (uint8_t*) lcm_malloc(sizeof(uint8_t) * q[element].descriptor_size);
+        __byte_clone_array(p[element].descriptor, q[element].descriptor, p[element].descriptor_size);
 
     }
     return 0;

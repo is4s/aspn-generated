@@ -71,9 +71,9 @@ class type_image_feature
         /**
          * Description: Feature descriptor.
          * Units: none
-         * LCM Type: int16_t[descriptor_size]
+         * LCM Type: byte[descriptor_size]
          */
-        std::vector< int16_t > descriptor;
+        std::vector< uint8_t > descriptor;
 
     public:
         /**
@@ -193,7 +193,7 @@ int type_image_feature::_encodeNoHash(void *buf, int offset, int maxlen) const
     if(tlen < 0) return tlen; else pos += tlen;
 
     if(this->descriptor_size > 0) {
-        tlen = __int16_t_encode_array(buf, offset + pos, maxlen - pos, &this->descriptor[0], this->descriptor_size);
+        tlen = __byte_encode_array(buf, offset + pos, maxlen - pos, &this->descriptor[0], this->descriptor_size);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -227,7 +227,7 @@ int type_image_feature::_decodeNoHash(const void *buf, int offset, int maxlen)
 
     if(this->descriptor_size) {
         this->descriptor.resize(this->descriptor_size);
-        tlen = __int16_t_decode_array(buf, offset + pos, maxlen - pos, &this->descriptor[0], this->descriptor_size);
+        tlen = __byte_decode_array(buf, offset + pos, maxlen - pos, &this->descriptor[0], this->descriptor_size);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -244,13 +244,13 @@ int type_image_feature::_getEncodedSizeNoHash() const
     enc_size += __int32_t_encoded_array_size(NULL, 1);
     enc_size += __int32_t_encoded_array_size(NULL, 1);
     enc_size += __int32_t_encoded_array_size(NULL, 1);
-    enc_size += __int16_t_encoded_array_size(NULL, this->descriptor_size);
+    enc_size += __byte_encoded_array_size(NULL, this->descriptor_size);
     return enc_size;
 }
 
 uint64_t type_image_feature::_computeHash(const __lcm_hash_ptr *)
 {
-    uint64_t hash = 0x961ed1e790449286LL;
+    uint64_t hash = 0xb7044cccc86ac036LL;
     return (hash<<1) + ((hash>>63)&1);
 }
 

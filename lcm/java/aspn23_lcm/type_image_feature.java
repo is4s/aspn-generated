@@ -68,9 +68,9 @@ public final class type_image_feature implements lcm.lcm.LCMEncodable
     /**
      * Description: Feature descriptor.
      * Units: none
-     * LCM Type: int16_t[descriptor_size]
+     * LCM Type: byte[descriptor_size]
      */
-    public short descriptor[];
+    public byte descriptor[];
 
  
     public type_image_feature()
@@ -78,7 +78,7 @@ public final class type_image_feature implements lcm.lcm.LCMEncodable
     }
  
     public static final long LCM_FINGERPRINT;
-    public static final long LCM_FINGERPRINT_BASE = 0x961ed1e790449286L;
+    public static final long LCM_FINGERPRINT_BASE = 0xb7044cccc86ac036L;
  
     static {
         LCM_FINGERPRINT = _hashRecursive(new ArrayList<Class<?>>());
@@ -118,9 +118,8 @@ public final class type_image_feature implements lcm.lcm.LCMEncodable
  
         outs.writeInt(this.descriptor_size); 
  
-        for (int a = 0; a < this.descriptor_size; a++) {
-            outs.writeShort(this.descriptor[a]); 
-        }
+        if (this.descriptor_size > 0)
+            outs.write(this.descriptor, 0, (int) descriptor_size);
  
     }
  
@@ -160,11 +159,8 @@ public final class type_image_feature implements lcm.lcm.LCMEncodable
  
         this.descriptor_size = ins.readInt();
  
-        this.descriptor = new short[(int) descriptor_size];
-        for (int a = 0; a < this.descriptor_size; a++) {
-            this.descriptor[a] = ins.readShort();
-        }
- 
+        this.descriptor = new byte[(int) descriptor_size];
+        ins.readFully(this.descriptor, 0, (int) descriptor_size); 
     }
  
     public aspn23_lcm.type_image_feature copy()
@@ -184,7 +180,7 @@ public final class type_image_feature implements lcm.lcm.LCMEncodable
  
         outobj.descriptor_size = this.descriptor_size;
  
-        outobj.descriptor = new short[(int) descriptor_size];
+        outobj.descriptor = new byte[(int) descriptor_size];
         if (this.descriptor_size > 0)
             System.arraycopy(this.descriptor, 0, outobj.descriptor, 0, (int) this.descriptor_size); 
         return outobj;

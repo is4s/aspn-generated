@@ -18,7 +18,7 @@ class measurement_satnav_subframe(object):
 
     __slots__ = ["icd_measurement_satnav_subframe", "header", "time_of_validity", "gnss_message_id", "prn", "satellite_system", "freq_slot_id", "num_bytes", "data_vector", "num_integrity", "integrity"]
 
-    __typenames__ = ["int8_t", "aspn23_lcm.type_header", "aspn23_lcm.type_timestamp", "int64_t", "int32_t", "aspn23_lcm.type_satnav_satellite_system", "int32_t", "int32_t", "int8_t", "int16_t", "aspn23_lcm.type_integrity"]
+    __typenames__ = ["int8_t", "aspn23_lcm.type_header", "aspn23_lcm.type_timestamp", "int64_t", "int32_t", "aspn23_lcm.type_satnav_satellite_system", "int32_t", "int32_t", "byte", "int16_t", "aspn23_lcm.type_integrity"]
 
     __dimensions__ = [None, None, None, None, None, None, None, None, ["num_bytes"], None, ["num_integrity"]]
 
@@ -78,12 +78,12 @@ class measurement_satnav_subframe(object):
         LCM Type: int32_t
         """
 
-        self.data_vector = []
+        self.data_vector = b""
         """
         Description: num_bytes sized array of raw subframe message collected by the sensor. The
         underlying type and shape of the data vector is given by satnav_msg_id.
         Units: none
-        LCM Type: int8_t[num_bytes]
+        LCM Type: byte[num_bytes]
         """
 
         self.num_integrity = 0
@@ -119,7 +119,7 @@ class measurement_satnav_subframe(object):
         assert self.satellite_system._get_packed_fingerprint() == aspn23_lcm.type_satnav_satellite_system._get_packed_fingerprint()
         self.satellite_system._encode_one(buf)
         buf.write(struct.pack(">ii", self.freq_slot_id, self.num_bytes))
-        buf.write(struct.pack('>%db' % self.num_bytes, *self.data_vector[:self.num_bytes]))
+        buf.write(bytearray(self.data_vector[:self.num_bytes]))
         buf.write(struct.pack(">h", self.num_integrity))
         for i0 in range(self.num_integrity):
             assert self.integrity[i0]._get_packed_fingerprint() == aspn23_lcm.type_integrity._get_packed_fingerprint()
@@ -144,7 +144,7 @@ class measurement_satnav_subframe(object):
         self.gnss_message_id, self.prn = struct.unpack(">qi", buf.read(12))
         self.satellite_system = aspn23_lcm.type_satnav_satellite_system._decode_one(buf)
         self.freq_slot_id, self.num_bytes = struct.unpack(">ii", buf.read(8))
-        self.data_vector = struct.unpack('>%db' % self.num_bytes, buf.read(self.num_bytes))
+        self.data_vector = buf.read(self.num_bytes)
         self.num_integrity = struct.unpack(">h", buf.read(2))[0]
         self.integrity = []
         for i0 in range(self.num_integrity):
@@ -155,7 +155,7 @@ class measurement_satnav_subframe(object):
     def _get_hash_recursive(parents):
         if measurement_satnav_subframe in parents: return 0
         newparents = parents + [measurement_satnav_subframe]
-        tmphash = (0x7f968873412530fa+ aspn23_lcm.type_header._get_hash_recursive(newparents)+ aspn23_lcm.type_timestamp._get_hash_recursive(newparents)+ aspn23_lcm.type_satnav_satellite_system._get_hash_recursive(newparents)+ aspn23_lcm.type_integrity._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0x15322dda6d63e750+ aspn23_lcm.type_header._get_hash_recursive(newparents)+ aspn23_lcm.type_timestamp._get_hash_recursive(newparents)+ aspn23_lcm.type_satnav_satellite_system._get_hash_recursive(newparents)+ aspn23_lcm.type_integrity._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

@@ -41,7 +41,7 @@ struct type_image_feature {
 
     // Description: Feature descriptor.
     // Units: none
-    int16_t descriptor[descriptor_size];
+    byte descriptor[descriptor_size];
 
 
 }

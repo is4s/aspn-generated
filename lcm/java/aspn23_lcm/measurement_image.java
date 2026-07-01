@@ -82,9 +82,9 @@ public final class measurement_image implements lcm.lcm.LCMEncodable
     /**
      * Description: Stores the encoded image. Interpretation varies based on the image_type.
      * Units: none
-     * LCM Type: int16_t[image_data_length]
+     * LCM Type: byte[image_data_length]
      */
-    public short image_data[];
+    public byte image_data[];
 
     /**
      * The model used to map 3D points in the world to 2D points on the image plane
@@ -125,7 +125,7 @@ public final class measurement_image implements lcm.lcm.LCMEncodable
     }
  
     public static final long LCM_FINGERPRINT;
-    public static final long LCM_FINGERPRINT_BASE = 0x77351e40ed8bb80aL;
+    public static final long LCM_FINGERPRINT_BASE = 0xb9911e5964b761c2L;
  
     /**
      * Windows Bitmaps
@@ -230,9 +230,8 @@ public final class measurement_image implements lcm.lcm.LCMEncodable
  
         outs.writeLong(this.image_data_length); 
  
-        for (int a = 0; a < this.image_data_length; a++) {
-            outs.writeShort(this.image_data[a]); 
-        }
+        if (this.image_data_length > 0)
+            outs.write(this.image_data, 0, (int) image_data_length);
  
         outs.writeByte(this.camera_model); 
  
@@ -288,11 +287,8 @@ public final class measurement_image implements lcm.lcm.LCMEncodable
  
         this.image_data_length = ins.readLong();
  
-        this.image_data = new short[(int) image_data_length];
-        for (int a = 0; a < this.image_data_length; a++) {
-            this.image_data[a] = ins.readShort();
-        }
- 
+        this.image_data = new byte[(int) image_data_length];
+        ins.readFully(this.image_data, 0, (int) image_data_length); 
         this.camera_model = ins.readByte();
  
         this.num_model_coefficients = ins.readShort();
@@ -330,7 +326,7 @@ public final class measurement_image implements lcm.lcm.LCMEncodable
  
         outobj.image_data_length = this.image_data_length;
  
-        outobj.image_data = new short[(int) image_data_length];
+        outobj.image_data = new byte[(int) image_data_length];
         if (this.image_data_length > 0)
             System.arraycopy(this.image_data, 0, outobj.image_data, 0, (int) this.image_data_length); 
         outobj.camera_model = this.camera_model;

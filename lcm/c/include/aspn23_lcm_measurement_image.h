@@ -131,9 +131,9 @@ struct _aspn23_lcm_measurement_image
     /**
      * Description: Stores the encoded image. Interpretation varies based on the image_type.
      * Units: none
-     * LCM Type: int16_t[image_data_length]
+     * LCM Type: byte[image_data_length]
      */
-    int16_t    *image_data;
+    uint8_t    *image_data;
 
     /**
      * The model used to map 3D points in the world to 2D points on the image plane

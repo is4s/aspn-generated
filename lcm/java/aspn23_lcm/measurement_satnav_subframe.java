@@ -70,7 +70,7 @@ public final class measurement_satnav_subframe implements lcm.lcm.LCMEncodable
      * Description: num_bytes sized array of raw subframe message collected by the sensor. The
      * underlying type and shape of the data vector is given by satnav_msg_id.
      * Units: none
-     * LCM Type: int8_t[num_bytes]
+     * LCM Type: byte[num_bytes]
      */
     public byte data_vector[];
 
@@ -95,7 +95,7 @@ public final class measurement_satnav_subframe implements lcm.lcm.LCMEncodable
     }
  
     public static final long LCM_FINGERPRINT;
-    public static final long LCM_FINGERPRINT_BASE = 0x7f968873412530faL;
+    public static final long LCM_FINGERPRINT_BASE = 0x15322dda6d63e750L;
  
     static {
         LCM_FINGERPRINT = _hashRecursive(new ArrayList<Class<?>>());

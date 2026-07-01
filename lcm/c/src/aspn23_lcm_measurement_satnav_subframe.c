@@ -26,7 +26,7 @@ uint64_t __aspn23_lcm_measurement_satnav_subframe_hash_recursive(const __lcm_has
     cp.v = __aspn23_lcm_measurement_satnav_subframe_get_hash;
     (void) cp;
 
-    uint64_t hash = (uint64_t)0x7f968873412530faLL
+    uint64_t hash = (uint64_t)0x15322dda6d63e750LL
          + __int8_t_hash_recursive(&cp)
          + __aspn23_lcm_type_header_hash_recursive(&cp)
          + __aspn23_lcm_type_timestamp_hash_recursive(&cp)
@@ -35,7 +35,7 @@ uint64_t __aspn23_lcm_measurement_satnav_subframe_hash_recursive(const __lcm_has
          + __aspn23_lcm_type_satnav_satellite_system_hash_recursive(&cp)
          + __int32_t_hash_recursive(&cp)
          + __int32_t_hash_recursive(&cp)
-         + __int8_t_hash_recursive(&cp)
+         + __byte_hash_recursive(&cp)
          + __int16_t_hash_recursive(&cp)
          + __aspn23_lcm_type_integrity_hash_recursive(&cp)
         ;
@@ -84,7 +84,7 @@ int __aspn23_lcm_measurement_satnav_subframe_encode_array(void *buf, int offset,
         thislen = __int32_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].num_bytes), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        thislen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, p[element].data_vector, p[element].num_bytes);
+        thislen = __byte_encode_array(buf, offset + pos, maxlen - pos, p[element].data_vector, p[element].num_bytes);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int16_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].num_integrity), 1);
@@ -132,7 +132,7 @@ int __aspn23_lcm_measurement_satnav_subframe_encoded_array_size(const aspn23_lcm
 
         size += __int32_t_encoded_array_size(&(p[element].num_bytes), 1);
 
-        size += __int8_t_encoded_array_size(p[element].data_vector, p[element].num_bytes);
+        size += __byte_encoded_array_size(p[element].data_vector, p[element].num_bytes);
 
         size += __int16_t_encoded_array_size(&(p[element].num_integrity), 1);
 
@@ -177,8 +177,8 @@ int __aspn23_lcm_measurement_satnav_subframe_decode_array(const void *buf, int o
         thislen = __int32_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].num_bytes), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        p[element].data_vector = (int8_t*) lcm_malloc(sizeof(int8_t) * p[element].num_bytes);
-        thislen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, p[element].data_vector, p[element].num_bytes);
+        p[element].data_vector = (uint8_t*) lcm_malloc(sizeof(uint8_t) * p[element].num_bytes);
+        thislen = __byte_decode_array(buf, offset + pos, maxlen - pos, p[element].data_vector, p[element].num_bytes);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int16_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].num_integrity), 1);
@@ -214,7 +214,7 @@ int __aspn23_lcm_measurement_satnav_subframe_decode_array_cleanup(aspn23_lcm_mea
 
         __int32_t_decode_array_cleanup(&(p[element].num_bytes), 1);
 
-        __int8_t_decode_array_cleanup(p[element].data_vector, p[element].num_bytes);
+        __byte_decode_array_cleanup(p[element].data_vector, p[element].num_bytes);
         if (p[element].data_vector) free(p[element].data_vector);
 
         __int16_t_decode_array_cleanup(&(p[element].num_integrity), 1);
@@ -268,8 +268,8 @@ int __aspn23_lcm_measurement_satnav_subframe_clone_array(const aspn23_lcm_measur
 
         __int32_t_clone_array(&(p[element].num_bytes), &(q[element].num_bytes), 1);
 
-        q[element].data_vector = (int8_t*) lcm_malloc(sizeof(int8_t) * q[element].num_bytes);
-        __int8_t_clone_array(p[element].data_vector, q[element].data_vector, p[element].num_bytes);
+        q[element].data_vector = (uint8_t*) lcm_malloc(sizeof(uint8_t) * q[element].num_bytes);
+        __byte_clone_array(p[element].data_vector, q[element].data_vector, p[element].num_bytes);
 
         __int16_t_clone_array(&(p[element].num_integrity), &(q[element].num_integrity), 1);
 
