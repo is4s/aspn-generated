@@ -1,5 +1,5 @@
 [build-system]
-requires = ['meson-python', 'numpy>=1.21', 'pybind11-stubgen>=2.5.5']
+requires = ['meson==1.8.4', 'meson-python', 'numpy>=1.21', 'pybind11-stubgen>=2.5.5']
 build-backend = 'mesonpy'
 
 [tool.meson-python.args]
@@ -10,13 +10,25 @@ setup = ['-Daspn-cpp-eigen=disabled',
          '-Ddds-generated=disabled',
          '-Dlcm-generated=disabled',
          '-Daspn-c-main-library=false']
-install = ['--tags=runtime,python-runtime']
+install = ['--tags=runtime,python-runtime,devel', '--skip-subprojects']
 
 [project]
 dependencies = ['numpy']
 name = 'aspn23_xtensor'
-version = '0.dev2'
+version = '0.1.0'
 description = 'ASPN-C++ (xtensor) Python Bindings'
 license = 'Apache-2.0'
 license-files = ['LICENSE']
 readme = 'aspn-cpp/README_PYTHON.md'
+
+[tool.pytest.ini_options]
+norecursedirs = ['subprojects']
+
+[[tool.cibuildwheel.overrides]]
+select = "*armv7*"
+before-all = """
+  apt-get update &&
+  apt-get install -y libopenblas-dev gcc-10 g++-10 &&
+  update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 60 &&
+  update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 60
+"""
