@@ -154,7 +154,7 @@ if not get_option('aspn-cpp-xtensor').disabled()
 endif
 
 aspn_xtensor_py_sources = [
-        'src/aspn23/xtensor_py/TypeDirection2DToPoint.cpp',
+    'src/aspn23/xtensor_py/TypeDirection2DToPoint.cpp',
     'src/aspn23/xtensor_py/TypeDirection3DToPoint.cpp',
     'src/aspn23/xtensor_py/TypeHeader.cpp',
     'src/aspn23/xtensor_py/TypeImageFeature.cpp',
@@ -222,6 +222,75 @@ aspn_xtensor_py_sources = [
     'src/aspn23/xtensor_py/aspn_xtensor.cpp',
 ]
 
+aspn_xtensor_py_headers = [
+    'src/aspn23/xtensor_py/TypeDirection2DToPoint.hpp',
+    'src/aspn23/xtensor_py/TypeDirection3DToPoint.hpp',
+    'src/aspn23/xtensor_py/TypeHeader.hpp',
+    'src/aspn23/xtensor_py/TypeImageFeature.hpp',
+    'src/aspn23/xtensor_py/TypeIntegrity.hpp',
+    'src/aspn23/xtensor_py/TypeKeplerOrbit.hpp',
+    'src/aspn23/xtensor_py/TypeMetadataheader.hpp',
+    'src/aspn23/xtensor_py/TypeMounting.hpp',
+    'src/aspn23/xtensor_py/TypeRemotePoint.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavClock.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavObs.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavSatelliteSystem.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavSignalDescriptor.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavSvData.hpp',
+    'src/aspn23/xtensor_py/TypeSatnavTime.hpp',
+    'src/aspn23/xtensor_py/TypeTimestamp.hpp',
+    'src/aspn23/xtensor_py/MetadataBeidouEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataGlonassEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataGpsCnavEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataGpsLnavEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataGpsMnavEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataGpsIonoUtcParameters.hpp',
+    'src/aspn23/xtensor_py/MetadataGalileoEphemeris.hpp',
+    'src/aspn23/xtensor_py/MetadataImu.hpp',
+    'src/aspn23/xtensor_py/MetadataGeneric.hpp',
+    'src/aspn23/xtensor_py/MetadataImageFeatures.hpp',
+    'src/aspn23/xtensor_py/MetadataMagneticField.hpp',
+    'src/aspn23/xtensor_py/MetadataSatnavObs.hpp',
+    'src/aspn23/xtensor_py/MeasurementImu.hpp',
+    'src/aspn23/xtensor_py/MeasurementTdoa1Tx2Rx.hpp',
+    'src/aspn23/xtensor_py/MeasurementTdoa2Tx1Rx.hpp',
+    'src/aspn23/xtensor_py/MeasurementAccumulatedDistanceTraveled.hpp',
+    'src/aspn23/xtensor_py/MeasurementAltitude.hpp',
+    'src/aspn23/xtensor_py/MeasurementAngularVelocity.hpp',
+    'src/aspn23/xtensor_py/MeasurementAngularVelocity1D.hpp',
+    'src/aspn23/xtensor_py/MeasurementAttitude2D.hpp',
+    'src/aspn23/xtensor_py/MeasurementAttitude3D.hpp',
+    'src/aspn23/xtensor_py/MeasurementBarometer.hpp',
+    'src/aspn23/xtensor_py/MeasurementDeltaPosition.hpp',
+    'src/aspn23/xtensor_py/MeasurementDeltaRange.hpp',
+    'src/aspn23/xtensor_py/MeasurementDeltaRangeToPoint.hpp',
+    'src/aspn23/xtensor_py/MeasurementDirection2DToPoints.hpp',
+    'src/aspn23/xtensor_py/MeasurementDirection3DToPoints.hpp',
+    'src/aspn23/xtensor_py/MeasurementDirectionOfMotion2D.hpp',
+    'src/aspn23/xtensor_py/MeasurementDirectionOfMotion3D.hpp',
+    'src/aspn23/xtensor_py/MeasurementFrequencyDifference.hpp',
+    'src/aspn23/xtensor_py/MeasurementHeading.hpp',
+    'src/aspn23/xtensor_py/MeasurementImage.hpp',
+    'src/aspn23/xtensor_py/MeasurementMagneticField.hpp',
+    'src/aspn23/xtensor_py/MeasurementMagneticFieldMagnitude.hpp',
+    'src/aspn23/xtensor_py/MeasurementPosition.hpp',
+    'src/aspn23/xtensor_py/MeasurementPositionAttitude.hpp',
+    'src/aspn23/xtensor_py/MeasurementPositionVelocityAttitude.hpp',
+    'src/aspn23/xtensor_py/MeasurementRangeRateToPoint.hpp',
+    'src/aspn23/xtensor_py/MeasurementRangeToPoint.hpp',
+    'src/aspn23/xtensor_py/MeasurementSatnav.hpp',
+    'src/aspn23/xtensor_py/MeasurementSatnavSubframe.hpp',
+    'src/aspn23/xtensor_py/MeasurementSatnavWithSvData.hpp',
+    'src/aspn23/xtensor_py/MeasurementSpecificForce1D.hpp',
+    'src/aspn23/xtensor_py/MeasurementSpeed.hpp',
+    'src/aspn23/xtensor_py/MeasurementTemperature.hpp',
+    'src/aspn23/xtensor_py/MeasurementTime.hpp',
+    'src/aspn23/xtensor_py/MeasurementTimeDifference.hpp',
+    'src/aspn23/xtensor_py/MeasurementTimeFrequencyDifference.hpp',
+    'src/aspn23/xtensor_py/MeasurementVelocity.hpp',
+    'src/aspn23/xtensor_py/aspn_xtensor.hpp',
+]
+
 aspn_xtensor_py_dep = disabler()
 
 if not get_option('aspn-cpp-xtensor-py').disabled()
@@ -231,7 +300,11 @@ if not get_option('aspn-cpp-xtensor-py').disabled()
         sources: [aspn_xtensor_py_sources, 'src/aspn23/xtensor_py/xtensor_bindings.cpp'],
         include_directories: aspn_xtensor_py_include,
         override_options: ['b_coverage=false', 'b_sanitize=none'],
-        dependencies: [aspn_xtensor_py_deps, aspn_c_no_asan_dep])
+        dependencies: [aspn_xtensor_py_deps, aspn_c_no_asan_dep],
+        install_dir: python.get_install_dir() / 'aspn23_xtensor',
+        install: true)
+
+    install_headers(aspn_xtensor_py_headers, subdir: 'aspn23/xtensor_py')
 
     aspn_xtensor_py_dep = declare_dependency(
         link_whole: aspn_xtensor_py_static_lib,
