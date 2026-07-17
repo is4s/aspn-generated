@@ -1,0 +1,87 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_speed.json",
+  "title": "measurementSpeed",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Speed is the magnitude of the velocity vector with respect to the user-specified reference frame.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "reference": {
+      "description": "reference (enum): Defines measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "TAS: Speed with respect to air measured as true airspeed (TAS) with respect to air mass expressed in sensor coordinate frame."
+        },
+        {
+          "const": 1,
+          "description": "IAS: Speed with respect to air measured as indicated airspeed (IAS) with respect to air mass expressed in sensor coordinate frame; for example, dynamic pressure from a pitot tube converted to airspeed without compensation for instrument error, position, altitude, or temperature."
+        },
+        {
+          "const": 2,
+          "description": "WATER: Speed with respect to water. Speed with respect to water expressed in sensor coordinate frame."
+        },
+        {
+          "const": 3,
+          "description": "GROUND: Speed with respect to ground. An example source is a ground Doppler radar."
+        }
+      ]
+    },
+    "speed": {
+      "description": "speed: Speed as the magnitude of the velocity.  Units: m/s",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Speed variance. Units: (m/s)^2",
+      "type": "number"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "reference", "speed", "variance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

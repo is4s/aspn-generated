@@ -1,0 +1,69 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_range_rate_to_point.json",
+  "title": "measurementRangeRateToPoint",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Range rate to a point is the instantaneous rate of change in the distance between the sensor and the point at time_of_validity.  Information about the remote point (its position and/or correspondence with previous or future appearances of this same point) may be determined using remote_point.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "remotePoint": {
+      "description": "remote_point: Position and/or correspondence information about the remote point.  Units: various",
+      "$ref": "type_remote_point.json"
+    },
+    "obs": {
+      "description": "obs: Range rate to the remote point.  Units: m/s",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Variance of the range rate measurement.  Units: (m/s)^2",
+      "type": "number"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "remotePoint", "obs", "variance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

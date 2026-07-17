@@ -1,0 +1,77 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_frequency_difference.json",
+  "title": "measurementFrequencyDifference",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Frequency difference between two clocks or timing sources.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "timeOfValidityAttosec": {
+      "description": "time_of_validity_attosec: Whole number of attoseconds used to provide additional timestamp fidelity describing the time at which the measurement is considered to be valid.  This is only needed if the time of validity is known to more precision than 1ns; otherwise, set time_of_validity_attosec = 0.  Be sure to report the timestamp's digits of precision in the `type_metadataheader` as part of the metadata. The full timestamp in nanoseconds is calculated as         time_of_validity + ( time_of_validity_attosec * 1E-9 )  and if needed, a timestamp in seconds is calculated as         time_of_validity * 1E-9 + time_of_validity_attosec * 1E-18  (Recall time_of_validity is in nanoseconds and time_of_validity_attosec is in attoseconds.) Furthermore, both time_of_validity and time_of_validity_attosec are signed integers and may be positive or negative.  It is recommended to make time_of_validity and time_of_validity_attosec the same sign. Care should be taken when constructing the timestamp components to be sure the summation produces the desired result.  Units: attoseconds",
+      "type": "integer"
+    },
+    "clockId1": {
+      "description": "clock_id1: Identifier for clock/timing source 1.  See clock_identifiers.md for a full description, but the summary is as follows:   0 = ASPN System Time   1 = International Atomic Time (TAI)   2 = Universal Coordinated Time (UTC)   3 = GPS System Time   4 = Galileo System Time   5 = GLONASS System Time   6 = BeiDou System Time   7-50: Reserved for future additional time scale representations.",
+      "type": "integer"
+    },
+    "clockId2": {
+      "description": "clock_id2: Identifier for clock/timing source 2.  See clock_identifiers.md for a full description, but the summary is as follows:   0 = ASPN System Time   1 = International Atomic Time (TAI)   2 = Universal Coordinated Time (UTC)   3 = GPS System Time   4 = Galileo System Time   5 = GLONASS System Time   6 = BeiDou System Time   7-50: Reserved for future additional time scale representations.",
+      "type": "integer"
+    },
+    "freqDiff": {
+      "description": "freq_diff: Frequency difference formed as (frequency from clock_id1) - (frequency from clock_id2).  Units: Hertz",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Variance of the error in the frequency difference measurement. Units: Hertz^2",
+      "type": "number"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "timeOfValidityAttosec", "clockId1", "clockId2", "freqDiff", "variance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

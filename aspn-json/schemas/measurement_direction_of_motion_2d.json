@@ -1,0 +1,87 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_direction_of_motion_2d.json",
+  "title": "measurementDirectionOfMotion2D",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Direction of motion represented in a two-dimensional reference frame as defined by the enum.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "reference": {
+      "description": "reference (enum): Specifies measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NE: Direction of motion expressed in the two-dimensional North-East plane of the locally level NED frame as the angle between the N-axis and the direction of motion.  Positive angle is defined as a rotation towards the E-axis.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 1,
+          "description": "ND: Direction of motion expressed in the two-dimensional North-Down plane of the locally level NED frame as the angle between the N-axis and the direction of motion.  Positive angle is defined as a rotation towards the D-axis.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 2,
+          "description": "ED: Direction of motion expressed in the two-dimensional East-Down plane of the locally level NED frame as the angle between the E-axis and the direction of motion. Positive angle is defined as a rotation towards the D-axis.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 3,
+          "description": "SENSOR: Direction of motion expressed in the sensor frame as the angle between the sensor frame x-axis and the direction of motion.  Positive angle is defined as a rotation towards the sensor frame y-axis. (Sensor frame is two dimensional, x and y, as defined in mounting.)"
+        }
+      ]
+    },
+    "obs": {
+      "description": "obs: Observations as specified in the reference enum.  Units: rad",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Measurement error variance.  Units: rad^2",
+      "type": "number"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "reference", "obs", "variance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

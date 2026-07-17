@@ -1,0 +1,68 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_IMU.json",
+  "title": "measurementImu",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Inertial Measurement Unit (IMU) measurements from the device's three axis accelerometers and three axis gyroscopes.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "imuType": {
+      "description": "imu_type (enum): IMU type",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "INTEGRATED: delta velocity and delta rotation measurements from the device's three axis accelerometers and three axis gyroscopes. Specific force integrated over last measurement period expressed as delta_v array in m/s. Angular rate integrated over last measurement period expressed as delta_theta array in radians. Time of validity is the end of integration period. Integration period is from previous measurement to the current measurement."
+        },
+        {
+          "const": 1,
+          "description": "SAMPLED: sampled specific force and rotation rates from the device's three axis accelerometers and three axis gyroscopes. Specific force is sampled expressed as an array in m/s/s. Angular rate is sampled and expressed as an array in rad/s."
+        }
+      ]
+    },
+    "measAccel": {
+      "description": "meas_accel: Accelerometer (specific force) measurements in 3 axes per enumerated definition.  Units: various",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "measGyro": {
+      "description": "meas_gyro: Gyroscope measurements in 3 axes per enumerated definition. Units: various",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "imuType", "measAccel", "measGyro", "numIntegrity", "integrity" ]
+}

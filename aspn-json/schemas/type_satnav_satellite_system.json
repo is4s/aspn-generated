@@ -1,0 +1,51 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_satellite_system.json",
+  "title": "typeSatnavSatelliteSystem",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Satellite system name",
+  "type": "object",
+  "properties": {
+    "satelliteSystem": {
+      "description": "satellite_system (enum): Enumerated field which describes the Satellite System.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "SYS_GPS: GPS."
+        },
+        {
+          "const": 1,
+          "description": "SYS_GALILEO: Galileo."
+        },
+        {
+          "const": 2,
+          "description": "SYS_GLONASS: GLONASS."
+        },
+        {
+          "const": 3,
+          "description": "SYS_BEIDOU: BeiDou."
+        },
+        {
+          "const": 4,
+          "description": "SYS_SBAS: SBAS."
+        },
+        {
+          "const": 5,
+          "description": "SYS_QZSS: QZSS."
+        },
+        {
+          "const": 6,
+          "description": "SYS_IRNSS: IRNSS."
+        }
+      ]
+    }
+  },
+  "required": [ "satelliteSystem" ]
+}

@@ -1,0 +1,89 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_GPS_iono_utc_parameters.json",
+  "title": "metadataGpsIonoUtcParameters",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Broadcasted GPS navigation data for estimation of single frequency ionospheric correction and determination of UTC.  Definitions and usage are covered in ICD-GPS-200L, Section 20.3.3.5.1.6 and 20.3.3.5.1.7.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "a0": {
+      "description": "a_0: Bias coefficient of GPS time scale relative to UTC time scale.  Units: s",
+      "type": "number"
+    },
+    "a1": {
+      "description": "a_1: Drift coefficient of GPS time scale relative to UTC time scale.  Units: s/s",
+      "type": "number"
+    },
+    "deltaTLs": {
+      "description": "delta_t_ls: Leap second count.  Units: s",
+      "type": "integer"
+    },
+    "tot": {
+      "description": "tot: Reference GPS time of week for UTC parameters  Units: s",
+      "type": "integer"
+    },
+    "wnT": {
+      "description": "wn_t: Reference Modulo 256 GPS Week number for UTC parameters  Units: weeks",
+      "type": "integer"
+    },
+    "wnLsf": {
+      "description": "wn_lsf: Modulo 256 GPS Week number at the end of which delta_t_lsf becomes effective.  Units: weeks",
+      "type": "integer"
+    },
+    "dn": {
+      "description": "dn: Day number at the end of which delta_t_lsf becomes effective (1 to 7).  Units: days",
+      "type": "integer"
+    },
+    "deltaTLsf": {
+      "description": "delta_t_lsf: Future leap second count.  Units: s",
+      "type": "integer"
+    },
+    "alpha0": {
+      "description": "alpha_0: Zeroth-order coefficient of amplitude of vertical ionospheric delay.  Units: s",
+      "type": "number"
+    },
+    "alpha1": {
+      "description": "alpha_1: First-order coefficient of amplitude of vertical ionospheric delay.  Units: s/rad",
+      "type": "number"
+    },
+    "alpha2": {
+      "description": "alpha_2: Second-order coefficient of amplitude of vertical ionospheric delay.  Units: s/rad^2",
+      "type": "number"
+    },
+    "alpha3": {
+      "description": "alpha_3: Third-order coefficient of amplitude of vertical ionospheric delay.  Units: s/rads^3",
+      "type": "number"
+    },
+    "beta0": {
+      "description": "beta_0: Zeroth-order coefficient of period of ionospheric delay model.  Units: s",
+      "type": "number"
+    },
+    "beta1": {
+      "description": "beta_1: First-order coefficient of period of ionospheric delay model.  Units: s/rad",
+      "type": "number"
+    },
+    "beta2": {
+      "description": "beta_2: Second-order coefficient of period of ionospheric delay model.  Units: s/rad^2",
+      "type": "number"
+    },
+    "beta3": {
+      "description": "beta_3: Third-order coefficient of period of ionospheric delay model.  Units: s/rad^3",
+      "type": "number"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "a0", "a1", "deltaTLs", "tot", "wnT", "wnLsf", "dn", "deltaTLsf", "alpha0", "alpha1", "alpha2", "alpha3", "beta0", "beta1", "beta2", "beta3" ]
+}

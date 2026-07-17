@@ -1,0 +1,87 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_altitude.json",
+  "title": "measurementAltitude",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Height above a user-specified reference frame.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "reference": {
+      "description": "reference (enum): Specifies altitude reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "AGL: height above ground level (AGL). Generally, position and terrain elevation data are required to convert between AGL and (MSL or HAE)."
+        },
+        {
+          "const": 1,
+          "description": "MSL: height above mean sea level (MSL). Generally, position is required to convert between MSL and HAE."
+        },
+        {
+          "const": 2,
+          "description": "HAE: height above the WGS-84 ellipsoid (HAE), also known as geodetic altitude."
+        }
+      ]
+    },
+    "altitude": {
+      "description": "altitude: Altitude in meters, with altitude defined by the enum, altitude_type.  Units: m",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Altitude variance.  Units: m^2",
+      "type": "number"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        },
+        {
+          "const": 1,
+          "description": "FOGM: First-order Gauss-Markov (FOGM) process, defined by the following parameters (num_error_model_params = 3):   1) standard_deviation, units: m, description: standard deviation of a scalar, first order   Gauss-Markov measurement noise model.   2) time_constant, units: seconds, description: time constant of a scalar, first order   Gauss-Markov measurement noise model.   3) initial_standard_deviation, units: m, description: initial standard deviation of a   scalar, first order Gauss-Markov measurement noise model."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model. Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "reference", "altitude", "variance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

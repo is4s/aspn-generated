@@ -1,0 +1,53 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_BeiDou_ephemeris.json",
+  "title": "metadataBeidouEphemeris",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "BeiDou Ephemeris describing satellite locations.  Definitions and usage are covered in BDS-SIS-ICD-BII-3.0, February 2019,",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "prn": {
+      "description": "prn: Satellite PRN number.",
+      "type": "integer"
+    },
+    "clock": {
+      "description": "clock: GNSS broadcast parameters required to calculate sv clock corrections.",
+      "$ref": "type_satnav_clock.json"
+    },
+    "orbit": {
+      "description": "orbit: Keplerian orbit parameters required to calculate satellite position.",
+      "$ref": "type_kepler_orbit.json"
+    },
+    "tGd1": {
+      "description": "t_gd1: Group delay differential for B1I user.  Units: s",
+      "type": "number"
+    },
+    "tGd2": {
+      "description": "t_gd2: Group delay differential for B2I user.  Units: s",
+      "type": "number"
+    },
+    "aodc": {
+      "description": "aodc: Age of data, clock is updated at start of each hour in BDT per table 5-6 in BDS-SIS-ICD-BII-3.0.  Units: none",
+      "type": "integer"
+    },
+    "aode": {
+      "description": "aode: Age of data, ephemeris is updated at start of each hour in BDT per table 5-8 in BDS-SIS-ICD-BII-3.0.  Units: none",
+      "type": "integer"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "prn", "clock", "orbit", "tGd1", "tGd2", "aodc", "aode" ]
+}

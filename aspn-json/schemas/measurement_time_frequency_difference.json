@@ -1,0 +1,99 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_time_frequency_difference.json",
+  "title": "measurementTimeFrequencyDifference",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Time and frequency difference between two clocks or timing sources.  This measurement requires both time and frequency to be provided.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "timeOfValidityAttosec": {
+      "description": "time_of_validity_attosec: Whole number of attoseconds used to provide additional timestamp fidelity describing the time at which the measurement is considered to be valid.  This is only needed if the time of validity is known to more precision than 1ns; otherwise, set time_of_validity_attosec = 0.  Be sure to report the timestamp's digits of precision in the `type_metadataheader` as part of the metadata.  The full timestamp in nanoseconds is calculated as         time_of_validity + ( time_of_validity_attosec * 1E-9 )  and if needed, a timestamp in seconds is calculated as         time_of_validity * 1E-9 + time_of_validity_attosec * 1E-18  (Recall time_of_validity is in nanoseconds and time_of_validity_attosec is in attoseconds.) Furthermore, both time_of_validity and time_of_validity_attosec are signed integers and may be positive or negative.  It is recommended to make time_of_validity and time_of_validity_attosec the same sign. Care should be taken when constructing the timestamp components to be sure the summation produces the desired result.  Units: attoseconds",
+      "type": "integer"
+    },
+    "clockId1": {
+      "description": "clock_id1: Identifier for clock/timing source 2.  See clock_identifiers.md for a full description, but the summary is as follows:   0 = ASPN System Time   1 = International Atomic Time (TAI)   2 = Universal Coordinated Time (UTC)   3 = GPS System Time   4 = Galileo System Time   5 = GLONASS System Time   6 = BeiDou System Time   7-50: Reserved for future additional time scale representations.",
+      "type": "integer"
+    },
+    "clockId2": {
+      "description": "clock_id2: Identifier for clock/timing source 2.  See clock_identifiers.md for a full description, but the summary is as follows:   0 = ASPN System Time   1 = International Atomic Time (TAI)   2 = Universal Coordinated Time (UTC)   3 = GPS System Time   4 = Galileo System Time   5 = GLONASS System Time   6 = BeiDou System Time   7-50: Reserved for future additional time scale representations.",
+      "type": "integer"
+    },
+    "timeDiffNsec": {
+      "description": "time_diff_nsec: Whole number nanoseconds in time difference (time from clock_id1) -  (time from clock_id2). This value shall be positive when (time from clock_id1) -  (time from clock_id2) is greater than or equal to zero.  This value shall be negative when (time from clock_id1) - (time from clock_id2) is less than zero.Additionally, the timestamp's digits of precision are included as `digits_of_precision`.  Units: nanoseconds",
+      "type": "integer"
+    },
+    "timeDiffAttosec": {
+      "description": "time_diff_attosec: Whole number attoseconds in time difference (time from clock_id1) -  (time from clock_id2). Must be less than 1e9. This value shall be positive when (time from clock_id1) -  (time from clock_id2) is greater than or equal to zero.  This value shall be negative when (time from clock_id1) - (time from clock_id2) is less than zero. This is only needed if the time of validity is known to more precision than 1ns; otherwise, set time_of_validity_attosec = 0.  Be sure to report the timestamp's digits of precision. The time difference in seconds is calculated as    time difference = time_diff_nsec * 1e-9 + time_diff_attosec * 1e-18  It shall be assumed that time_diff_nsec and time_diff_attosec have the same sign.  Therefore, the time difference is positive when (time from clock_id1) -  (time from clock_id2) is positive and the time difference is negative when (time from clock_id1) -  (time from clock_id2) is negative. A cautionary note:  Both timediff_nsec and time_diff_attosec are signed integers and may be positive or negative.  It is mandated to make timediff_nsec and time_diff_attosec the same sign; however, care should be taken when constructing the observation components to be sure the summation produces the desired result.  Units: attoseconds",
+      "type": "integer"
+    },
+    "digitsOfPrecision": {
+      "description": "digits_of_precision: Defines how many decimal digits of precision are represented in the observation after the decimal point.  The precision of the observation is 10E-N, where N is digits_of_precision.  A value of 3 would mean that the observation has precision at the 10E-3 (millisecond) level, a value of 6 would mean the observation has precision at the 10E-6 (microsecond) level, etc.",
+      "type": "integer"
+    },
+    "freqDiff": {
+      "description": "freq_diff: Frequency difference formed as (frequency from clock_id1) - (frequency from clock_id2).  Units: Hertz",
+      "type": "number"
+    },
+    "covariance": {
+      "description": "covariance: Covariance information for the time/frequency measurement.  Using zero-indexing, the [0,0] element has units of sec^2, the [1,1] element has units of Hertz^2, and the off-diagonal terms have units of sec*Hertz. Units: various",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "timeOfValidityAttosec", "clockId1", "clockId2", "timeDiffNsec", "timeDiffAttosec", "digitsOfPrecision", "freqDiff", "covariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

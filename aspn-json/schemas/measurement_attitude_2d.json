@@ -1,0 +1,98 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_attitude_2d.json",
+  "title": "measurementAttitude2D",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Two-dimensional, local level, geographic attitude expressed in the locally level NED frame as a rotation about two axes as defined by the reference_frame.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid .",
+      "$ref": "type_timestamp.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Defines measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NE: Local level, geographic attitude expressed in the locally level NED frame as a rotation about the E-axis followed by rotation about the N-axis. Positive rotation follows the right-hand rule.  The third rotation in the NED-frame is unspecified and is not sensed.  Use attitude_3d to report a sensed third dimension that is zero.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 1,
+          "description": "ND: Local level, geographic attitude expressed in the locally level NED frame as a rotation about the D-axis followed by rotation about the N-axis. Positive rotation follows the right-hand rule.  The third rotation in the NED-frame is unspecified and is not sensed.  Use attitude_3d to report a sensed third dimension that is zero.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 2,
+          "description": "ED: Local level, geographic attitude expressed in the locally level NED frame as a rotation about the D-axis followed by rotation about the E-axis. Positive rotation follows the right-hand rule.  The third rotation in the NED-frame is unspecified and is not sensed.  Use attitude_3d to report a sensed third dimension that is zero.  See also NED coordinate frame definition for N, E, and D definitions."
+        }
+      ]
+    },
+    "attitude2d": {
+      "description": "attitude2d: Two-dimensional, local level, geographic attitude.  Units: rad",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number"
+      }
+    },
+    "covariance": {
+      "description": "covariance: Covariance of the measurement.  Units: rad^2",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model. Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "referenceFrame", "attitude2d", "covariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

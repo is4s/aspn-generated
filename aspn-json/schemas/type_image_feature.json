@@ -1,0 +1,48 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_image_feature.json",
+  "title": "typeImageFeature",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Image feature characteristics",
+  "type": "object",
+  "properties": {
+    "response": {
+      "description": "response: Value representing the magnitude of the response of the keypoint detection algorithm used to locate this keypoint in the image.",
+      "type": "number"
+    },
+    "orientation": {
+      "description": "orientation: Value representing the orientation of the detected keypoint, as measured relative to the image coordinate system (radians, clockwise). Metadata flag determines if this field is calculated by the current keypoint detector.  Units: rad",
+      "type": "number"
+    },
+    "size": {
+      "description": "size: Effective size (pixels) of the detected keypoint. This field takes into consideration the octave and kernel used to localize the keypoint, and normalizes to the original size of the image.  Units: pixels",
+      "type": "number"
+    },
+    "classId": {
+      "description": "class_id: ID that ties the detected keypoint to a class or group of keypoints.",
+      "type": "integer"
+    },
+    "octave": {
+      "description": "octave: Octave or pyramid layer from which the detected keypoint was extracted.",
+      "type": "integer"
+    },
+    "descriptorSize": {
+      "description": "descriptor_size: Size of the descriptor in bytes.",
+      "type": "integer"
+    },
+    "descriptor": {
+      "description": "descriptor: Feature descriptor.",
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  },
+  "required": [ "response", "orientation", "size", "classId", "octave", "descriptorSize", "descriptor" ]
+}

@@ -1,0 +1,63 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_satnav_subframe.json",
+  "title": "measurementSatnavSubframe",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "satnav navigation data bit subframe.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "gnssMessageId": {
+      "description": "gnss_message_id: Message ID provided from the satnav receiver.",
+      "type": "integer"
+    },
+    "prn": {
+      "description": "prn: Satellite ID number.",
+      "type": "integer"
+    },
+    "satelliteSystem": {
+      "description": "satellite_system: Describes the satellite system that generated the subframe.",
+      "$ref": "type_satnav_satellite_system.json"
+    },
+    "freqSlotId": {
+      "description": "freq_slot_id: Frequency slot +7 (range from 0-13). Only used for GLONASS.",
+      "type": "integer"
+    },
+    "numBytes": {
+      "description": "num_bytes: Number of bytes of subframe data.",
+      "type": "integer"
+    },
+    "dataVector": {
+      "description": "data_vector: num_bytes sized array of raw subframe message collected by the sensor. The underlying type and shape of the data vector is given by satnav_msg_id.",
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "gnssMessageId", "prn", "satelliteSystem", "freqSlotId", "numBytes", "dataVector", "numIntegrity", "integrity" ]
+}

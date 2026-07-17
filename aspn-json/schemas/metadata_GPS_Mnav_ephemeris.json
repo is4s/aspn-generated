@@ -1,0 +1,105 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_GPS_Mnav_ephemeris.json",
+  "title": "metadataGpsMnavEphemeris",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "MNAV Ephemeris describing GPS satellite locations.  Definitions and usage are covered in ICD-GPS-200L, Section 20.3.3.4 and following, with additional military use definitions and usage covered in ICD-GPS-700D.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "weekNumber": {
+      "description": "week_number: Full GPS week number calculated from the Modulo 1024 WN in Subframe 1 and the number of GPS week rollovers  Units: weeks",
+      "type": "integer"
+    },
+    "prn": {
+      "description": "prn: Satellite PRN number.",
+      "type": "integer"
+    },
+    "clock": {
+      "description": "clock: GNSS broadcast parameters required to calculate sv clock corrections.",
+      "$ref": "type_satnav_clock.json"
+    },
+    "orbit": {
+      "description": "orbit: Keplerian orbit parameters required to calculate satellite position.",
+      "$ref": "type_kepler_orbit.json"
+    },
+    "aDot": {
+      "description": "a_dot: Change rate of semi-major axis.  Units: m/s",
+      "type": "number"
+    },
+    "deltaAf0": {
+      "description": "delta_af_0: SV clock bias correction provided by the Mnav Message Correction (MMC).  Units: s",
+      "type": "number"
+    },
+    "deltaAf1": {
+      "description": "delta_af_1: SV clock drift correction provided by the Mnav Message Correction (MMC).  Units: s",
+      "type": "number"
+    },
+    "deltaGamma": {
+      "description": "delta_gamma: Ephemeris parameters correction provided by the Mnav Message Correction (MMC).  Units: radians",
+      "type": "number"
+    },
+    "deltaI": {
+      "description": "delta_i: Angle of inclination correction provided by the Mnav Message Correction (MMC).  Units: radians",
+      "type": "number"
+    },
+    "deltaOmega": {
+      "description": "delta_omega: Angle of Right Ascension correction provided by the Mnav Message Correction (MMC).  Units: radians",
+      "type": "number"
+    },
+    "deltaA": {
+      "description": "delta_a: Semi-major axis correction provided by the Mnav Message Correction (MMC).  Units: m",
+      "type": "number"
+    },
+    "iscL1ME": {
+      "description": "isc_l1_m_e: L M1_E to L1 P(Y) inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL2ME": {
+      "description": "isc_l2_m_e: L M2_E to L1 P(Y) inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL1MS": {
+      "description": "isc_l1_m_s: L M1_S to L1 P(Y) inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL2MS": {
+      "description": "isc_l2_m_s: L M2_S to L1 P(Y) inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "isaL2Py": {
+      "description": "isa_l2_py: L2 P(Y) to L1 P(Y) inter-signal accuracy index.",
+      "type": "number"
+    },
+    "isaL1ME": {
+      "description": "isa_l1_m_e: L M1_E to L1 P(Y) inter-signal accuracy index.",
+      "type": "number"
+    },
+    "isaL2ME": {
+      "description": "isa_l2_m_e: L M2_E to L1 P(Y) inter-signal accuracy index.",
+      "type": "number"
+    },
+    "isaL1MS": {
+      "description": "isa_l1_m_s: L M1_S to L1 P(Y) inter-signal accuracy index.",
+      "type": "number"
+    },
+    "isaL2MS": {
+      "description": "isa_l2_m_s: L M2_S to L1 P(Y) inter-signal accuracy index.",
+      "type": "number"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "weekNumber", "prn", "clock", "orbit", "aDot", "deltaAf0", "deltaAf1", "deltaGamma", "deltaI", "deltaOmega", "deltaA", "iscL1ME", "iscL2ME", "iscL1MS", "iscL2MS", "isaL2Py", "isaL1ME", "isaL2ME", "isaL1MS", "isaL2MS" ]
+}

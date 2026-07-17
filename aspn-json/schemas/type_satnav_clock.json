@@ -1,0 +1,33 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_clock.json",
+  "title": "typeSatnavClock",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "satnav broadcast parameters required to calculate sv clock corrections",
+  "type": "object",
+  "properties": {
+    "tOc": {
+      "description": "t_oc: Clock reference time.  Units: s",
+      "type": "number"
+    },
+    "af0": {
+      "description": "af_0: Satellite clock bias.  Units: s",
+      "type": "number"
+    },
+    "af1": {
+      "description": "af_1: Satellite clock drift.  Units: s/s",
+      "type": "number"
+    },
+    "af2": {
+      "description": "af_2: Satellite clock drift rate.  Units: s/s^2",
+      "type": "number"
+    }
+  },
+  "required": [ "tOc", "af0", "af1", "af2" ]
+}

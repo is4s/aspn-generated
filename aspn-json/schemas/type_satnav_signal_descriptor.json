@@ -1,0 +1,287 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_signal_descriptor.json",
+  "title": "typeSatnavSignalDescriptor",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Satellite signal descriptor as defined in RINEX 3.05",
+  "type": "object",
+  "properties": {
+    "signalDescriptor": {
+      "description": "signal_descriptor (enum): Three letter RINEX Observation Code of signal as given in Table A23 of RINEX 3.05 specification (https://files.igs.org/pub/data/format/rinex305.pdf). RINEX Observation Code must be paired with Satellite system to determine a unique identifier",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "L1C: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 1,
+          "description": "L1S: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 2,
+          "description": "L1L: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 3,
+          "description": "L1X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 4,
+          "description": "L1P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 5,
+          "description": "L1W: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 6,
+          "description": "L1N: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 7,
+          "description": "L2C: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 8,
+          "description": "L2D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 9,
+          "description": "L2S: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 10,
+          "description": "L2L: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 11,
+          "description": "L2X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 12,
+          "description": "L2P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 13,
+          "description": "L2W: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 14,
+          "description": "L2N: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 15,
+          "description": "L5I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 16,
+          "description": "L5Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 17,
+          "description": "L5X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 18,
+          "description": "L4A: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 19,
+          "description": "L4B: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 20,
+          "description": "L4X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 21,
+          "description": "L6A: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 22,
+          "description": "L6B: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 23,
+          "description": "L6X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 24,
+          "description": "L3I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 25,
+          "description": "L3Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 26,
+          "description": "L3X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 27,
+          "description": "L1B: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 28,
+          "description": "L7I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 29,
+          "description": "L7Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 30,
+          "description": "L7X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 31,
+          "description": "L8I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 32,
+          "description": "L8Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 33,
+          "description": "L8X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 34,
+          "description": "L6C: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 35,
+          "description": "L1Z: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 36,
+          "description": "L5D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 37,
+          "description": "L5P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 38,
+          "description": "L5Z: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 39,
+          "description": "L6S: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 40,
+          "description": "L6L: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 41,
+          "description": "L6E: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 42,
+          "description": "L6Z: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 43,
+          "description": "L2I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 44,
+          "description": "L2Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 45,
+          "description": "L1D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 46,
+          "description": "L7D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 47,
+          "description": "L7P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 48,
+          "description": "L7Z: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 49,
+          "description": "L8D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 50,
+          "description": "L8P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 51,
+          "description": "L6I: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 52,
+          "description": "L6Q: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 53,
+          "description": "L6D: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 54,
+          "description": "L6P: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 55,
+          "description": "L5A: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 56,
+          "description": "L5B: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 57,
+          "description": "L5C: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 58,
+          "description": "L9A: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 59,
+          "description": "L9B: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 60,
+          "description": "L9C: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 61,
+          "description": "L9X: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 62,
+          "description": "L1Y: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 63,
+          "description": "L1M: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 64,
+          "description": "L2Y: See RINEX 3.05 Table A23"
+        },
+        {
+          "const": 65,
+          "description": "L2M: See RINEX 3.05 Table A23"
+        }
+      ]
+    }
+  },
+  "required": [ "signalDescriptor" ]
+}

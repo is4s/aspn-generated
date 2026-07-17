@@ -1,0 +1,58 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_mounting.json",
+  "title": "typeMounting",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Describes the translational and angular offset between the sensor frame and the platform body frame.  Platform body frame is defined using axes in forward, right, and down convention, and the origin is system defined.  This type also contains the uncertainty associated with the translational and angular offset.",
+  "type": "object",
+  "properties": {
+    "leverArm": {
+      "description": "lever_arm: 3x1 lever arm vector describing the sensor position in the platform body frame.  Units: m",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "leverArmSigma": {
+      "description": "lever_arm_sigma: 3x1 lever arm uncertainty vector as standard deviations in the platform body frame.  Units: m",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "orientationQuaternion": {
+      "description": "orientation_quaternion: Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2), c = (phi_y/phi)*sin(phi/2), and d = (phi_z/phi)*sin(phi/2).  In this description, the vector [phi_x, phi_y, phi_z] represents the rotation vector that describes the frame rotation to be applied to the 'reference' frame (ECI, ECEF, or NED) to rotate it into the axes that describe the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z] vector. Orientation is optional in the sense that orientation shall be specified except in the case that orientation is meaningless, for example, in the case of an RF antenna mounting. See 'conventions' documentation for more detailed information.",
+      "type": ["array", "null"],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number"
+      }
+    },
+    "orientationTiltErrorCovariance": {
+      "description": "orientation_tilt_error_covariance: Tilt error covariance matrix.  This matrix represents the uncertainty in the 'tilt errors' that represent the additional rotation to be applied to the provided attitude quaternion in order to convert it to the true attitude with no errors.  By convention, these 'tilt errors' are expressed in the reference frame (ECI, ECEF, or NED). Tilt error covariance is optional only because orientation itself is optional.  Orientation error covariance shall be provided if orientation is provided. See 'conventions' documentation for more detailed information.  Units: rad^2",
+      "type": ["array", "null"],
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [ "leverArm", "leverArmSigma", "orientationQuaternion", "orientationTiltErrorCovariance" ]
+}

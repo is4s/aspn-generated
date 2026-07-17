@@ -1,0 +1,97 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_position.json",
+  "title": "measurementPosition",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "One, two, or three dimensional position relative to a user-defined reference frame.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Defines measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "ECI: Sensor position relative to the earth-centered, inertial (ECi) frame expressed where term1, term2, and term3 are the x, y, and z components of ECI position in meters, respectively.  Each term is optional. Error covariance is given using x-axis position error component (meters), y-axis position error component (meters), and z-axis position error component (meters). In the case of nulled position components, the corresponding error covariance terms are omitted. See also ECi coordinate frame definition for x, y, and z definitions."
+        },
+        {
+          "const": 1,
+          "description": "GEODETIC: Sensor position relative to the WGS-84 reference expressed using term1 as geodetic latitude in radians, term2 as longitude in radians, and term3 as geodetic altitude (or height above the WGS-84 ellipsoid) in meters. Each term is optional. Error covariance is given using north-south position error in meters (an expression of geodetic latitude error), east-west position error in meters (an expression of longitude error in meters), and geodetic altitude error in meters. In the case of nulled position components, the corresponding error covariance terms are omitted."
+        }
+      ]
+    },
+    "term1": {
+      "description": "term1: First position term as defined in enum.  Units: various",
+      "type": ["number", "null"]
+    },
+    "term2": {
+      "description": "term2: Second position term as defined in enum.  Units: various",
+      "type": ["number", "null"]
+    },
+    "term3": {
+      "description": "term3: Third position term as defined in enum.  Units: various",
+      "type": ["number", "null"]
+    },
+    "numMeas": {
+      "description": "num_meas: Dimension of measurement provided.",
+      "type": "integer"
+    },
+    "covariance": {
+      "description": "covariance: Error covariance or variance depending on observation dimension.  Units: various Dimensions of covariance must be num_meas²",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "referenceFrame", "term1", "term2", "term3", "numMeas", "covariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

@@ -1,0 +1,89 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_GLONASS_ephemeris.json",
+  "title": "metadataGlonassEphemeris",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "GLONASS Ephemeris describing GLONASS satellite locations.  Definitions and usage are covered in GLONASS ICD L1,L2 - Edition 5.1 2008, Section 4.4.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "slotNumber": {
+      "description": "slot_number: GLONASS satellite slot number.",
+      "type": "integer"
+    },
+    "freqO": {
+      "description": "freq_o: Frequency channel offset number in range from 0 to 20.",
+      "type": "integer"
+    },
+    "nT": {
+      "description": "n_t: Calender number of day within 4 year interval starting at Jan 1 of a leap year  Units: days",
+      "type": "integer"
+    },
+    "tK": {
+      "description": "t_k: Time referenced to the beginning of the frame within the current day.  Units: s",
+      "type": "number"
+    },
+    "tB": {
+      "description": "t_b: Index of time interval within current day according to UTC(SU) + 03 hrs.  Units: minutes",
+      "type": "number"
+    },
+    "gammaN": {
+      "description": "gamma_n: Relative Satellite frequency bias  Units: s/s",
+      "type": "number"
+    },
+    "tauN": {
+      "description": "tau_n: Satellite clock bias.  Units: s",
+      "type": "number"
+    },
+    "svPosX": {
+      "description": "sv_pos_x: Satellite X position in PZ-90 coordinate system at time t_b.  Units: km",
+      "type": "number"
+    },
+    "svVelX": {
+      "description": "sv_vel_x: Satellite X velocity in PZ-90 coordinate system at time t_b.  Units: km/s",
+      "type": "number"
+    },
+    "svAccelX": {
+      "description": "sv_accel_x: Satellite X acceleration in PZ-90 coordinate system at time t_b.  Units: km/s^2",
+      "type": "number"
+    },
+    "svPosY": {
+      "description": "sv_pos_y: Satellite Y position in PZ-90 coordinate system at time t_b.  Units: km",
+      "type": "number"
+    },
+    "svVelY": {
+      "description": "sv_vel_y: Satellite Y velocity in PZ-90 coordinate system at time t_b.  Units: km/s",
+      "type": "number"
+    },
+    "svAccelY": {
+      "description": "sv_accel_y: Satellite Y acceleration in PZ-90 coordinate system at time t_b.  Units: km/s^2",
+      "type": "number"
+    },
+    "svPosZ": {
+      "description": "sv_pos_z: Satellite Z position in PZ-90 coordinate system at time t_b.  Units: km",
+      "type": "number"
+    },
+    "svVelZ": {
+      "description": "sv_vel_z: Satellite Z velocity in PZ-90 coordinate system at time t_b.  Units: km/s",
+      "type": "number"
+    },
+    "svAccelZ": {
+      "description": "sv_accel_z: Satellite Z acceleration in PZ-90 coordinate system at time t_b.  Units: km/s^2",
+      "type": "number"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "slotNumber", "freqO", "nT", "tK", "tB", "gammaN", "tauN", "svPosX", "svVelX", "svAccelX", "svPosY", "svVelY", "svAccelY", "svPosZ", "svVelZ", "svAccelZ" ]
+}

@@ -1,0 +1,33 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_satnav_obs.json",
+  "title": "metadataSatnavObs",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Metadata for satnav_obs",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "deltarangeIntervalStart": {
+      "description": "deltarange_interval_start: Start time of the interval over which the deltarange is measured with respect to the measurement time.  This value must be provided if the deltarange measurement is provided.  Units: seconds",
+      "type": ["number", "null"]
+    },
+    "deltarangeIntervalStop": {
+      "description": "deltarange_interval_stop: Stop time of the interval over which the deltarange is measured with respect to the measurement time.  This value must be provided if the deltarange measurement is provided.  If the deltarange integration period is the same as the measurement time, this value should be 0.  Units: seconds",
+      "type": ["number", "null"]
+    }
+  },
+  "required": [ "info", "timeOfValidity", "deltarangeIntervalStart", "deltarangeIntervalStop" ]
+}
