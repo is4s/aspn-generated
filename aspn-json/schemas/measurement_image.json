@@ -1,0 +1,134 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_image.json",
+  "title": "measurementImage",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "2D Raster Image",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "height": {
+      "description": "height: The number of pixel rows in this image.  Units: pixels",
+      "type": "integer"
+    },
+    "width": {
+      "description": "width: The number of pixel columns in this image.  Units: pixels",
+      "type": "integer"
+    },
+    "isBigendian": {
+      "description": "is_bigendian: True if the image_data byte order is big endian, false if it is little endian. For raw image_types, this is only applicable for image_types with multi-byte pixels.",
+      "type": "boolean"
+    },
+    "imageType": {
+      "description": "image_type (enum): Enumerated field which specifies the datatype of the pixels represented in this image. Raw images are stored in row-major order.  In multi-channel raw images, the first element contains the first pixel of the first channel, the second element contains the first pixel of the second channel, and so on. The data of each multi-byte pixel should be contiguous within the data array with the endianness defined by the is_bigendian field. Example - 2x2 RAW_RGB8 image_data[0]   row1  col1  chanR image_data[1]   row1  col1  chanG image_data[2]   row1  col1  chanB image_data[3]   row1  col2  chanR image_data[4]   row1  col2  chanG image_data[5]   row1  col2  chanB image_data[6]   row2  col1  chanR image_data[7]   row2  col1  chanG image_data[8]   row2  col1  chanB image_data[9]   row2  col2  chanR image_data[10]  row2  col2  chanG image_data[11]  row2  col2  chanB Example - 2x2 RAW_GRAY16, is_bigendian = 1 Where byte 1 is the most significant byte (byte1 << 8 | byte2): image_data[0]  row1  col1  byte1 image_data[1]  row1  col1  byte2 image_data[2]  row1  col2  byte1 image_data[3]  row1  col2  byte2 image_data[4]  row2  col1  byte1 image_data[5]  row2  col1  byte2 image_data[6]  row2  col2  byte1 image_data[7]  row2  col2  byte2",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "BMP: Windows Bitmaps"
+        },
+        {
+          "const": 1,
+          "description": "PNG: Portable Network Graphics"
+        },
+        {
+          "const": 2,
+          "description": "JPG: Joint Photographic Experts Group"
+        },
+        {
+          "const": 3,
+          "description": "TIFF: Tag Image File Format"
+        },
+        {
+          "const": 4,
+          "description": "RAW_GRAY8: Single channel raw gray scale image. One byte per pixel."
+        },
+        {
+          "const": 5,
+          "description": "RAW_RGB8: Three channel raw RGB image. One byte per pixel per channel."
+        },
+        {
+          "const": 6,
+          "description": "RAW_BGR8: Three channel raw BGR image. One byte per pixel per channel."
+        },
+        {
+          "const": 7,
+          "description": "RAW_RGBA8: Four channel raw RGBA image. One byte per pixel per channel."
+        },
+        {
+          "const": 8,
+          "description": "RAW_BGRA8: Four channel raw BGRA image. One byte per pixel per channel."
+        },
+        {
+          "const": 9,
+          "description": "RAW_GRAY16: Single channel raw gray scale image. Two bytes per pixel."
+        },
+        {
+          "const": 10,
+          "description": "RAW_GRAYFLOAT64: Single channel raw gray scale image. Eight bytes per pixel."
+        }
+      ]
+    },
+    "imageDataLength": {
+      "description": "image_data_length: Length of the byte array holding the encoded image. For raw image types, this should be equal to height * width * num_channels * bytes_per_pixel.  Units: byte",
+      "type": "integer"
+    },
+    "imageData": {
+      "description": "image_data: Stores the encoded image. Interpretation varies based on the image_type.",
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "cameraModel": {
+      "description": "camera_model (enum): The model used to map 3D points in the world to 2D points on the image plane",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "ASPN_PINHOLE_PLUMB_BOB: A 10 parameter model, 4 parameters composing the 2D focal length fc = (fx, fy) and camera principal point cc = (cx, cy) in pixels, a model of radial and tangential distortion specified using the 5 parameters (kc1, kc2, kc3, kc4, kc5). And the skew parameter, alpha_c. Mapping from 3D points in the world to 2D points in the image is described at http://www.vision.caltech.edu/bouguetj/calib_doc/htmls/parameters.html"
+        },
+        {
+          "const": 1,
+          "description": "ASPN_LINEAR_MODEL: A 4 parameter model, modeling only the the 2D focal length fc = (fx, fy) and camera principal point cc = (cx, cy). Effectively  using the same model as described in described at http://www.vision.caltech.edu/bouguetj/calib_doc/htmls/parameters.html, with all distortion and  skew parameters zeroed out"
+        }
+      ]
+    },
+    "numModelCoefficients": {
+      "description": "num_model_coefficients: The number of coefficients used in camera model.",
+      "type": "integer"
+    },
+    "modelCoefficients": {
+      "description": "model_coefficients: The camera model parameters, size depending on the distortion model.",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "height", "width", "isBigendian", "imageType", "imageDataLength", "imageData", "cameraModel", "numModelCoefficients", "modelCoefficients", "numIntegrity", "integrity" ]
+}

@@ -1,0 +1,118 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_sv_data.json",
+  "title": "typeSatnavSvData",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Satellite position, velocity and clock error at a particular time epoch",
+  "type": "object",
+  "properties": {
+    "prn": {
+      "description": "prn: PRN code which identifies satellite (or slot number, in the case of GLONASS) of this ephemeris.",
+      "type": "integer"
+    },
+    "satelliteSystem": {
+      "description": "satellite_system: Describes the Satellite System which was used to generate the satellite information provided in this message.",
+      "$ref": "type_satnav_satellite_system.json"
+    },
+    "ephemerisType": {
+      "description": "ephemeris_type (enum): Provides further clarification of which ephemeris was used to generate the satellite information provided in this message for systems which  have more than one ephemeris representation.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "SET_BY_SYSTEM: To be used when a system only uses one ephemeris representation, so knowing the satellite_system fully defines what ephemeris is being used."
+        },
+        {
+          "const": 1,
+          "description": "GPS_LNAV: Calculated using legacy GPS (LNAV) messages"
+        },
+        {
+          "const": 2,
+          "description": "GPS_CNAV: Calculated using GPS CNAV messages"
+        },
+        {
+          "const": 3,
+          "description": "GPS_MNAV: Calculated using GPS MNAV messages"
+        }
+      ]
+    },
+    "svDataTime": {
+      "description": "sv_data_time: Receiver time at which the data provided in this message is valid.",
+      "$ref": "type_satnav_time.json"
+    },
+    "coordinateFrame": {
+      "description": "coordinate_frame (enum): Coordinate frame system used to describe satellite position and velocity.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "ITRF: International Terrestrial Reference Frame"
+        },
+        {
+          "const": 1,
+          "description": "ECEF: Earth-centered earth-fixed frame as defined by WGS-84 (nearly identical with ITRF)"
+        },
+        {
+          "const": 2,
+          "description": "GTRF: Galileo Terrestrial Reference Frame (nearly identical with ITRF)"
+        },
+        {
+          "const": 3,
+          "description": "PZ90: Parametri Zemli 1990 (PZ-90) reference frame"
+        }
+      ]
+    },
+    "svPos": {
+      "description": "sv_pos: Satellite position in frame specified by coordinate_frame at time specified by sv_data_time_week_number and sv_data_time_seconds_of_week.  Units: m",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "svVel": {
+      "description": "sv_vel: Satellite velocity in frame specified by coordinate_frame at time specified by sv_data_time_week_number and sv_data_time_seconds_of_week.  Units: m/s",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "number"
+      }
+    },
+    "svClockBias": {
+      "description": "sv_clock_bias: Satellite clock bias at the sv_data_time, used to correct the satellite time like delta_t_sv in equation (1) of ICD-GPS-200L, Section 20.3.3.3.3.1.  Units: sec",
+      "type": "number"
+    },
+    "svClockDrift": {
+      "description": "sv_clock_drift: Satellite clock drift rate at the sv_data_time.  By way of example, for GPS this would be af1 in equation (2) of ICD-GPS-200L, Section 20.3.3.3.3.1.  Units: sec/sec",
+      "type": "number"
+    },
+    "groupDelayEnum": {
+      "description": "group_delay_enum (enum): Describes how to interpret group delay terms, because they vary by ephemeris type.  Descriptions assume zero-indexing.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "TGD_LNAV: group_delay_vector[0] is legacy Tgd as defined in ICD-GPS-200L Section 20.3.3.3.3.2.  All other terms not used."
+        }
+      ]
+    },
+    "groupDelayVector": {
+      "description": "group_delay_vector: Group delay terms, with interpretation provided by group_delay_enum.  (Need to verify that four is sufficient for all ephemeris.)  Units: sec",
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [ "prn", "satelliteSystem", "ephemerisType", "svDataTime", "coordinateFrame", "svPos", "svVel", "svClockBias", "svClockDrift", "groupDelayEnum", "groupDelayVector" ]
+}

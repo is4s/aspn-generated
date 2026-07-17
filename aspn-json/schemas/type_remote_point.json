@@ -1,0 +1,65 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_remote_point.json",
+  "title": "typeRemotePoint",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "ASPN custom type representing a point. This includes optional information (indicated by included_terms) for the position and a correspondence ID for the point.",
+  "type": "object",
+  "properties": {
+    "includedTerms": {
+      "description": "included_terms: Indicates which information is included about the point   0 = no information included (unknown point)   1 = id included (corresponded point)   2 = position included (known point)   3 = id and position included",
+      "type": "integer"
+    },
+    "id": {
+      "description": "id: Unique identification number assigned by the sensor. Points that have the same id from a sensor are multiple instances of the same point as determined by a sensor's point correspondence.",
+      "type": "integer"
+    },
+    "positionReferenceFrame": {
+      "description": "position_reference_frame (enum): Defines position reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No reference frame. This is only valid if position is not included (included_terms is 0 or 1)."
+        },
+        {
+          "const": 1,
+          "description": "GEODETIC: Point position relative to the WGS-84 reference expressed using position1 as geodetic latitude in radians, position2 as longitude in radians, and position3 as geodetic altitude (or height above the WGS-84 ellipsoid) in meters. Each term is optional. position_covariance is given using north-south position error in meters (an expression of geodetic latitude error), east-west position error in meters (an expression of longitude error), and geodetic altitude error in meters. In the case of nulled position components, the corresponding error covariance terms are omitted."
+        }
+      ]
+    },
+    "position1": {
+      "description": "position1: First position term as defined in position_reference_frame.  Units: various",
+      "type": ["number", "null"]
+    },
+    "position2": {
+      "description": "position2: Second position term as defined in position_reference_frame.  Units: various",
+      "type": ["number", "null"]
+    },
+    "position3": {
+      "description": "position3: Third position term as defined in position_reference_frame.  Units: various",
+      "type": ["number", "null"]
+    },
+    "numPositionComponents": {
+      "description": "num_position_components: Dimension of position provided.",
+      "type": "integer"
+    },
+    "positionCovariance": {
+      "description": "position_covariance: Position error covariance (or variance depending on num_position_components) as defined in position_reference_frame.  Units: m^2",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "required": [ "includedTerms", "id", "positionReferenceFrame", "position1", "position2", "position3", "numPositionComponents", "positionCovariance" ]
+}

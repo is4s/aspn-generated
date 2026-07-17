@@ -1,0 +1,120 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_obs.json",
+  "title": "typeSatnavObs",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Defines measurements that come from a satnav receiver tracking a single signal from a single satellite.",
+  "type": "object",
+  "properties": {
+    "satelliteSystem": {
+      "description": "satellite_system: Enumerated field which describes the Satellite System that generated the observations.",
+      "$ref": "type_satnav_satellite_system.json"
+    },
+    "signalDescriptor": {
+      "description": "signal_descriptor: Satellite signal descriptor as defined in RINEX 3.05",
+      "$ref": "type_satnav_signal_descriptor.json"
+    },
+    "prn": {
+      "description": "prn: PRN code which identifies satellite (or slot number, in the case of GLONASS) for the observables.",
+      "type": "integer"
+    },
+    "frequency": {
+      "description": "frequency: Center frequency of signal.  For GLONASS, this should be the center frequency of the frequency-shifted signal with the k value taken into account.  Units: Hz",
+      "type": "number"
+    },
+    "pseudorange": {
+      "description": "pseudorange: Pseudorange measurement  Units: m",
+      "type": ["number", "null"]
+    },
+    "pseudorangeVariance": {
+      "description": "pseudorange_variance: Variance of pseudorange measurement noise/multipath.  This value must be provided if the pseudorange measurement is provided.  Note: This is not intended to  represent clock, atmospheric, or satellite position errors.  Units: m^2",
+      "type": ["number", "null"]
+    },
+    "pseudorangeRateType": {
+      "description": "pseudorange_rate_type (enum): Indicates the type of measurement contained in pseudorange_rate.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "PSR_RATE_DOPPLER: Instantaneous Doppler at measurement time. Units = Hz Cov. Units = Hz^2"
+        },
+        {
+          "const": 1,
+          "description": "PSR_RATE_DELTA_RANGE: Change in pseudorange (integrated Doppler) over a specified time interval.  The interval is provided in metadata_satnav_obs. Units = m Cov. Units = m^2"
+        }
+      ]
+    },
+    "pseudorangeRate": {
+      "description": "pseudorange_rate: Measurement of the change in the pseudorange.  See pseudorange_rate_type for details.  Units: Hz or m",
+      "type": ["number", "null"]
+    },
+    "pseudorangeRateVariance": {
+      "description": "pseudorange_rate_variance: Variance of pseudorange_rate noise.  This value must be provided if the pseudorange_rate measurement is provided.  Units: Hz^2 or m^2",
+      "type": ["number", "null"]
+    },
+    "carrierPhase": {
+      "description": "carrier_phase: Carrier-phase (integrated Doppler) measurement.  This measurement has an N cycle ambiguity (where N is unknown and arbitrary integer).  Units: cycles (1 cycle = wavelength of carrier frequency)",
+      "type": ["number", "null"]
+    },
+    "carrierPhaseVariance": {
+      "description": "carrier_phase_variance: Variance of carrier-phase noise/multipath.  This value must be provided if the carrier-phase measurement is provided.  Note: This is not intended to represent clock, atmospheric, or satellite position errors or the integer N ambiguity.  Units: cycles^2",
+      "type": ["number", "null"]
+    },
+    "cN0": {
+      "description": "c_n0: Carrier to noise density ratio.  C/N0 = 10[log10(S/N0)] Units: db-Hz",
+      "type": ["number", "null"]
+    },
+    "lockCount": {
+      "description": "lock_count: Number of observations with continuous tracking (no cycle slips).  Value of -1 means that there is no loss of lock information available.  First lock_count after cycle slip has occurred will have a value of 0.  The lock_count only applies to the carrier-phase measurement.",
+      "type": "integer"
+    },
+    "ionoCorrectionSource": {
+      "description": "iono_correction_source (enum): Enumerated field which describes the source of the ionospheric delay correction.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "UNKNOWN: unknown source"
+        },
+        {
+          "const": 1,
+          "description": "MODELED: modeled using the ionospheric models in IS-GPS-200, IS-GPS-700, or IS-GPS-800"
+        },
+        {
+          "const": 2,
+          "description": "MEASURED: measured using dual frequencies"
+        }
+      ]
+    },
+    "ionoCorrectionApplied": {
+      "description": "iono_correction_applied: Identifies if the ionospheric correction has been applied to the measurement. 1 = Applied.",
+      "type": "boolean"
+    },
+    "tropoCorrectionApplied": {
+      "description": "tropo_correction_applied: Identifies if the tropospheric correction has been applied to the measurement. 1 = Applied.",
+      "type": "boolean"
+    },
+    "signalBiasCorrectionApplied": {
+      "description": "signal_bias_correction_applied: Represents biases within the transmitting signal that are identified in the downlink data, Group Delay for LNAV, and Interchannel Signal Correction (ISC) message for MNAV. This term indicates whether the correction is known, being applied to Pseudorange Correction, and its associated estimated error applied to the ERE. When invalid the correction and estimated error are not known and therefore not applied. 1 = Valid.",
+      "type": "boolean"
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "satelliteSystem", "signalDescriptor", "prn", "frequency", "pseudorange", "pseudorangeVariance", "pseudorangeRateType", "pseudorangeRate", "pseudorangeRateVariance", "carrierPhase", "carrierPhaseVariance", "cN0", "lockCount", "ionoCorrectionSource", "ionoCorrectionApplied", "tropoCorrectionApplied", "signalBiasCorrectionApplied", "numIntegrity", "integrity" ]
+}

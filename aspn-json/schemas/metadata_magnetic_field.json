@@ -1,0 +1,50 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_magnetic_field.json",
+  "title": "metadataMagneticField",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Metadata for a magnetic field measurement.  In addition to generic metadata information, calibration parameters may be provided to account for effects such as soft iron, scale factor, non-orthogonality, zero-bias, and hard iron.  In general, for an num_meas-dimensional measurement, the magnetic field calibration metadata (K and b) shall be used as    m_calibrated = K * m_measured - b  where m_calibrated, m_measured, and b are num_meas x 1 vectors (scalar for num_meas = 1) and K is an num_meas x num_meas matrix (scalar for num_meas = 1).  See magnetic_calibration.md for additional details.  More sophisticated approaches that include calibration parameters such as time-varying effects, first-order Gauss-Markov bias models, and calibration parameter uncertainties may be included using an appropriate error model in the measurement message.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "mounting": {
+      "description": "mounting: Standard ASPN mounting information.",
+      "$ref": "type_mounting.json"
+    },
+    "numMeas": {
+      "description": "num_meas: Dimension of measurement for which this metadata is applicable.  May be 1, 2, or 3.",
+      "type": "integer"
+    },
+    "k": {
+      "description": "k: Optional calibration parameter to account for the combined effects of soft iron, scale factor, and non-orthogonality as a unitless num_meas x num_meas matrix. Optional, but if provided, b must also be provided.",
+      "type": ["array", "null"],
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "b": {
+      "description": "b: Optional calibration parameter to account for the combined effects of zero-bias and hard iron as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be provided.  Units: nT",
+      "type": ["array", "null"],
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [ "info", "timeOfValidity", "mounting", "numMeas", "k", "b" ]
+}

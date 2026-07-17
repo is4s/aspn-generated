@@ -1,0 +1,77 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_GPS_Cnav_ephemeris.json",
+  "title": "metadataGpsCnavEphemeris",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "CNAV Ephemeris describing GPS satellite locations.  Definitions and usage are covered in ICD-GPS-200L, Section 20.3.3.4 and following.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "weekNumber": {
+      "description": "week_number: Full GPS week number calculated from the Modulo 1024 WN in Subframe 1 and the number of GPS week rollovers  Units: weeks",
+      "type": "integer"
+    },
+    "prn": {
+      "description": "prn: Satellite PRN number.",
+      "type": "integer"
+    },
+    "clock": {
+      "description": "clock: GNSS broadcast parameters required to calculate sv clock corrections.",
+      "$ref": "type_satnav_clock.json"
+    },
+    "orbit": {
+      "description": "orbit: Keplerian orbit parameters required to calculate satellite position.",
+      "$ref": "type_kepler_orbit.json"
+    },
+    "tGd": {
+      "description": "t_gd: Group delay differential between L1 and L2.  Units: s",
+      "type": "number"
+    },
+    "iodc": {
+      "description": "iodc: Issue of Data Clock. 10 bit value from Subframe 1  Units: none",
+      "type": "integer"
+    },
+    "iode": {
+      "description": "iode: Issue of Data Ephemeris. 8 bits repeated in Subframe 2 and Subframe 3. Should match the 8 LSBs of the IODC.  Units: none",
+      "type": "integer"
+    },
+    "iscL1Ca": {
+      "description": "isc_l1_ca: L1 P(Y) to L1 C/A inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL2C": {
+      "description": "isc_l2_c: L1 P(Y) to L2C inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL5I5": {
+      "description": "isc_l5_i5: L1 P(Y) to L5 I5 inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "iscL5Q5": {
+      "description": "isc_l5_q5: L1 P(Y) to L5 Q5 inter-signal correction.  Units: s",
+      "type": "number"
+    },
+    "deltaA0": {
+      "description": "delta_a_0: Semi-major axis difference at reference time.  Units: m",
+      "type": "number"
+    },
+    "aDot": {
+      "description": "a_dot: Change rate of semi-major axis.  Units: m/s",
+      "type": "number"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "weekNumber", "prn", "clock", "orbit", "tGd", "iodc", "iode", "iscL1Ca", "iscL2C", "iscL5I5", "iscL5Q5", "deltaA0", "aDot" ]
+}

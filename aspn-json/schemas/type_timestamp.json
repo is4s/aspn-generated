@@ -1,0 +1,21 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_timestamp.json",
+  "title": "typeTimestamp",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Whole number nanoseconds elapsed since timestamp's zero epoch.  If negative, whole number nanoseconds until timestamp's zero epoch.  The zero epoch definition is based on the timing source used by the message provider.  The timing source used by the message provider is defined by the `timestamp_clock_id` included in the `type_metadataheader` as part of the metadata.  Additionally, the timestamp's digits of precision are included in the `type_metadataheader` as part of the metadata, which may be useful if an implementation is converting the timestamp to another type internally. If needed, the time elapsed in seconds is equal to elapsed_nsec * 1e-9.",
+  "type": "object",
+  "properties": {
+    "elapsedNsec": {
+      "description": "elapsed_nsec: Whole number nanoseconds elapsed since timestamp's zero epoch.  If negative, whole number nanoseconds until timestamp's zero epoch.  Units: nanoseconds",
+      "type": "integer"
+    }
+  },
+  "required": [ "elapsedNsec" ]
+}

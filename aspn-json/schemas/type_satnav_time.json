@@ -1,0 +1,47 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_satnav_time.json",
+  "title": "typeSatnavTime",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Satellite system time",
+  "type": "object",
+  "properties": {
+    "weekNumber": {
+      "description": "week_number: Full Week number since zero epoch at which the data provided in this message is valid, expressed in time system defined by time_reference enum (below).  Units: weeks",
+      "type": "integer"
+    },
+    "secondsOfWeek": {
+      "description": "seconds_of_week: Seconds since start of current week at which the data provided in this message is valid, expressed in time system defined by time_reference enum (below).  Units: seconds",
+      "type": "number"
+    },
+    "timeReference": {
+      "description": "time_reference (enum): Reference time system used to express the data in this message. In a multi-GNSS receiver (GPS/GLONASS/Galileo/QZSS/BeiDou) all pseudorange observations must refer to one receiver clock only. The receiver clock time of the measurement is the receiver clock time of the received signals. It is identical for the phase and range measurements and is identical for all satellites observed in a given epoch.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "TIME_GPS: GPS system time."
+        },
+        {
+          "const": 1,
+          "description": "TIME_GALILEO: Galileo system time."
+        },
+        {
+          "const": 2,
+          "description": "TIME_BEIDOU: BeiDou system time."
+        },
+        {
+          "const": 3,
+          "description": "TIME_GLONASS: GLONASS system time."
+        }
+      ]
+    }
+  },
+  "required": [ "weekNumber", "secondsOfWeek", "timeReference" ]
+}

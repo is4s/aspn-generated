@@ -1,0 +1,55 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_Galileo_ephemeris.json",
+  "title": "metadataGalileoEphemeris",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "GALILEO Ephemeris describing satellite locations.  Definitions and usage are covered in OS SIS ICD, Issue 2.0, January 2021, Section 4.2, 4.3, and 5.1.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "navMsgType": {
+      "description": "nav_msg_type (enum): Enumerated field which describes the GALILEO message type used to define clock correction parameters.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "INAV: I/NAV ephemeris."
+        },
+        {
+          "const": 1,
+          "description": "FNAV: F/NAV ephemeris."
+        }
+      ]
+    },
+    "prn": {
+      "description": "prn: Satellite PRN number.",
+      "type": "integer"
+    },
+    "clock": {
+      "description": "clock: GNSS broadcast parameters required to calculate sv clock corrections.",
+      "$ref": "type_satnav_clock.json"
+    },
+    "orbit": {
+      "description": "orbit: Keplerian orbit parameters required to calculate satellite position.",
+      "$ref": "type_kepler_orbit.json"
+    },
+    "bgd": {
+      "description": "bgd: Broadcast group delay (E1-E5b if F/Nav, E1-E5b if I/NAV)  Units: s",
+      "type": "number"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "navMsgType", "prn", "clock", "orbit", "bgd" ]
+}

@@ -1,0 +1,91 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_direction_2d_to_point.json",
+  "title": "typeDirection2DToPoint",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "2D direction to or from a point as defined by the reference enum. Information about the remote point (its position and/or correspondence with previous or future appearances of this same point) may be determined using remote_point.",
+  "type": "object",
+  "properties": {
+    "remotePoint": {
+      "description": "remote_point: Position and/or correspondence information about the remote point.  Units: various",
+      "$ref": "type_remote_point.json"
+    },
+    "reference": {
+      "description": "reference (enum): Specifies measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NE_TO: Angle between the sensor's local level N-axis and the vector from the sensor to the point projected onto the sensor's local level North-East plane. Positive angle is defined as a rotation towards the E-axis. See also NED coordinate frame definition for N, E, and D definitions. A figure depicting the angle definition is included in the conventions documentation."
+        },
+        {
+          "const": 1,
+          "description": "NE_FROM: Angle between the point's local level N-axis and the vector from the point to the sensor projected onto the point's local level North-East plane. Positive angle is defined as a rotation towards the E-axis. The significant difference between NE_TO and NE_FROM is where the NED frame originates (NE_FROM has its origin located at the point's location). See also NED coordinate frame definition for N, E, and D definitions. A figure depicting the angle definition is included in the conventions documentation."
+        },
+        {
+          "const": 2,
+          "description": "ELEVATION: Angle between the sensor's local level North-East plane and the vector from the sensor to the point. Positive angle is defined as a rotation towards the negative D-axis of the NED frame. See also NED coordinate frame definition for N, E, and D definitions. A figure depicting the angle definition is included in the conventions documentation."
+        },
+        {
+          "const": 3,
+          "description": "SENSOR: Angle between the sensor's x-axis and the vector from the sensor to the point projected onto the sensor frame x-y plane. Positive angle is defined as a rotation towards the y-axis. Sensor frame is defined in mounting. A figure depicting the angle definition is included in the conventions documentation."
+        }
+      ]
+    },
+    "obs": {
+      "description": "obs: Observations as specified in the reference enum.  Units: rad",
+      "type": "number"
+    },
+    "variance": {
+      "description": "variance: Measurement error variance.  Units: rad^2",
+      "type": "number"
+    },
+    "hasObservationCharacteristics": {
+      "description": "has_observation_characteristics: Switch for whether observation_characteristics is valid or not.",
+      "type": "boolean"
+    },
+    "observationCharacteristics": {
+      "description": "observation_characteristics: Image feature characteristics.  Units: various",
+      "$ref": "type_image_feature.json"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "remotePoint", "reference", "obs", "variance", "hasObservationCharacteristics", "observationCharacteristics", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

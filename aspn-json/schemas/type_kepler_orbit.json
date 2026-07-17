@@ -1,0 +1,81 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_kepler_orbit.json",
+  "title": "typeKeplerOrbit",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Keplerian orbit parameters required to calculate satellite position",
+  "type": "object",
+  "properties": {
+    "m0": {
+      "description": "m_0: Mean anomaly at reference time.  Units: rad",
+      "type": "number"
+    },
+    "deltaN": {
+      "description": "delta_n: Mean motion difference from computed value.  Units: rad/s",
+      "type": "number"
+    },
+    "e": {
+      "description": "e: Eccentricity.",
+      "type": "number"
+    },
+    "sqrtA": {
+      "description": "sqrt_a: Square root of semi-major axis.  Units: sqrt(m)",
+      "type": "number"
+    },
+    "omega0": {
+      "description": "omega_0: Longitude of ascending node of orbit plane at weekly epoch  Units: rad",
+      "type": "number"
+    },
+    "i0": {
+      "description": "i_0: Inclination angle at reference time.  Units: rad",
+      "type": "number"
+    },
+    "iDot": {
+      "description": "i_dot: Rate of change of inclination angle.  Units: rad",
+      "type": "number"
+    },
+    "omega": {
+      "description": "omega: Argument of perigee.  Units: rad",
+      "type": "number"
+    },
+    "omegaDot": {
+      "description": "omega_dot: Rate of right ascension.  Units: rad/s",
+      "type": "number"
+    },
+    "cUc": {
+      "description": "c_uc: Amplitude of cosine harmonic correction terms to the argument of latitude.  Units: rad",
+      "type": "number"
+    },
+    "cUs": {
+      "description": "c_us: Amplitude of sine harmonic correction terms to the argument of latitude.  Units: rad",
+      "type": "number"
+    },
+    "cRc": {
+      "description": "c_rc: Amplitude of cosine harmonic correction terms to the orbit radius.  Units: m",
+      "type": "number"
+    },
+    "cRs": {
+      "description": "c_rs: Amplitude of sine harmonic correction terms to the orbit radius.  Units: m",
+      "type": "number"
+    },
+    "cIc": {
+      "description": "c_ic: Amplitude of cosine harmonic correction terms to the angle of inclination.  Units: rad",
+      "type": "number"
+    },
+    "cIs": {
+      "description": "c_is: Amplitude of sine harmonic correction terms to the angle of inclination.  Units: rad",
+      "type": "number"
+    },
+    "tOe": {
+      "description": "t_oe: Ephemeris reference time.  Units: s",
+      "type": "number"
+    }
+  },
+  "required": [ "m0", "deltaN", "e", "sqrtA", "omega0", "i0", "iDot", "omega", "omegaDot", "cUc", "cUs", "cRc", "cRs", "cIc", "cIs", "tOe" ]
+}

@@ -1,0 +1,98 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_attitude_3d.json",
+  "title": "measurementAttitude3D",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Three-dimensional attitude expressed as a quaternion, a four element vector representation, the elements of which are functions of the orientation of the vector and the magnitude of the rotation.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid .",
+      "$ref": "type_timestamp.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Defines measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "ECI: Absolute inertial attitude. Sensor frame attitude relative to the earth-centered, inertial (ECi) frame. See also ECi coordinate frame definition for x, y, and z definitions."
+        },
+        {
+          "const": 1,
+          "description": "ECEF: Attitude relative to Earth. Sensor frame attitude relative to the ECEF frame.  Generally, time is required to convert between absolute inertial attitude and attitude relative to Earth. See also ECEF coordinate frame definition for x, y, and z definitions."
+        },
+        {
+          "const": 2,
+          "description": "NED: Local level, geographic attitude.  Sensor frame attitude with respect to earth-fixed frame expressed in the North-East-Down (NED), local level frame.  See also NED coordinate frame definition for N, E, and D definitions.  Generally, position is required to convert between attitude relative to the earth and locally level, geographic attitude.  See also NED coordinate frame definition for N, E, and D definitions."
+        }
+      ]
+    },
+    "quaternion": {
+      "description": "quaternion: Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2), c = (phi_y/phi)*sin(phi/2), and d = (phi_z/phi)*sin(phi/2).  In this description, the vector [phi_x, phi_y, phi_z] represents the rotation vector that describes the frame rotation to be applied to the 'reference' frame (ECI, ECEF, or NED) to rotate it into the axes that describe the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z] vector. See 'conventions' documentation for more detailed information.",
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number"
+      }
+    },
+    "tiltErrorCovariance": {
+      "description": "tilt_error_covariance: Tilt error covariance matrix.  This matrix represents the uncertainty in the 'tilt errors' that represent the additional rotation to be applied to the provided attitude quaternion in order to convert it to the true attitude with no errors.  By convention, these 'tilt errors' are expressed in the reference frame (ECI, ECEF, or NED). See 'conventions' documentation for more detailed information.  Units: rad^2",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model. Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "referenceFrame", "quaternion", "tiltErrorCovariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

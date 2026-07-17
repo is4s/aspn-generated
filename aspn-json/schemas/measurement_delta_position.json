@@ -1,0 +1,105 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_delta_position.json",
+  "title": "measurementDeltaPosition",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Delta position is the change in position from the position at time (time_of_validity - delta_t) to the position at time (time_of_validity), where the change in position is reported along each axis of the reference frame.  The reference frame is chosen by the user in the reference enum.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid at the end of the delta-position period.",
+      "$ref": "type_timestamp.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Specifies measurement reference frame.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NED: Change in position along the N, E, and D axes of the locally level NED frame.  Each direction is optional.  term1, term2, and term3, if provided, describe the change in position along the N, E, and D axes, respectively. For example, a depth sensor may report a change in position of +2m along the D axis by omitting term1 and term2 (using the appropriate null) and using term3 = 2. This observation may be interpreted as (1) the sensor has no knowledge of the change in position in the N and E directions, and (2) the sensor observed that the position at the end of the observation time interval, time_of_validity, is 2 meters lower than the position at the start of the time interval, time_of_validity - delta_t.  See also NED coordinate frame definition for N, E, and D definitions."
+        },
+        {
+          "const": 1,
+          "description": "SENSOR_START: Change in position expressed in the sensor frame at the start of the measurement interval as defined in mounting.  Each direction is optional. term1, term2, and term3, if provided, describe the change in position along the sensor x, y, and z axes, respectively."
+        },
+        {
+          "const": 2,
+          "description": "SENSOR_END: Change in position expressed in the sensor frame at the end of the measurement interval as defined in mounting.  Each direction is optional. term1, term2, and term3, if provided, describe the change in position along the sensor x, y, and z axes, respectively."
+        }
+      ]
+    },
+    "deltaT": {
+      "description": "delta_t: Duration of the observation time interval. The time_of_validity denotes the end of the time interval. The start of the time interval is time_of_validity - delta_t.  Units: sec",
+      "type": "number"
+    },
+    "numMeas": {
+      "description": "num_meas: Dimension of measurement provided.",
+      "type": "integer"
+    },
+    "term1": {
+      "description": "term1: Delta position over the first dimension specified by the enum.  Units: m",
+      "type": ["number", "null"]
+    },
+    "term2": {
+      "description": "term2: Delta position over the second dimension specified by the enum.  Units: m",
+      "type": ["number", "null"]
+    },
+    "term3": {
+      "description": "term3: Delta position over the third dimension specified by the enum.  Units: m",
+      "type": ["number", "null"]
+    },
+    "covariance": {
+      "description": "covariance: Variance or covariance matrix depending on measurement dimension.  Units: m^2 Dimensions of covariance must be num_meas²",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "referenceFrame", "deltaT", "numMeas", "term1", "term2", "term3", "covariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

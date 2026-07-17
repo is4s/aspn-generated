@@ -1,0 +1,118 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/measurement_position_velocity_attitude.json",
+  "title": "measurementPositionVelocityAttitude",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "measurement",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Position, velocity, and attitude. Position, in whole or in part, is optional. Velocity, in whole or in part, is optional. Attitude is optional, but if included, must be 3-dimensional. Position is relative to a user-defined reference frame. Velocity is time rate of change of position with respect to the user-specified reference frame. Attitude expressed as a quaternion, a four element vector representation, the elements of which are functions of the orientation of the vector and the magnitude of the rotation.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "description": "header: Standard ASPN measurement header.",
+      "$ref": "type_header.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Defines measurement reference.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "ECI: Sensor position, velocity, and attitude relative to the earth-centered, inertial (ECi) frame. Position is expressed where p1, p2, and p3 are the x, y, and z components of ECI position in meters, respectively. Velocity is expressed where v1, v2, and v3 are the x, y, and z components of velocity with respect to the ECi frame in m/s, respectively. Attitude is expressed as a four-element quaternion. Position, in whole or in part, is optional. Velocity, in whole or in part, is optional. Attitude is optional, but if included, must be 3 dimensional. Error covariance is given using x-axis position error component (meters), y-axis position error component (meters), z-axis position error component (meters), x-axis velocity error component (m/s), y-axis velocity error component (m/s), z-axis velocity error component (m/s), tilt error about the x-axis (rad), tilt error about the y-axis (rad), and tilt error about the z-axis (rad). In the case of nulled position, velocity, or attitude, the corresponding error covariance terms are omitted. See also ECi coordinate frame definition for x, y, and z definitions."
+        },
+        {
+          "const": 1,
+          "description": "GEODETIC: Sensor position, velocity, and attitude relative to the WGS-84 reference.  Position is expressed where p1 is the geodetic latitude in radians, p2 is the longitude in radians, and p3 is the geodetic altitude (or height above the WGS-84 ellipsoid) in meters. Velocity with respect to the local level geographical frame with the origin at the sensor position is expressed using the North-East-Down (NED) convention, where v1 is the north velocity component in m/s, v2 is the east velocity component in m/s, and v3 is the down velocity component in m/s. Attitude is the sensor frame rotation relative to the local level frame expressed as a four-element quaternion.  Position, in whole or in part, is optional. Velocity, in whole or in part, is optional. Attitude is optional, but if included, must be 3 dimensional. Error covariance is given using north-south position error (meters), east-west position error (meters), geodetic altitude error (meters), north velocity component error (m/s), east velocity component error (m/s), down velocity component error (m/s), tilt error about the north axis (rad), tilt error about the east axis (rad), and tilt error about the down axis (rad). In the case of nulled position, velocity, or attitude, the corresponding error covariance terms are omitted."
+        }
+      ]
+    },
+    "p1": {
+      "description": "p1: First position term as defined in enum.  Units: various",
+      "type": ["number", "null"]
+    },
+    "p2": {
+      "description": "p2: Second position term as defined in enum.  Units: various",
+      "type": ["number", "null"]
+    },
+    "p3": {
+      "description": "p3: Third position term as defined in enum.  Units: m",
+      "type": ["number", "null"]
+    },
+    "v1": {
+      "description": "v1: Velocity along the first axis of the measurement reference frame enumerated in reference_frame.  Units: m/s",
+      "type": ["number", "null"]
+    },
+    "v2": {
+      "description": "v2: Velocity along the second axis of the measurement reference frame enumerated in reference_frame.  Units: m/s",
+      "type": ["number", "null"]
+    },
+    "v3": {
+      "description": "v3: Velocity along the third axis of the measurement reference frame enumerated in reference_frame.  Units: m/s",
+      "type": ["number", "null"]
+    },
+    "quaternion": {
+      "description": "quaternion: Four element quaternion, q = [a, b, c, d], where a = cos(phi/2), b = (phi_x/phi)*sin(phi/2), c = (phi_y/phi)*sin(phi/2), and d = (phi_z/phi)*sin(phi/2).  In this description, the vector [phi_x, phi_y, phi_z] represents the rotation vector that describes the frame rotation to be applied to the 'reference' frame (ECI, ECEF, or NED) to rotate it into the axes that describe the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z] vector. See 'conventions' documentation for more detailed information.",
+      "type": ["array", "null"],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "number"
+      }
+    },
+    "numMeas": {
+      "description": "num_meas: Dimension of measurement provided.  In this sense, num_meas is the number of measurement terms that include valid data.",
+      "type": "integer"
+    },
+    "covariance": {
+      "description": "covariance: Measurement error variance or covariance depending on measurement dimension. NOTE: Attitude errors are expressed as tilt errors, so if an attitude is provided, that should count as 3 terms in num_meas.  For example, a 3-D position, 3-D velocity, and attitude expressed as a quaternion (which takes 10 terms total to describe) is num_meas = 9.  A second example is a 3-D position and 3-D velocity is num_meas = 6.  Units: various Dimensions of covariance must be num_meas²",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "header", "timeOfValidity", "referenceFrame", "p1", "p2", "p3", "v1", "v2", "v3", "quaternion", "numMeas", "covariance", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}

@@ -1,0 +1,143 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/metadata_image_features.json",
+  "title": "metadataImageFeatures",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "metadata",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "Features from an optical camera.",
+  "type": "object",
+  "properties": {
+    "info": {
+      "description": "info: Standard ASPN metadata header.",
+      "$ref": "type_metadataheader.json"
+    },
+    "timeOfValidity": {
+      "description": "time_of_validity: Time at which the measurement is considered to be valid.",
+      "$ref": "type_timestamp.json"
+    },
+    "keypointDetector": {
+      "description": "keypoint_detector (enum): Enumerated field which provides the type of keypoint detector used.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "DET_AGAST: Keypoint detected using AGAST based detector."
+        },
+        {
+          "const": 1,
+          "description": "DET_AKAZE: Keypoint detected using AKAZE based detector."
+        },
+        {
+          "const": 2,
+          "description": "DET_BRISK: Keypoint detected using BRISK based detector."
+        },
+        {
+          "const": 3,
+          "description": "DET_FAST: Keypoint detected using FAST based detector."
+        },
+        {
+          "const": 4,
+          "description": "DET_GFTT: Keypoint detected using GFTT based detector."
+        },
+        {
+          "const": 5,
+          "description": "DET_KAZE: Keypoint detected using KAZE based detector."
+        },
+        {
+          "const": 6,
+          "description": "DET_MSER: Keypoint detected using MSER based detector."
+        },
+        {
+          "const": 7,
+          "description": "DET_ORB: Keypoint detected using ORB based detector."
+        },
+        {
+          "const": 8,
+          "description": "DET_SIFT: Keypoint detected using SIFT based detector."
+        },
+        {
+          "const": 9,
+          "description": "DET_SURF: Keypoint detected using SURF based detector."
+        },
+        {
+          "const": 10,
+          "description": "DET_HARRIS: Keypoint detected using Harris based detector."
+        },
+        {
+          "const": 11,
+          "description": "DET_SHI: Keypoint detected using Shi-Tomasi based detector."
+        },
+        {
+          "const": 12,
+          "description": "DET_OTHER: Keypoint detected using a detector not represented in this enum."
+        }
+      ]
+    },
+    "orientationCalculated": {
+      "description": "orientation_calculated: Set to true if the keypoint detector or descriptor extractor calculates and assigns a primary orientation to the features represented in the measurements.  Units: none",
+      "type": "boolean"
+    },
+    "descriptorExtractor": {
+      "description": "descriptor_extractor (enum): Enumerated field which provides the type of descriptor extractor used to generate the measurement descriptor vector.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "DESC_AKAZE: Descriptor computed using the AKAZE extractor."
+        },
+        {
+          "const": 1,
+          "description": "DESC_BRISK: Descriptor computed using the BRISK extractor."
+        },
+        {
+          "const": 2,
+          "description": "DESC_KAZE: Descriptor computed using the KAZE extractor."
+        },
+        {
+          "const": 3,
+          "description": "DESC_ORB: Descriptor computed using the ORB extractor."
+        },
+        {
+          "const": 4,
+          "description": "DESC_SIFT: Descriptor computed using the SIFT extractor."
+        },
+        {
+          "const": 5,
+          "description": "DESC_SURF: Descriptor computed using the SURF extractor."
+        },
+        {
+          "const": 6,
+          "description": "DESC_OTHER: Descriptor computed using an extractor not represented in this enum."
+        }
+      ]
+    },
+    "isBigendian": {
+      "description": "is_bigendian: True if the descriptor byte order is big endian, false if it is little endian. Only applicable for descriptor_types with multi-byte elements.",
+      "type": "boolean"
+    },
+    "descriptorType": {
+      "description": "descriptor_type (enum): Enumerated field describing the underlying datatype of the provided descriptor vector.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "UINT8: The descriptor data should be interpreted as an array of unsigned 8-bit ints."
+        },
+        {
+          "const": 1,
+          "description": "FLOAT32: The descriptor data should be interpreted as an array of 32-bit floats."
+        }
+      ]
+    },
+    "descriptorNumberOfElements": {
+      "description": "descriptor_number_of_elements: The number of elements of type 'descriptor_type' in the descriptor data array. In type_image_feature, descriptor data is represented as an array of uint8 values whose length is given by 'descriptor_size'.  Inconjunction with descriptor_type, these fields describe how that data should be interpreted. For example - descriptor_type UINT8: descriptor_number_of_elements == descriptor_size - descriptor_type FLOAT32: (descriptor_number_of_elements * 4) == descriptor_size Units: none",
+      "type": "integer"
+    }
+  },
+  "required": [ "info", "timeOfValidity", "keypointDetector", "orientationCalculated", "descriptorExtractor", "isBigendian", "descriptorType", "descriptorNumberOfElements" ]
+}

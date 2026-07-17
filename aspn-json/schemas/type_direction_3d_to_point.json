@@ -1,0 +1,106 @@
+{
+  "$comment": "This file is generated via firehose. DO NOT edit by hand. Make any changes required using the firehose repo instead.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/is4s/aspn-generated/tree/main/aspn-json/schemas/type_direction_3d_to_point.json",
+  "title": "typeDirection3DToPoint",
+  "version": 2023,
+  "systemType": "standard",
+  "category": "type",
+  "controlled": false,
+  "distribution": "A",
+  "experimental": false,
+  "description": "3D direction to or from a point as defined by the reference enum. Information about the remote point (its position and/or correspondence with previous or future appearances of this same point) may be determined using remote_point.",
+  "type": "object",
+  "properties": {
+    "remotePoint": {
+      "description": "remote_point: Position and/or correspondence information about the remote point.  Units: various",
+      "$ref": "type_remote_point.json"
+    },
+    "referenceFrame": {
+      "description": "reference_frame (enum): Defines measurement reference frame.",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "AZ_EL: Azimuth (first component of obs) is the angle between the sensor frame x-axis (boresight) and the projection of the point onto the sensor frame's x-y plane (positive right-hand rule about the sensor frame z-axis). Elevation (second component of obs) is the angle between the sensor frame's x-y plane and the vector from the sensor to the point (positive right-hand rule about the intermediate axis formed by the azimuth rotation). The covariance is for the azimuth and elevation errors. Units for the observation are in rad, covariance rad^2."
+        },
+        {
+          "const": 1,
+          "description": "PIXEL: The pixel coordinates of the point in an image (sub-pixel resolution is allowed). When combined with the camera model, these can be converted to the NORMALIZED_IMAGE reference frame representation.  Units for the observation are in pixels, covariance pixels^2."
+        },
+        {
+          "const": 2,
+          "description": "NORMALIZED_IMAGE: 2D position from the sensor frame origin to the point expressed in components y and z of the sensor frame normalized by the boresight distance. The x component of the sensor frame is the boresight axis. Units for the observation are m/m, covariance (m/m)^2."
+        },
+        {
+          "const": 3,
+          "description": "SINE_SPACE: 2D position from the sensor frame origin to the point expressed in components y and z of the sensor frame normalized by the range to the point. The x component of the sensor frame is the boresight axis. Units for the observation are m/m, covariance (m/m)^2."
+        }
+      ]
+    },
+    "obs": {
+      "description": "obs: 3D direction to the remote point as defined in reference_frame.  Units: various",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number"
+      }
+    },
+    "covariance": {
+      "description": "covariance: Covariance of the direction measurement as defined in reference_frame.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "hasObservationCharacteristics": {
+      "description": "has_observation_characteristics: Switch for whether observation_characteristics is valid or not.",
+      "type": "boolean"
+    },
+    "observationCharacteristics": {
+      "description": "observation_characteristics: Image feature characteristics.  Units: various",
+      "$ref": "type_image_feature.json"
+    },
+    "errorModel": {
+      "description": "error_model (enum): Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).",
+      "type": "integer",
+      "oneOf": [
+        {
+          "const": 0,
+          "description": "NONE: No additional error model provided (num_error_model_params = 0)."
+        }
+      ]
+    },
+    "numErrorModelParams": {
+      "description": "num_error_model_params: Number of parameters required for the error model chosen.",
+      "type": "integer"
+    },
+    "errorModelParams": {
+      "description": "error_model_params: Error model parameters that characterize the optional error model.  Units: various",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "numIntegrity": {
+      "description": "num_integrity: Number of integrity values.",
+      "type": "integer"
+    },
+    "integrity": {
+      "description": "integrity: Measurement integrity.  Includes the integrity method used and an integrity value (which is to be interpreted based upon the integrity method).  The intent of allowing num_integrity > 1 is to report multiple integrity values based on multiple integrity methods.",
+      "type": "array",
+      "items": {
+        "$ref": "type_integrity.json"
+      }
+    }
+  },
+  "required": [ "remotePoint", "referenceFrame", "obs", "covariance", "hasObservationCharacteristics", "observationCharacteristics", "errorModel", "numErrorModelParams", "errorModelParams", "numIntegrity", "integrity" ]
+}
