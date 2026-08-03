@@ -80,9 +80,9 @@ struct _aspn23_lcm_measurement_satnav_subframe
      * Description: num_bytes sized array of raw subframe message collected by the sensor. The
      * underlying type and shape of the data vector is given by satnav_msg_id.
      * Units: none
-     * LCM Type: int8_t[num_bytes]
+     * LCM Type: byte[num_bytes]
      */
-    int8_t     *data_vector;
+    uint8_t    *data_vector;
 
     /**
      * Description: Number of integrity values.

@@ -18,7 +18,7 @@ class measurement_image(object):
 
     __slots__ = ["icd_measurement_image", "header", "time_of_validity", "height", "width", "is_bigendian", "image_type", "image_data_length", "image_data", "camera_model", "num_model_coefficients", "model_coefficients", "num_integrity", "integrity"]
 
-    __typenames__ = ["int8_t", "aspn23_lcm.type_header", "aspn23_lcm.type_timestamp", "int64_t", "int64_t", "boolean", "int8_t", "int64_t", "int16_t", "int8_t", "int16_t", "double", "int16_t", "aspn23_lcm.type_integrity"]
+    __typenames__ = ["int8_t", "aspn23_lcm.type_header", "aspn23_lcm.type_timestamp", "int64_t", "int64_t", "boolean", "int8_t", "int64_t", "byte", "int8_t", "int16_t", "double", "int16_t", "aspn23_lcm.type_integrity"]
 
     __dimensions__ = [None, None, None, None, None, None, None, None, ["image_data_length"], None, None, ["num_model_coefficients"], None, ["num_integrity"]]
 
@@ -129,11 +129,11 @@ class measurement_image(object):
         LCM Type: int64_t
         """
 
-        self.image_data = []
+        self.image_data = b""
         """
         Description: Stores the encoded image. Interpretation varies based on the image_type.
         Units: none
-        LCM Type: int16_t[image_data_length]
+        LCM Type: byte[image_data_length]
         """
 
         self.camera_model = 0
@@ -186,7 +186,7 @@ class measurement_image(object):
         assert self.time_of_validity._get_packed_fingerprint() == aspn23_lcm.type_timestamp._get_packed_fingerprint()
         self.time_of_validity._encode_one(buf)
         buf.write(struct.pack(">qqbbq", self.height, self.width, self.is_bigendian, self.image_type, self.image_data_length))
-        buf.write(struct.pack('>%dh' % self.image_data_length, *self.image_data[:self.image_data_length]))
+        buf.write(bytearray(self.image_data[:self.image_data_length]))
         buf.write(struct.pack(">bh", self.camera_model, self.num_model_coefficients))
         buf.write(struct.pack('>%dd' % self.num_model_coefficients, *self.model_coefficients[:self.num_model_coefficients]))
         buf.write(struct.pack(">h", self.num_integrity))
@@ -213,7 +213,7 @@ class measurement_image(object):
         self.height, self.width = struct.unpack(">qq", buf.read(16))
         self.is_bigendian = bool(struct.unpack('b', buf.read(1))[0])
         self.image_type, self.image_data_length = struct.unpack(">bq", buf.read(9))
-        self.image_data = struct.unpack('>%dh' % self.image_data_length, buf.read(self.image_data_length * 2))
+        self.image_data = buf.read(self.image_data_length)
         self.camera_model, self.num_model_coefficients = struct.unpack(">bh", buf.read(3))
         self.model_coefficients = struct.unpack('>%dd' % self.num_model_coefficients, buf.read(self.num_model_coefficients * 8))
         self.num_integrity = struct.unpack(">h", buf.read(2))[0]
@@ -226,7 +226,7 @@ class measurement_image(object):
     def _get_hash_recursive(parents):
         if measurement_image in parents: return 0
         newparents = parents + [measurement_image]
-        tmphash = (0x77351e40ed8bb80a+ aspn23_lcm.type_header._get_hash_recursive(newparents)+ aspn23_lcm.type_timestamp._get_hash_recursive(newparents)+ aspn23_lcm.type_integrity._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0xb9911e5964b761c2+ aspn23_lcm.type_header._get_hash_recursive(newparents)+ aspn23_lcm.type_timestamp._get_hash_recursive(newparents)+ aspn23_lcm.type_integrity._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

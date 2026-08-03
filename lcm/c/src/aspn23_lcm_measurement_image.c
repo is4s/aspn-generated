@@ -26,7 +26,7 @@ uint64_t __aspn23_lcm_measurement_image_hash_recursive(const __lcm_hash_ptr *p)
     cp.v = __aspn23_lcm_measurement_image_get_hash;
     (void) cp;
 
-    uint64_t hash = (uint64_t)0x77351e40ed8bb80aLL
+    uint64_t hash = (uint64_t)0xb9911e5964b761c2LL
          + __int8_t_hash_recursive(&cp)
          + __aspn23_lcm_type_header_hash_recursive(&cp)
          + __aspn23_lcm_type_timestamp_hash_recursive(&cp)
@@ -35,7 +35,7 @@ uint64_t __aspn23_lcm_measurement_image_hash_recursive(const __lcm_hash_ptr *p)
          + __boolean_hash_recursive(&cp)
          + __int8_t_hash_recursive(&cp)
          + __int64_t_hash_recursive(&cp)
-         + __int16_t_hash_recursive(&cp)
+         + __byte_hash_recursive(&cp)
          + __int8_t_hash_recursive(&cp)
          + __int16_t_hash_recursive(&cp)
          + __double_hash_recursive(&cp)
@@ -87,7 +87,7 @@ int __aspn23_lcm_measurement_image_encode_array(void *buf, int offset, int maxle
         thislen = __int64_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].image_data_length), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        thislen = __int16_t_encode_array(buf, offset + pos, maxlen - pos, p[element].image_data, p[element].image_data_length);
+        thislen = __byte_encode_array(buf, offset + pos, maxlen - pos, p[element].image_data, p[element].image_data_length);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, &(p[element].camera_model), 1);
@@ -144,7 +144,7 @@ int __aspn23_lcm_measurement_image_encoded_array_size(const aspn23_lcm_measureme
 
         size += __int64_t_encoded_array_size(&(p[element].image_data_length), 1);
 
-        size += __int16_t_encoded_array_size(p[element].image_data, p[element].image_data_length);
+        size += __byte_encoded_array_size(p[element].image_data, p[element].image_data_length);
 
         size += __int8_t_encoded_array_size(&(p[element].camera_model), 1);
 
@@ -195,8 +195,8 @@ int __aspn23_lcm_measurement_image_decode_array(const void *buf, int offset, int
         thislen = __int64_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].image_data_length), 1);
         if (thislen < 0) return thislen; else pos += thislen;
 
-        p[element].image_data = (int16_t*) lcm_malloc(sizeof(int16_t) * p[element].image_data_length);
-        thislen = __int16_t_decode_array(buf, offset + pos, maxlen - pos, p[element].image_data, p[element].image_data_length);
+        p[element].image_data = (uint8_t*) lcm_malloc(sizeof(uint8_t) * p[element].image_data_length);
+        thislen = __byte_decode_array(buf, offset + pos, maxlen - pos, p[element].image_data, p[element].image_data_length);
         if (thislen < 0) return thislen; else pos += thislen;
 
         thislen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, &(p[element].camera_model), 1);
@@ -242,7 +242,7 @@ int __aspn23_lcm_measurement_image_decode_array_cleanup(aspn23_lcm_measurement_i
 
         __int64_t_decode_array_cleanup(&(p[element].image_data_length), 1);
 
-        __int16_t_decode_array_cleanup(p[element].image_data, p[element].image_data_length);
+        __byte_decode_array_cleanup(p[element].image_data, p[element].image_data_length);
         if (p[element].image_data) free(p[element].image_data);
 
         __int8_t_decode_array_cleanup(&(p[element].camera_model), 1);
@@ -303,8 +303,8 @@ int __aspn23_lcm_measurement_image_clone_array(const aspn23_lcm_measurement_imag
 
         __int64_t_clone_array(&(p[element].image_data_length), &(q[element].image_data_length), 1);
 
-        q[element].image_data = (int16_t*) lcm_malloc(sizeof(int16_t) * q[element].image_data_length);
-        __int16_t_clone_array(p[element].image_data, q[element].image_data, p[element].image_data_length);
+        q[element].image_data = (uint8_t*) lcm_malloc(sizeof(uint8_t) * q[element].image_data_length);
+        __byte_clone_array(p[element].image_data, q[element].image_data, p[element].image_data_length);
 
         __int8_t_clone_array(&(p[element].camera_model), &(q[element].camera_model), 1);
 

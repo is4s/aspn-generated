@@ -41,7 +41,7 @@ struct measurement_satnav_subframe {
     // Description: num_bytes sized array of raw subframe message collected by the sensor. The
     // underlying type and shape of the data vector is given by satnav_msg_id.
     // Units: none
-    int8_t data_vector[num_bytes];
+    byte data_vector[num_bytes];
 
     // Description: Number of integrity values.
     // Units: none
