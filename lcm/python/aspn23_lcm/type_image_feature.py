@@ -16,7 +16,7 @@ class type_image_feature(object):
 
     __slots__ = ["icd_type_image_feature", "response", "orientation", "size", "class_id", "octave", "descriptor_size", "descriptor"]
 
-    __typenames__ = ["int8_t", "double", "double", "double", "int32_t", "int32_t", "int32_t", "int16_t"]
+    __typenames__ = ["int8_t", "double", "double", "double", "int32_t", "int32_t", "int32_t", "byte"]
 
     __dimensions__ = [None, None, None, None, None, None, None, ["descriptor_size"]]
 
@@ -74,11 +74,11 @@ class type_image_feature(object):
         LCM Type: int32_t
         """
 
-        self.descriptor = []
+        self.descriptor = b""
         """
         Description: Feature descriptor.
         Units: none
-        LCM Type: int16_t[descriptor_size]
+        LCM Type: byte[descriptor_size]
         """
 
 
@@ -90,7 +90,7 @@ class type_image_feature(object):
 
     def _encode_one(self, buf):
         buf.write(struct.pack(">bdddiii", self.icd_type_image_feature, self.response, self.orientation, self.size, self.class_id, self.octave, self.descriptor_size))
-        buf.write(struct.pack('>%dh' % self.descriptor_size, *self.descriptor[:self.descriptor_size]))
+        buf.write(bytearray(self.descriptor[:self.descriptor_size]))
 
     @staticmethod
     def decode(data: bytes):
@@ -106,13 +106,13 @@ class type_image_feature(object):
     def _decode_one(buf):
         self = type_image_feature()
         self.icd_type_image_feature, self.response, self.orientation, self.size, self.class_id, self.octave, self.descriptor_size = struct.unpack(">bdddiii", buf.read(37))
-        self.descriptor = struct.unpack('>%dh' % self.descriptor_size, buf.read(self.descriptor_size * 2))
+        self.descriptor = buf.read(self.descriptor_size)
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
         if type_image_feature in parents: return 0
-        tmphash = (0x961ed1e790449286) & 0xffffffffffffffff
+        tmphash = (0xb7044cccc86ac036) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

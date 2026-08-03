@@ -74,9 +74,9 @@ struct _aspn23_lcm_type_image_feature
     /**
      * Description: Feature descriptor.
      * Units: none
-     * LCM Type: int16_t[descriptor_size]
+     * LCM Type: byte[descriptor_size]
      */
-    int16_t    *descriptor;
+    uint8_t    *descriptor;
 };
 
 /**

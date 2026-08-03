@@ -77,9 +77,9 @@ class measurement_satnav_subframe
          * Description: num_bytes sized array of raw subframe message collected by the sensor. The
          * underlying type and shape of the data vector is given by satnav_msg_id.
          * Units: none
-         * LCM Type: int8_t[num_bytes]
+         * LCM Type: byte[num_bytes]
          */
-        std::vector< int8_t > data_vector;
+        std::vector< uint8_t > data_vector;
 
         /**
          * Description: Number of integrity values.
@@ -217,7 +217,7 @@ int measurement_satnav_subframe::_encodeNoHash(void *buf, int offset, int maxlen
     if(tlen < 0) return tlen; else pos += tlen;
 
     if(this->num_bytes > 0) {
-        tlen = __int8_t_encode_array(buf, offset + pos, maxlen - pos, &this->data_vector[0], this->num_bytes);
+        tlen = __byte_encode_array(buf, offset + pos, maxlen - pos, &this->data_vector[0], this->num_bytes);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -262,7 +262,7 @@ int measurement_satnav_subframe::_decodeNoHash(const void *buf, int offset, int 
 
     if(this->num_bytes) {
         this->data_vector.resize(this->num_bytes);
-        tlen = __int8_t_decode_array(buf, offset + pos, maxlen - pos, &this->data_vector[0], this->num_bytes);
+        tlen = __byte_decode_array(buf, offset + pos, maxlen - pos, &this->data_vector[0], this->num_bytes);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -293,7 +293,7 @@ int measurement_satnav_subframe::_getEncodedSizeNoHash() const
     enc_size += this->satellite_system._getEncodedSizeNoHash();
     enc_size += __int32_t_encoded_array_size(NULL, 1);
     enc_size += __int32_t_encoded_array_size(NULL, 1);
-    enc_size += __int8_t_encoded_array_size(NULL, this->num_bytes);
+    enc_size += __byte_encoded_array_size(NULL, this->num_bytes);
     enc_size += __int16_t_encoded_array_size(NULL, 1);
     for (int a0 = 0; a0 < this->num_integrity; a0++) {
         enc_size += this->integrity[a0]._getEncodedSizeNoHash();
@@ -309,7 +309,7 @@ uint64_t measurement_satnav_subframe::_computeHash(const __lcm_hash_ptr *p)
             return 0;
     const __lcm_hash_ptr cp = { p, measurement_satnav_subframe::getHash };
 
-    uint64_t hash = 0x7f968873412530faLL +
+    uint64_t hash = 0x15322dda6d63e750LL +
          aspn23_lcm::type_header::_computeHash(&cp) +
          aspn23_lcm::type_timestamp::_computeHash(&cp) +
          aspn23_lcm::type_satnav_satellite_system::_computeHash(&cp) +

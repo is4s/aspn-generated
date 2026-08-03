@@ -88,9 +88,9 @@ class measurement_image
         /**
          * Description: Stores the encoded image. Interpretation varies based on the image_type.
          * Units: none
-         * LCM Type: int16_t[image_data_length]
+         * LCM Type: byte[image_data_length]
          */
-        std::vector< int16_t > image_data;
+        std::vector< uint8_t > image_data;
 
         /**
          * The model used to map 3D points in the world to 2D points on the image plane
@@ -337,7 +337,7 @@ int measurement_image::_encodeNoHash(void *buf, int offset, int maxlen) const
     if(tlen < 0) return tlen; else pos += tlen;
 
     if(this->image_data_length > 0) {
-        tlen = __int16_t_encode_array(buf, offset + pos, maxlen - pos, &this->image_data[0], this->image_data_length);
+        tlen = __byte_encode_array(buf, offset + pos, maxlen - pos, &this->image_data[0], this->image_data_length);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -393,7 +393,7 @@ int measurement_image::_decodeNoHash(const void *buf, int offset, int maxlen)
 
     if(this->image_data_length) {
         this->image_data.resize(this->image_data_length);
-        tlen = __int16_t_decode_array(buf, offset + pos, maxlen - pos, &this->image_data[0], this->image_data_length);
+        tlen = __byte_decode_array(buf, offset + pos, maxlen - pos, &this->image_data[0], this->image_data_length);
         if(tlen < 0) return tlen; else pos += tlen;
     }
 
@@ -436,7 +436,7 @@ int measurement_image::_getEncodedSizeNoHash() const
     enc_size += __boolean_encoded_array_size(NULL, 1);
     enc_size += __int8_t_encoded_array_size(NULL, 1);
     enc_size += __int64_t_encoded_array_size(NULL, 1);
-    enc_size += __int16_t_encoded_array_size(NULL, this->image_data_length);
+    enc_size += __byte_encoded_array_size(NULL, this->image_data_length);
     enc_size += __int8_t_encoded_array_size(NULL, 1);
     enc_size += __int16_t_encoded_array_size(NULL, 1);
     enc_size += __double_encoded_array_size(NULL, this->num_model_coefficients);
@@ -455,7 +455,7 @@ uint64_t measurement_image::_computeHash(const __lcm_hash_ptr *p)
             return 0;
     const __lcm_hash_ptr cp = { p, measurement_image::getHash };
 
-    uint64_t hash = 0x77351e40ed8bb80aLL +
+    uint64_t hash = 0xb9911e5964b761c2LL +
          aspn23_lcm::type_header::_computeHash(&cp) +
          aspn23_lcm::type_timestamp::_computeHash(&cp) +
          aspn23_lcm::type_integrity::_computeHash(&cp);
