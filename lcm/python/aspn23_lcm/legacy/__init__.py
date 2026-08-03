@@ -69,5 +69,3 @@ from .type_satnav_sv_data import type_satnav_sv_data as type_satnav_sv_data
 from .metadata_generic import metadata_generic as metadata_generic
 from .measurement_angular_velocity import measurement_angular_velocity as measurement_angular_velocity
 from .measurement_accumulated_distance_traveled import measurement_accumulated_distance_traveled as measurement_accumulated_distance_traveled
-
-from . import legacy
