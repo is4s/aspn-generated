@@ -1,3 +1,4 @@
+import math
 from typing import Callable, TypeAlias, Union
 
 import numpy as np
@@ -375,10 +376,10 @@ def type_direction_2d_to_point_to_lcm(
         old.observation_characteristics
     )
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -414,10 +415,10 @@ def type_direction_3d_to_point_to_lcm(
         old.observation_characteristics
     )
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -466,8 +467,8 @@ def type_image_feature_to_lcm(old: TypeImageFeature) -> LcmTypeImageFeature:
     msg.size = old.size
     msg.class_id = old.class_id
     msg.octave = old.octave
-    msg.descriptor = old.descriptor.tolist()
     msg.descriptor_size = len(old.descriptor)
+    msg.descriptor = old.descriptor.tolist()
 
     return msg
 
@@ -571,12 +572,12 @@ def type_mounting_to_lcm(old: TypeMounting) -> LcmTypeMounting:
     msg.orientation_quaternion = (
         old.orientation_quaternion.tolist()
         if old.orientation_quaternion is not None
-        else []
+        else [math.nan] * 4
     )
     msg.orientation_tilt_error_covariance = (
         old.orientation_tilt_error_covariance.tolist()
         if old.orientation_tilt_error_covariance is not None
-        else []
+        else [[math.nan] * 3] * 3
     )
 
     return msg
@@ -586,9 +587,15 @@ def lcm_to_type_mounting(old: LcmTypeMounting) -> TypeMounting:
     return TypeMounting(
         lever_arm=np.array(old.lever_arm),
         lever_arm_sigma=np.array(old.lever_arm_sigma),
-        orientation_quaternion=np.array(old.orientation_quaternion),
-        orientation_tilt_error_covariance=np.array(
-            old.orientation_tilt_error_covariance
+        orientation_quaternion=(
+            np.array(old.orientation_quaternion)
+            if not np.isnan(old.orientation_quaternion).any()
+            else None
+        ),
+        orientation_tilt_error_covariance=(
+            np.array(old.orientation_tilt_error_covariance)
+            if not np.isnan(old.orientation_tilt_error_covariance).any()
+            else None
         ),
     )
 
@@ -601,8 +608,8 @@ def type_remote_point_to_lcm(old: TypeRemotePoint) -> LcmTypeRemotePoint:
     msg.position1 = old.position1 if old.position1 is not None else float()
     msg.position2 = old.position2 if old.position2 is not None else float()
     msg.position3 = old.position3 if old.position3 is not None else float()
-    msg.position_covariance = old.position_covariance.tolist()
     msg.num_position_components = len(old.position_covariance)
+    msg.position_covariance = old.position_covariance.tolist()
 
     return msg
 
@@ -666,8 +673,8 @@ def type_satnav_obs_to_lcm(old: TypeSatnavObs) -> LcmTypeSatnavObs:
     msg.iono_correction_applied = old.iono_correction_applied
     msg.tropo_correction_applied = old.tropo_correction_applied
     msg.signal_bias_correction_applied = old.signal_bias_correction_applied
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1103,8 +1110,8 @@ def metadata_IMU_to_lcm(old: MetadataImu) -> LcmMetadataImu:
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
     msg.mounting = type_mounting_to_lcm(old.mounting)
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
+    msg.error_model_params = old.error_model_params.tolist()
 
     return msg
 
@@ -1176,9 +1183,13 @@ def metadata_magnetic_field_to_lcm(
     msg.info = type_metadataheader_to_lcm(old.info)
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
     msg.mounting = type_mounting_to_lcm(old.mounting)
-    msg.k = old.k.tolist() if old.k is not None else []
     msg.num_meas = len(old.k) if old.k is not None else 0
-    msg.b = old.b.tolist() if old.b is not None else []
+    msg.k = (
+        old.k.tolist()
+        if old.k is not None
+        else [[math.nan] * msg.num_meas] * msg.num_meas
+    )
+    msg.b = old.b.tolist() if old.b is not None else [math.nan] * msg.num_meas
 
     return msg
 
@@ -1190,8 +1201,8 @@ def lcm_to_metadata_magnetic_field(
         info=lcm_to_type_metadataheader(old.info),
         time_of_validity=lcm_to_type_timestamp(old.time_of_validity),
         mounting=lcm_to_type_mounting(old.mounting),
-        k=np.array(old.k),
-        b=np.array(old.b),
+        k=np.array(old.k) if not np.isnan(old.k).any() else None,
+        b=np.array(old.b) if not np.isnan(old.b).any() else None,
     )
 
 
@@ -1229,8 +1240,8 @@ def measurement_IMU_to_lcm(old: MeasurementImu) -> LcmMeasurementImu:
     msg.imu_type = old.imu_type.value
     msg.meas_accel = old.meas_accel.tolist()
     msg.meas_gyro = old.meas_gyro.tolist()
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1261,10 +1272,10 @@ def measurement_TDOA_1Tx_2Rx_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1304,10 +1315,10 @@ def measurement_TDOA_2Tx_1Rx_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1342,10 +1353,10 @@ def measurement_accumulated_distance_traveled_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1373,10 +1384,10 @@ def measurement_altitude_to_lcm(old: MeasurementAltitude) -> LcmMeasurementAltit
     msg.altitude = old.altitude
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1405,10 +1416,10 @@ def measurement_angular_velocity_to_lcm(
     msg.meas = old.meas.tolist()
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1439,10 +1450,10 @@ def measurement_angular_velocity_1d_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1472,10 +1483,10 @@ def measurement_attitude_2d_to_lcm(
     msg.attitude2d = old.attitude2d.tolist()
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1505,10 +1516,10 @@ def measurement_attitude_3d_to_lcm(
     msg.quaternion = old.quaternion.tolist()
     msg.tilt_error_covariance = old.tilt_error_covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1535,10 +1546,10 @@ def measurement_barometer_to_lcm(old: MeasurementBarometer) -> LcmMeasurementBar
     msg.pressure = old.pressure
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1566,13 +1577,13 @@ def measurement_delta_position_to_lcm(
     msg.term1 = old.term1 if old.term1 is not None else float()
     msg.term2 = old.term2 if old.term2 is not None else float()
     msg.term3 = old.term3 if old.term3 is not None else float()
-    msg.covariance = old.covariance.tolist()
     msg.num_meas = len(old.covariance)
+    msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1605,10 +1616,10 @@ def measurement_delta_range_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1639,10 +1650,10 @@ def measurement_delta_range_to_point_to_lcm(
     msg.delta_t = old.delta_t
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1669,8 +1680,8 @@ def measurement_direction_2d_to_points_to_lcm(
     msg = LcmMeasurementDirection2DToPoints()
     msg.header = type_header_to_lcm(old.header)
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
-    msg.obs = [type_direction_2d_to_point_to_lcm(x) for x in old.obs]
     msg.num_obs = len(old.obs)
+    msg.obs = [type_direction_2d_to_point_to_lcm(x) for x in old.obs]
 
     return msg
 
@@ -1691,8 +1702,8 @@ def measurement_direction_3d_to_points_to_lcm(
     msg = LcmMeasurementDirection3DToPoints()
     msg.header = type_header_to_lcm(old.header)
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
-    msg.obs = [type_direction_3d_to_point_to_lcm(x) for x in old.obs]
     msg.num_obs = len(old.obs)
+    msg.obs = [type_direction_3d_to_point_to_lcm(x) for x in old.obs]
 
     return msg
 
@@ -1717,10 +1728,10 @@ def measurement_direction_of_motion_2d_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1751,10 +1762,10 @@ def measurement_direction_of_motion_3d_to_lcm(
     msg.error_vector = old.error_vector.tolist()
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1789,10 +1800,10 @@ def measurement_frequency_difference_to_lcm(
     msg.freq_diff = old.freq_diff
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1822,10 +1833,10 @@ def measurement_heading_to_lcm(old: MeasurementHeading) -> LcmMeasurementHeading
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1851,13 +1862,13 @@ def measurement_image_to_lcm(old: MeasurementImage) -> LcmMeasurementImage:
     msg.width = old.width
     msg.is_bigendian = old.is_bigendian
     msg.image_type = old.image_type.value
-    msg.image_data = old.image_data.tolist()
     msg.image_data_length = len(old.image_data)
+    msg.image_data = old.image_data.tolist()
     msg.camera_model = old.camera_model.value
-    msg.model_coefficients = old.model_coefficients.tolist()
     msg.num_model_coefficients = len(old.model_coefficients)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.model_coefficients = old.model_coefficients.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1892,13 +1903,13 @@ def measurement_magnetic_field_to_lcm(
     msg.z_field_strength = (
         old.z_field_strength if old.z_field_strength is not None else float()
     )
-    msg.covariance = old.covariance.tolist()
     msg.num_meas = len(old.covariance)
+    msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1928,10 +1939,10 @@ def measurement_magnetic_field_magnitude_to_lcm(
     msg.field_strength = old.field_strength
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1958,13 +1969,13 @@ def measurement_position_to_lcm(old: MeasurementPosition) -> LcmMeasurementPosit
     msg.term1 = old.term1 if old.term1 is not None else float()
     msg.term2 = old.term2 if old.term2 is not None else float()
     msg.term3 = old.term3 if old.term3 is not None else float()
-    msg.covariance = old.covariance.tolist()
     msg.num_meas = len(old.covariance)
+    msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -1997,10 +2008,10 @@ def measurement_position_attitude_to_lcm(
     msg.quaternion = old.quaternion.tolist()
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2036,14 +2047,16 @@ def measurement_position_velocity_attitude_to_lcm(
     msg.v1 = old.v1 if old.v1 is not None else float()
     msg.v2 = old.v2 if old.v2 is not None else float()
     msg.v3 = old.v3 if old.v3 is not None else float()
-    msg.quaternion = old.quaternion.tolist() if old.quaternion is not None else []
-    msg.covariance = old.covariance.tolist()
+    msg.quaternion = (
+        old.quaternion.tolist() if old.quaternion is not None else [math.nan] * 4
+    )
     msg.num_meas = len(old.covariance)
+    msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2063,7 +2076,9 @@ def lcm_to_measurement_position_velocity_attitude(
         v1=old.v1,
         v2=old.v2,
         v3=old.v3,
-        quaternion=np.array(old.quaternion),
+        quaternion=(
+            np.array(old.quaternion) if not np.isnan(old.quaternion).any() else None
+        ),
         covariance=np.array(old.covariance),
         error_model=MeasurementPositionVelocityAttitudeErrorModel(old.error_model),
         error_model_params=np.array(old.error_model_params),
@@ -2081,10 +2096,10 @@ def measurement_range_rate_to_point_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2114,10 +2129,10 @@ def measurement_range_to_point_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2143,10 +2158,10 @@ def measurement_satnav_to_lcm(old: MeasurementSatnav) -> LcmMeasurementSatnav:
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
     msg.receiver_clock_time = type_satnav_time_to_lcm(old.receiver_clock_time)
     msg.num_signal_types = old.num_signal_types
-    msg.obs = [type_satnav_obs_to_lcm(x) for x in old.obs]
     msg.num_signals_tracked = len(old.obs)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.obs = [type_satnav_obs_to_lcm(x) for x in old.obs]
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2172,10 +2187,10 @@ def measurement_satnav_subframe_to_lcm(
     msg.prn = old.prn
     msg.satellite_system = type_satnav_satellite_system_to_lcm(old.satellite_system)
     msg.freq_slot_id = old.freq_slot_id
-    msg.data_vector = old.data_vector.tolist()
     msg.num_bytes = len(old.data_vector)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.data_vector = old.data_vector.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2203,11 +2218,11 @@ def measurement_satnav_with_sv_data_to_lcm(
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
     msg.receiver_clock_time = type_satnav_time_to_lcm(old.receiver_clock_time)
     msg.num_signal_types = old.num_signal_types
-    msg.obs = [type_satnav_obs_to_lcm(x) for x in old.obs]
     msg.num_signals_tracked = len(old.obs)
+    msg.obs = [type_satnav_obs_to_lcm(x) for x in old.obs]
     msg.sv_data = [type_satnav_sv_data_to_lcm(x) for x in old.sv_data]
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2236,10 +2251,10 @@ def measurement_specific_force_1d_to_lcm(
     msg.obs = old.obs
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2267,10 +2282,10 @@ def measurement_speed_to_lcm(old: MeasurementSpeed) -> LcmMeasurementSpeed:
     msg.speed = old.speed
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2297,10 +2312,10 @@ def measurement_temperature_to_lcm(
     msg.temperature = old.temperature
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2324,17 +2339,17 @@ def measurement_time_to_lcm(old: MeasurementTime) -> LcmMeasurementTime:
     msg.header = type_header_to_lcm(old.header)
     msg.time_of_validity = type_timestamp_to_lcm(old.time_of_validity)
     msg.time_of_validity_attosec = old.time_of_validity_attosec
-    msg.clock_id = old.clock_id.tolist()
     msg.num_obs = len(old.clock_id)
+    msg.clock_id = old.clock_id.tolist()
     msg.elapsed_nsec = old.elapsed_nsec.tolist()
     msg.elapsed_attosec = old.elapsed_attosec.tolist()
     msg.digits_of_precision = old.digits_of_precision
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2369,10 +2384,10 @@ def measurement_time_difference_to_lcm(
     msg.digits_of_precision = old.digits_of_precision
     msg.variance = old.variance
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2411,10 +2426,10 @@ def measurement_time_frequency_difference_to_lcm(
     msg.freq_diff = old.freq_diff
     msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
@@ -2447,13 +2462,13 @@ def measurement_velocity_to_lcm(old: MeasurementVelocity) -> LcmMeasurementVeloc
     msg.x = old.x if old.x is not None else float()
     msg.y = old.y if old.y is not None else float()
     msg.z = old.z if old.z is not None else float()
-    msg.covariance = old.covariance.tolist()
     msg.num_meas = len(old.covariance)
+    msg.covariance = old.covariance.tolist()
     msg.error_model = old.error_model.value
-    msg.error_model_params = old.error_model_params.tolist()
     msg.num_error_model_params = len(old.error_model_params)
-    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
+    msg.error_model_params = old.error_model_params.tolist()
     msg.num_integrity = len(old.integrity)
+    msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
     return msg
 
