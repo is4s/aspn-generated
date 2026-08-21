@@ -90,6 +90,8 @@ typedef struct Aspn23MeasurementVelocity {
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double x;
@@ -97,6 +99,8 @@ typedef struct Aspn23MeasurementVelocity {
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double y;
@@ -104,6 +108,8 @@ typedef struct Aspn23MeasurementVelocity {
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double z;

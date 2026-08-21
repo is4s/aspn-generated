@@ -124,67 +124,91 @@ public:
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_p1() const;
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_p1(double);
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_p2() const;
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_p2(double);
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_p3() const;
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_p3(double);
 
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_v1() const;
 
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_v1(double);
 
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_v2() const;
 
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_v2(double);
 
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_v3() const;
 
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_v3(double);
 
@@ -195,6 +219,8 @@ public:
 	 * applied to the "reference" frame (ECI, ECEF, or NED) to rotate it into the axes that describe
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	xt::xtensor_fixed<double, xt::xshape<4>> get_quaternion() const;
 
@@ -205,6 +231,8 @@ public:
 	 * applied to the "reference" frame (ECI, ECEF, or NED) to rotate it into the axes that describe
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	void set_quaternion(xt::xtensor_fixed<double, xt::xshape<4>>);
 

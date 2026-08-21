@@ -24,7 +24,7 @@
 
 #include "MetadataGeneric.h"
 
-constexpr uint32_t aspn23_dds_MetadataGeneric_max_cdr_typesize {1240UL};
+constexpr uint32_t aspn23_dds_MetadataGeneric_max_cdr_typesize {1248UL};
 constexpr uint32_t aspn23_dds_MetadataGeneric_max_key_cdr_typesize {0UL};
 
 

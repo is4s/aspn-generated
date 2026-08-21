@@ -134,31 +134,43 @@ public:
 
 	/**
 	 * Delta position over the first dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term1() const;
 
 	/**
 	 * Delta position over the first dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term1(double);
 
 	/**
 	 * Delta position over the second dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term2() const;
 
 	/**
 	 * Delta position over the second dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term2(double);
 
 	/**
 	 * Delta position over the third dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term3() const;
 
 	/**
 	 * Delta position over the third dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term3(double);
 

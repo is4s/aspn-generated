@@ -80,12 +80,16 @@ public:
 	/**
 	 * Measurement integrity value to be interpreted based on the definition in the integrity_type
 	 * enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_integrity_value() const;
 
 	/**
 	 * Measurement integrity value to be interpreted based on the definition in the integrity_type
 	 * enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_integrity_value(double);
 

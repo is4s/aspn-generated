@@ -71,18 +71,24 @@ typedef struct Aspn23TypeRemotePoint {
 
 	/**
 	 * First position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double position1;
 
 	/**
 	 * Second position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double position2;
 
 	/**
 	 * Third position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double position3;

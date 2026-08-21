@@ -32,6 +32,8 @@ typedef struct Aspn23TypeMetadataheader {
 	/**
 	 * Optional nominal time interval between each measurement. Actual time interval may vary. Do
 	 * not report a delta_t_nom if the nominal time interval is not known ahead of time.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double delta_t_nom;

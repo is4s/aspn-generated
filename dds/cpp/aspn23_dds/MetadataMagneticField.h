@@ -243,26 +243,26 @@ public:
      * @param _k New value to be copied in member k
      */
     eProsima_user_DllExport void k(
-            const std::vector<double>& _k);
+            const eprosima::fastcdr::optional<std::vector<double>>& _k);
 
     /*!
      * @brief This function moves the value in member k
      * @param _k New value to be moved in member k
      */
     eProsima_user_DllExport void k(
-            std::vector<double>&& _k);
+            eprosima::fastcdr::optional<std::vector<double>>&& _k);
 
     /*!
      * @brief This function returns a constant reference to member k
      * @return Constant reference to member k
      */
-    eProsima_user_DllExport const std::vector<double>& k() const;
+    eProsima_user_DllExport const eprosima::fastcdr::optional<std::vector<double>>& k() const;
 
     /*!
      * @brief This function returns a reference to member k
      * @return Reference to member k
      */
-    eProsima_user_DllExport std::vector<double>& k();
+    eProsima_user_DllExport eprosima::fastcdr::optional<std::vector<double>>& k();
 
 
     /*!
@@ -297,7 +297,7 @@ private:
     aspn23_dds::TypeTimestamp m_time_of_validity;
     aspn23_dds::TypeMounting m_mounting;
     uint8_t m_num_meas{0};
-    std::vector<double> m_k;
+    eprosima::fastcdr::optional<std::vector<double>> m_k;
     eprosima::fastcdr::optional<std::vector<double>> m_b;
 
 };

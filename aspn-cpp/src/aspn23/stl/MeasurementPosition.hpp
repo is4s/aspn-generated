@@ -111,31 +111,43 @@ public:
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term1() const;
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term1(double);
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term2() const;
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term2(double);
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_term3() const;
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_term3(double);
 
