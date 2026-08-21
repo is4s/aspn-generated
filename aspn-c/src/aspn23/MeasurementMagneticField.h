@@ -53,18 +53,24 @@ typedef struct Aspn23MeasurementMagneticField {
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double x_field_strength;
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double y_field_strength;
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double z_field_strength;

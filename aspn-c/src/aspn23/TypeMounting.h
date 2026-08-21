@@ -41,6 +41,8 @@ typedef struct Aspn23TypeMounting {
 	 * vector. Orientation is optional in the sense that orientation shall be specified except in
 	 * the case that orientation is meaningless, for example, in the case of an RF antenna mounting.
 	 * See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 
 	double orientation_quaternion[4];
@@ -53,7 +55,7 @@ typedef struct Aspn23TypeMounting {
 	 * only because orientation itself is optional. Orientation error covariance shall be provided
 	 * if orientation is provided. See "conventions" documentation for more detailed information.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * A matrix of NaNs indicates this optional field is not provided.
 	 */
 
 	double orientation_tilt_error_covariance[3][3];

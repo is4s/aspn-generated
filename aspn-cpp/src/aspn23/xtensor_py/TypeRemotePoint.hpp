@@ -105,31 +105,43 @@ public:
 
 	/**
 	 * First position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_position1() const;
 
 	/**
 	 * First position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_position1(double);
 
 	/**
 	 * Second position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_position2() const;
 
 	/**
 	 * Second position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_position2(double);
 
 	/**
 	 * Third position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_position3() const;
 
 	/**
 	 * Third position term as defined in position_reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_position3(double);
 

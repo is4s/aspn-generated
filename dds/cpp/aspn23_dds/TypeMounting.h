@@ -220,33 +220,33 @@ public:
      * @param _orientation_tilt_error_covariance New value to be copied in member orientation_tilt_error_covariance
      */
     eProsima_user_DllExport void orientation_tilt_error_covariance(
-            const std::vector<double>& _orientation_tilt_error_covariance);
+            const eprosima::fastcdr::optional<std::vector<double>>& _orientation_tilt_error_covariance);
 
     /*!
      * @brief This function moves the value in member orientation_tilt_error_covariance
      * @param _orientation_tilt_error_covariance New value to be moved in member orientation_tilt_error_covariance
      */
     eProsima_user_DllExport void orientation_tilt_error_covariance(
-            std::vector<double>&& _orientation_tilt_error_covariance);
+            eprosima::fastcdr::optional<std::vector<double>>&& _orientation_tilt_error_covariance);
 
     /*!
      * @brief This function returns a constant reference to member orientation_tilt_error_covariance
      * @return Constant reference to member orientation_tilt_error_covariance
      */
-    eProsima_user_DllExport const std::vector<double>& orientation_tilt_error_covariance() const;
+    eProsima_user_DllExport const eprosima::fastcdr::optional<std::vector<double>>& orientation_tilt_error_covariance() const;
 
     /*!
      * @brief This function returns a reference to member orientation_tilt_error_covariance
      * @return Reference to member orientation_tilt_error_covariance
      */
-    eProsima_user_DllExport std::vector<double>& orientation_tilt_error_covariance();
+    eProsima_user_DllExport eprosima::fastcdr::optional<std::vector<double>>& orientation_tilt_error_covariance();
 
 private:
 
     std::array<double, 3> m_lever_arm{0.0};
     std::array<double, 3> m_lever_arm_sigma{0.0};
     eprosima::fastcdr::optional<std::array<double, 4>> m_orientation_quaternion;
-    std::vector<double> m_orientation_tilt_error_covariance;
+    eprosima::fastcdr::optional<std::vector<double>> m_orientation_tilt_error_covariance;
 
 };
 

@@ -81,12 +81,16 @@ public:
 	/**
 	 * Optional nominal time interval between each measurement. Actual time interval may vary. Do
 	 * not report a delta_t_nom if the nominal time interval is not known ahead of time.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_delta_t_nom() const;
 
 	/**
 	 * Optional nominal time interval between each measurement. Actual time interval may vary. Do
 	 * not report a delta_t_nom if the nominal time interval is not known ahead of time.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_delta_t_nom(double);
 

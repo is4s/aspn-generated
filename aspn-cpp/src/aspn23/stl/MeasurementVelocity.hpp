@@ -113,36 +113,48 @@ public:
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_x() const;
 
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_x(double);
 
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_y() const;
 
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_y(double);
 
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_z() const;
 
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_z(double);
 

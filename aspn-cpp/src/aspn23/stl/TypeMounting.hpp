@@ -87,6 +87,8 @@ public:
 	 * vector. Orientation is optional in the sense that orientation shall be specified except in
 	 * the case that orientation is meaningless, for example, in the case of an RF antenna mounting.
 	 * See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	std::vector<double> get_orientation_quaternion() const;
 
@@ -99,6 +101,8 @@ public:
 	 * vector. Orientation is optional in the sense that orientation shall be specified except in
 	 * the case that orientation is meaningless, for example, in the case of an RF antenna mounting.
 	 * See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	void set_orientation_quaternion(std::vector<double>);
 
@@ -110,7 +114,7 @@ public:
 	 * only because orientation itself is optional. Orientation error covariance shall be provided
 	 * if orientation is provided. See "conventions" documentation for more detailed information.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * A matrix of NaNs indicates this optional field is not provided.
 	 */
 	std::vector<double> get_orientation_tilt_error_covariance() const;
 
@@ -122,7 +126,7 @@ public:
 	 * only because orientation itself is optional. Orientation error covariance shall be provided
 	 * if orientation is provided. See "conventions" documentation for more detailed information.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * A matrix of NaNs indicates this optional field is not provided.
 	 */
 	void set_orientation_tilt_error_covariance(std::vector<double>);
 

@@ -102,18 +102,24 @@ typedef struct Aspn23MeasurementPositionVelocityAttitude {
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double p1;
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double p2;
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double p3;
@@ -121,6 +127,8 @@ typedef struct Aspn23MeasurementPositionVelocityAttitude {
 	/**
 	 * Velocity along the first axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double v1;
@@ -128,6 +136,8 @@ typedef struct Aspn23MeasurementPositionVelocityAttitude {
 	/**
 	 * Velocity along the second axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double v2;
@@ -135,6 +145,8 @@ typedef struct Aspn23MeasurementPositionVelocityAttitude {
 	/**
 	 * Velocity along the third axis of the measurement reference frame enumerated in
 	 * reference_frame.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double v3;
@@ -146,6 +158,8 @@ typedef struct Aspn23MeasurementPositionVelocityAttitude {
 	 * applied to the "reference" frame (ECI, ECEF, or NED) to rotate it into the axes that describe
 	 * the measured attitude, and the value phi is the magnitude of the [phi_x, phi_y, phi_z]
 	 * vector. See "conventions" documentation for more detailed information.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 
 	double quaternion[4];

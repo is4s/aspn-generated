@@ -12,7 +12,7 @@ module aspn23_dds {
         double lever_arm[3];
         double lever_arm_sigma[3];
         @optional double orientation_quaternion[4];
-        sequence<double> orientation_tilt_error_covariance;
+        @optional sequence<double> orientation_tilt_error_covariance;
     };
 };
 

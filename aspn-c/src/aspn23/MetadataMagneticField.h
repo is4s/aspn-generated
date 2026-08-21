@@ -63,7 +63,7 @@ typedef struct Aspn23MetadataMagneticField {
 	 * factor, and non-orthogonality as a unitless num_meas x num_meas matrix. Optional, but if
 	 * provided, b must also be provided.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * NULL indicates this optional field is not provided.
 	 */
 
 	double* ASPN_NULLABLE k;
@@ -72,6 +72,8 @@ typedef struct Aspn23MetadataMagneticField {
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
+	 *
+	 * NULL indicates this optional field is not provided.
 	 */
 
 	double* ASPN_NULLABLE b;

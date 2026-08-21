@@ -93,6 +93,8 @@ typedef struct Aspn23TypeSatnavObs {
 
 	/**
 	 * Pseudorange measurement
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double pseudorange;
@@ -101,6 +103,8 @@ typedef struct Aspn23TypeSatnavObs {
 	 * Variance of pseudorange measurement noise/multipath. This value must be provided if the
 	 * pseudorange measurement is provided. Note: This is not intended to represent clock,
 	 * atmospheric, or satellite position errors.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	float pseudorange_variance;
@@ -113,6 +117,8 @@ typedef struct Aspn23TypeSatnavObs {
 
 	/**
 	 * Measurement of the change in the pseudorange. See pseudorange_rate_type for details.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double pseudorange_rate;
@@ -120,6 +126,8 @@ typedef struct Aspn23TypeSatnavObs {
 	/**
 	 * Variance of pseudorange_rate noise. This value must be provided if the pseudorange_rate
 	 * measurement is provided.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	float pseudorange_rate_variance;
@@ -127,6 +135,8 @@ typedef struct Aspn23TypeSatnavObs {
 	/**
 	 * Carrier-phase (integrated Doppler) measurement. This measurement has an N cycle ambiguity
 	 * (where N is unknown and arbitrary integer).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double carrier_phase;
@@ -135,12 +145,15 @@ typedef struct Aspn23TypeSatnavObs {
 	 * Variance of carrier-phase noise/multipath. This value must be provided if the carrier-phase
 	 * measurement is provided. Note: This is not intended to represent clock, atmospheric, or
 	 * satellite position errors or the integer N ambiguity.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	float carrier_phase_variance;
 
 	/**
 	 * Carrier to noise density ratio. C/N0 = 10[log10(S/N0)]
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	float c_n0;

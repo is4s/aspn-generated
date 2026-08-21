@@ -82,18 +82,24 @@ typedef struct Aspn23MeasurementPosition {
 
 	/**
 	 * First position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term1;
 
 	/**
 	 * Second position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term2;
 
 	/**
 	 * Third position term as defined in enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term3;

@@ -228,7 +228,7 @@ eprosima::fastcdr::optional<std::array<double, 4>>& TypeMounting::orientation_qu
  * @param _orientation_tilt_error_covariance New value to be copied in member orientation_tilt_error_covariance
  */
 void TypeMounting::orientation_tilt_error_covariance(
-        const std::vector<double>& _orientation_tilt_error_covariance)
+        const eprosima::fastcdr::optional<std::vector<double>>& _orientation_tilt_error_covariance)
 {
     m_orientation_tilt_error_covariance = _orientation_tilt_error_covariance;
 }
@@ -238,7 +238,7 @@ void TypeMounting::orientation_tilt_error_covariance(
  * @param _orientation_tilt_error_covariance New value to be moved in member orientation_tilt_error_covariance
  */
 void TypeMounting::orientation_tilt_error_covariance(
-        std::vector<double>&& _orientation_tilt_error_covariance)
+        eprosima::fastcdr::optional<std::vector<double>>&& _orientation_tilt_error_covariance)
 {
     m_orientation_tilt_error_covariance = std::move(_orientation_tilt_error_covariance);
 }
@@ -247,7 +247,7 @@ void TypeMounting::orientation_tilt_error_covariance(
  * @brief This function returns a constant reference to member orientation_tilt_error_covariance
  * @return Constant reference to member orientation_tilt_error_covariance
  */
-const std::vector<double>& TypeMounting::orientation_tilt_error_covariance() const
+const eprosima::fastcdr::optional<std::vector<double>>& TypeMounting::orientation_tilt_error_covariance() const
 {
     return m_orientation_tilt_error_covariance;
 }
@@ -256,7 +256,7 @@ const std::vector<double>& TypeMounting::orientation_tilt_error_covariance() con
  * @brief This function returns a reference to member orientation_tilt_error_covariance
  * @return Reference to member orientation_tilt_error_covariance
  */
-std::vector<double>& TypeMounting::orientation_tilt_error_covariance()
+eprosima::fastcdr::optional<std::vector<double>>& TypeMounting::orientation_tilt_error_covariance()
 {
     return m_orientation_tilt_error_covariance;
 }
