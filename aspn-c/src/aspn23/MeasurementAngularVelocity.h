@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference.
@@ -188,7 +189,7 @@ aspn23_measurement_angular_velocity_copy(Aspn23MeasurementAngularVelocity*);
 
 void aspn23_measurement_angular_velocity_free(void* pointer);
 void aspn23_measurement_angular_velocity_free_members(Aspn23MeasurementAngularVelocity* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

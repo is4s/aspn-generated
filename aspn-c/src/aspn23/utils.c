@@ -583,7 +583,7 @@ void aspn23_set_time(AspnBase* base, Aspn23TypeTimestamp time) {
 	}
 }
 
-AspnBase* aspn23_copy_message(AspnBase* base) {
+AspnBase* ASPN_NULLABLE aspn23_copy_message(AspnBase* base) {
 	switch (base->message_type) {
 
 	case ASPN_METADATA_BEIDOU_EPHEMERIS: {

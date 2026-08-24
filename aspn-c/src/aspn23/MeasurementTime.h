@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).
@@ -202,7 +203,7 @@ Aspn23MeasurementTime* ASPN_NULLABLE aspn23_measurement_time_copy(Aspn23Measurem
 
 void aspn23_measurement_time_free(void* pointer);
 void aspn23_measurement_time_free_members(Aspn23MeasurementTime* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

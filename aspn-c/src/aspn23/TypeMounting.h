@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Describes the translational and angular offset between the sensor frame and the platform body
@@ -77,7 +78,7 @@ Aspn23TypeMounting* ASPN_NULLABLE aspn23_type_mounting_copy(Aspn23TypeMounting*)
 
 void aspn23_type_mounting_free(void* pointer);
 void aspn23_type_mounting_free_members(Aspn23TypeMounting* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Keplerian orbit parameters required to calculate satellite position
@@ -141,7 +142,7 @@ Aspn23TypeKeplerOrbit* ASPN_NULLABLE aspn23_type_kepler_orbit_copy(Aspn23TypeKep
 
 void aspn23_type_kepler_orbit_free(void* pointer);
 void aspn23_type_kepler_orbit_free_members(Aspn23TypeKeplerOrbit* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

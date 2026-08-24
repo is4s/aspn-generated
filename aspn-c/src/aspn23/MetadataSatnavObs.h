@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Metadata for satnav_obs
@@ -67,7 +68,7 @@ Aspn23MetadataSatnavObs* ASPN_NULLABLE aspn23_metadata_satnav_obs_copy(Aspn23Met
 
 void aspn23_metadata_satnav_obs_free(void* pointer);
 void aspn23_metadata_satnav_obs_free_members(Aspn23MetadataSatnavObs* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

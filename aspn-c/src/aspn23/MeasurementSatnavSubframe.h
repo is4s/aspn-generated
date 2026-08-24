@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * satnav navigation data bit subframe.
@@ -112,7 +113,7 @@ aspn23_measurement_satnav_subframe_copy(Aspn23MeasurementSatnavSubframe*);
 
 void aspn23_measurement_satnav_subframe_free(void* pointer);
 void aspn23_measurement_satnav_subframe_free_members(Aspn23MeasurementSatnavSubframe* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

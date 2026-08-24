@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).
@@ -117,7 +118,7 @@ aspn23_measurement_temperature_copy(Aspn23MeasurementTemperature*);
 
 void aspn23_measurement_temperature_free(void* pointer);
 void aspn23_measurement_temperature_free_members(Aspn23MeasurementTemperature* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

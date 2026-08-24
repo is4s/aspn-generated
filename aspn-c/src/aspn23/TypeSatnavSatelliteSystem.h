@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Enumerated field which describes the Satellite System.
@@ -87,7 +88,7 @@ aspn23_type_satnav_satellite_system_copy(Aspn23TypeSatnavSatelliteSystem*);
 
 void aspn23_type_satnav_satellite_system_free(void* pointer);
 void aspn23_type_satnav_satellite_system_free_members(Aspn23TypeSatnavSatelliteSystem* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

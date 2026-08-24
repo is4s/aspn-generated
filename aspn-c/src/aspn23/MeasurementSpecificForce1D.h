@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * sensor type
@@ -148,7 +149,7 @@ aspn23_measurement_specific_force_1d_copy(Aspn23MeasurementSpecificForce1D*);
 
 void aspn23_measurement_specific_force_1d_free(void* pointer);
 void aspn23_measurement_specific_force_1d_free_members(Aspn23MeasurementSpecificForce1D* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

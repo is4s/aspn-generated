@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Sensor metadata header.
@@ -93,7 +94,7 @@ Aspn23TypeMetadataheader* ASPN_NULLABLE aspn23_type_metadataheader_copy(Aspn23Ty
 
 void aspn23_type_metadataheader_free(void* pointer);
 void aspn23_type_metadataheader_free_members(Aspn23TypeMetadataheader* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

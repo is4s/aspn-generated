@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Broadcasted GPS navigation data for estimation of single frequency ionospheric correction and
@@ -160,7 +161,7 @@ aspn23_metadata_gps_iono_utc_parameters_copy(Aspn23MetadataGpsIonoUtcParameters*
 
 void aspn23_metadata_gps_iono_utc_parameters_free(void* pointer);
 void aspn23_metadata_gps_iono_utc_parameters_free_members(Aspn23MetadataGpsIonoUtcParameters* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

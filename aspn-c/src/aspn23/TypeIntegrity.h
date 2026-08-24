@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Enumerated field which describes the meaning of the integrity value. Integrity methods may use
@@ -73,7 +74,7 @@ Aspn23TypeIntegrity* ASPN_NULLABLE aspn23_type_integrity_copy(Aspn23TypeIntegrit
 
 void aspn23_type_integrity_free(void* pointer);
 void aspn23_type_integrity_free_members(Aspn23TypeIntegrity* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

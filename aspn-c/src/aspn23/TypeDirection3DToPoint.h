@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference frame.
@@ -175,7 +176,7 @@ aspn23_type_direction_3d_to_point_copy(Aspn23TypeDirection3DToPoint*);
 
 void aspn23_type_direction_3d_to_point_free(void* pointer);
 void aspn23_type_direction_3d_to_point_free_members(Aspn23TypeDirection3DToPoint* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

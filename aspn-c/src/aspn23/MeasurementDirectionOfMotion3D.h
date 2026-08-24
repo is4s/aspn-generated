@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference.
@@ -173,7 +174,7 @@ aspn23_measurement_direction_of_motion_3d_copy(Aspn23MeasurementDirectionOfMotio
 void aspn23_measurement_direction_of_motion_3d_free(void* pointer);
 void aspn23_measurement_direction_of_motion_3d_free_members(
     Aspn23MeasurementDirectionOfMotion3D* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

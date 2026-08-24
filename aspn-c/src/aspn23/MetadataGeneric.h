@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Metadata for a generic sensor.
@@ -53,7 +54,7 @@ Aspn23MetadataGeneric* ASPN_NULLABLE aspn23_metadata_generic_copy(Aspn23Metadata
 
 void aspn23_metadata_generic_free(void* pointer);
 void aspn23_metadata_generic_free_members(Aspn23MetadataGeneric* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

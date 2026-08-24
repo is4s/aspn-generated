@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference.
@@ -160,7 +161,7 @@ Aspn23MeasurementSpeed* ASPN_NULLABLE aspn23_measurement_speed_copy(Aspn23Measur
 
 void aspn23_measurement_speed_free(void* pointer);
 void aspn23_measurement_speed_free_members(Aspn23MeasurementSpeed* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

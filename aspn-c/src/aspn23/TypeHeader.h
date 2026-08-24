@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Header for each ASPN measurement
@@ -74,7 +75,7 @@ Aspn23TypeHeader* ASPN_NULLABLE aspn23_type_header_copy(Aspn23TypeHeader*);
 
 void aspn23_type_header_free(void* pointer);
 void aspn23_type_header_free_members(Aspn23TypeHeader* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * IMU type
@@ -114,7 +115,7 @@ Aspn23MeasurementImu* ASPN_NULLABLE aspn23_measurement_imu_copy(Aspn23Measuremen
 
 void aspn23_measurement_imu_free(void* pointer);
 void aspn23_measurement_imu_free_members(Aspn23MeasurementImu* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * GLONASS Ephemeris describing GLONASS satellite locations. Definitions and usage are covered in
@@ -159,7 +160,7 @@ aspn23_metadata_glonass_ephemeris_copy(Aspn23MetadataGlonassEphemeris*);
 
 void aspn23_metadata_glonass_ephemeris_free(void* pointer);
 void aspn23_metadata_glonass_ephemeris_free_members(Aspn23MetadataGlonassEphemeris* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

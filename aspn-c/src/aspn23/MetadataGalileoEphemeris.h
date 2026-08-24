@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Enumerated field which describes the GALILEO message type used to define clock correction
@@ -105,7 +106,7 @@ aspn23_metadata_galileo_ephemeris_copy(Aspn23MetadataGalileoEphemeris*);
 
 void aspn23_metadata_galileo_ephemeris_free(void* pointer);
 void aspn23_metadata_galileo_ephemeris_free_members(Aspn23MetadataGalileoEphemeris* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

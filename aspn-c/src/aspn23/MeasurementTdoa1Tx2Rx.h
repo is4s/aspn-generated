@@ -14,6 +14,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines an optional error model for other than zero-mean, additive, white Gaussian noise (AWGN).
@@ -137,7 +138,7 @@ aspn23_measurement_tdoa_1tx_2rx_copy(Aspn23MeasurementTdoa1Tx2Rx*);
 
 void aspn23_measurement_tdoa_1tx_2rx_free(void* pointer);
 void aspn23_measurement_tdoa_1tx_2rx_free_members(Aspn23MeasurementTdoa1Tx2Rx* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

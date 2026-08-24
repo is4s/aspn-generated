@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines position reference.
@@ -127,7 +128,7 @@ Aspn23TypeRemotePoint* ASPN_NULLABLE aspn23_type_remote_point_copy(Aspn23TypeRem
 
 void aspn23_type_remote_point_free(void* pointer);
 void aspn23_type_remote_point_free_members(Aspn23TypeRemotePoint* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

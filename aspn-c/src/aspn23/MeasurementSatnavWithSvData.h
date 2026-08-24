@@ -15,6 +15,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Raw measurements from a satnav receiver.
@@ -114,7 +115,7 @@ aspn23_measurement_satnav_with_sv_data_copy(Aspn23MeasurementSatnavWithSvData*);
 
 void aspn23_measurement_satnav_with_sv_data_free(void* pointer);
 void aspn23_measurement_satnav_with_sv_data_free_members(Aspn23MeasurementSatnavWithSvData* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

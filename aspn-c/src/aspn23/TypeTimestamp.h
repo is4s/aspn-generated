@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Whole number nanoseconds elapsed since timestamp's zero epoch. If negative, whole number
@@ -44,7 +45,7 @@ Aspn23TypeTimestamp* ASPN_NULLABLE aspn23_type_timestamp_copy(Aspn23TypeTimestam
 
 void aspn23_type_timestamp_free(void* pointer);
 void aspn23_type_timestamp_free_members(Aspn23TypeTimestamp* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

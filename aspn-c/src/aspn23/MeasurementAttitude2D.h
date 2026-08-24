@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference.
@@ -162,7 +163,7 @@ aspn23_measurement_attitude_2d_copy(Aspn23MeasurementAttitude2D*);
 
 void aspn23_measurement_attitude_2d_free(void* pointer);
 void aspn23_measurement_attitude_2d_free_members(Aspn23MeasurementAttitude2D* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

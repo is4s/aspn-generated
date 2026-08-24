@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Specifies altitude reference.
@@ -164,7 +165,7 @@ aspn23_measurement_altitude_copy(Aspn23MeasurementAltitude*);
 
 void aspn23_measurement_altitude_free(void* pointer);
 void aspn23_measurement_altitude_free_members(Aspn23MeasurementAltitude* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

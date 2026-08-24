@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Provides further clarification of which ephemeris was used to generate the satellite information
@@ -197,7 +198,7 @@ Aspn23TypeSatnavSvData* ASPN_NULLABLE aspn23_type_satnav_sv_data_copy(Aspn23Type
 
 void aspn23_type_satnav_sv_data_free(void* pointer);
 void aspn23_type_satnav_sv_data_free_members(Aspn23TypeSatnavSvData* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

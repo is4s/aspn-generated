@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines heading reference.
@@ -155,7 +156,7 @@ Aspn23MeasurementHeading* ASPN_NULLABLE aspn23_measurement_heading_copy(Aspn23Me
 
 void aspn23_measurement_heading_free(void* pointer);
 void aspn23_measurement_heading_free_members(Aspn23MeasurementHeading* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

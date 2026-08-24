@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Enumerated field which specifies the datatype of the pixels represented in this image.
@@ -255,7 +256,7 @@ Aspn23MeasurementImage* ASPN_NULLABLE aspn23_measurement_image_copy(Aspn23Measur
 
 void aspn23_measurement_image_free(void* pointer);
 void aspn23_measurement_image_free_members(Aspn23MeasurementImage* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

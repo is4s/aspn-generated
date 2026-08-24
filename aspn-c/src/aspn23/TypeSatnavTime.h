@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Reference time system used to express the data in this message. In a multi-GNSS receiver
@@ -92,7 +93,7 @@ Aspn23TypeSatnavTime* ASPN_NULLABLE aspn23_type_satnav_time_copy(Aspn23TypeSatna
 
 void aspn23_type_satnav_time_free(void* pointer);
 void aspn23_type_satnav_time_free_members(Aspn23TypeSatnavTime* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

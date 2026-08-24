@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Indicates the type of measurement contained in pseudorange_rate.
@@ -246,7 +247,7 @@ Aspn23TypeSatnavObs* ASPN_NULLABLE aspn23_type_satnav_obs_copy(Aspn23TypeSatnavO
 
 void aspn23_type_satnav_obs_free(void* pointer);
 void aspn23_type_satnav_obs_free_members(Aspn23TypeSatnavObs* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

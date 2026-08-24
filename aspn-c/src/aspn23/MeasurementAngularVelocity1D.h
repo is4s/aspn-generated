@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * sensor integration type
@@ -146,7 +147,7 @@ aspn23_measurement_angular_velocity_1d_copy(Aspn23MeasurementAngularVelocity1D*)
 
 void aspn23_measurement_angular_velocity_1d_free(void* pointer);
 void aspn23_measurement_angular_velocity_1d_free_members(Aspn23MeasurementAngularVelocity1D* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

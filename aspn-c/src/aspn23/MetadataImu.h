@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Allows the user to select an appropriate error model. Parameters are defined here. The number of
@@ -120,7 +121,7 @@ Aspn23MetadataImu* ASPN_NULLABLE aspn23_metadata_imu_copy(Aspn23MetadataImu*);
 
 void aspn23_metadata_imu_free(void* pointer);
 void aspn23_metadata_imu_free_members(Aspn23MetadataImu* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

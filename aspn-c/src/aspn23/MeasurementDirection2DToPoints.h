@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * 2D direction to points.
@@ -67,7 +68,7 @@ aspn23_measurement_direction_2d_to_points_copy(Aspn23MeasurementDirection2DToPoi
 void aspn23_measurement_direction_2d_to_points_free(void* pointer);
 void aspn23_measurement_direction_2d_to_points_free_members(
     Aspn23MeasurementDirection2DToPoints* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

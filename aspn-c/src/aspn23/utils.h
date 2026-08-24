@@ -19,12 +19,16 @@ extern "C" {
  */
 typedef Aspn23TypeHeader AspnBase;
 
+ASPN_ASSUME_NONNULL_BEGIN
+
 bool aspn23_is_core_message(AspnBase* base);
 
 Aspn23TypeTimestamp aspn23_get_time(const AspnBase* base);
 void aspn23_set_time(AspnBase* base, Aspn23TypeTimestamp time);
 
-AspnBase* aspn23_copy_message(AspnBase* base);
+AspnBase* ASPN_NULLABLE aspn23_copy_message(AspnBase* base);
+
+ASPN_ASSUME_NONNULL_END
 
 #ifdef __cplusplus
 }  // extern "C"

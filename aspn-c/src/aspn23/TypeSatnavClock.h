@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * satnav broadcast parameters required to calculate sv clock corrections
@@ -57,7 +58,7 @@ Aspn23TypeSatnavClock* ASPN_NULLABLE aspn23_type_satnav_clock_copy(Aspn23TypeSat
 
 void aspn23_type_satnav_clock_free(void* pointer);
 void aspn23_type_satnav_clock_free_members(Aspn23TypeSatnavClock* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

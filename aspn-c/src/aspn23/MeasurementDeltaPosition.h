@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Specifies measurement reference frame.
@@ -200,7 +201,7 @@ aspn23_measurement_delta_position_copy(Aspn23MeasurementDeltaPosition*);
 
 void aspn23_measurement_delta_position_free(void* pointer);
 void aspn23_measurement_delta_position_free_members(Aspn23MeasurementDeltaPosition* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

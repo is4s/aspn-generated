@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Metadata for a magnetic field measurement. In addition to generic metadata information,
@@ -103,7 +104,7 @@ aspn23_metadata_magnetic_field_copy(Aspn23MetadataMagneticField*);
 
 void aspn23_metadata_magnetic_field_free(void* pointer);
 void aspn23_metadata_magnetic_field_free_members(Aspn23MetadataMagneticField* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

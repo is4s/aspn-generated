@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Image feature characteristics
@@ -88,7 +89,7 @@ Aspn23TypeImageFeature* ASPN_NULLABLE aspn23_type_image_feature_copy(Aspn23TypeI
 
 void aspn23_type_image_feature_free(void* pointer);
 void aspn23_type_image_feature_free_members(Aspn23TypeImageFeature* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

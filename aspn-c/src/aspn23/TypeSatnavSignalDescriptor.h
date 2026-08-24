@@ -10,6 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Three letter RINEX Observation Code of signal as given in Table A23 of RINEX 3.05 specification
@@ -445,7 +446,7 @@ aspn23_type_satnav_signal_descriptor_copy(Aspn23TypeSatnavSignalDescriptor*);
 
 void aspn23_type_satnav_signal_descriptor_free(void* pointer);
 void aspn23_type_satnav_signal_descriptor_free_members(Aspn23TypeSatnavSignalDescriptor* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

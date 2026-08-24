@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Defines measurement reference.
@@ -252,7 +253,7 @@ aspn23_measurement_position_velocity_attitude_copy(Aspn23MeasurementPositionVelo
 void aspn23_measurement_position_velocity_attitude_free(void* pointer);
 void aspn23_measurement_position_velocity_attitude_free_members(
     Aspn23MeasurementPositionVelocityAttitude* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * 3D direction to points.
@@ -67,7 +68,7 @@ aspn23_measurement_direction_3d_to_points_copy(Aspn23MeasurementDirection3DToPoi
 void aspn23_measurement_direction_3d_to_points_free(void* pointer);
 void aspn23_measurement_direction_3d_to_points_free_members(
     Aspn23MeasurementDirection3DToPoints* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

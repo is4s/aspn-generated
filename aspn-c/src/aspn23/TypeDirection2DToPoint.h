@@ -12,6 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * Specifies measurement reference.
@@ -179,7 +180,7 @@ aspn23_type_direction_2d_to_point_copy(Aspn23TypeDirection2DToPoint*);
 
 void aspn23_type_direction_2d_to_point_free(void* pointer);
 void aspn23_type_direction_2d_to_point_free_members(Aspn23TypeDirection2DToPoint* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

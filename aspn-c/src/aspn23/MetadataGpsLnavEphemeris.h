@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * LNAV Ephemeris describing GPS satellite locations. Definitions and usage are covered in
@@ -100,7 +101,7 @@ aspn23_metadata_gps_lnav_ephemeris_copy(Aspn23MetadataGpsLnavEphemeris*);
 
 void aspn23_metadata_gps_lnav_ephemeris_free(void* pointer);
 void aspn23_metadata_gps_lnav_ephemeris_free_members(Aspn23MetadataGpsLnavEphemeris* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif

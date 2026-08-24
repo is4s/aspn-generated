@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+ASPN_ASSUME_NONNULL_BEGIN
 
 /**
  * BeiDou Ephemeris describing satellite locations. Definitions and usage are covered in
@@ -100,7 +101,7 @@ aspn23_metadata_beidou_ephemeris_copy(Aspn23MetadataBeidouEphemeris*);
 
 void aspn23_metadata_beidou_ephemeris_free(void* pointer);
 void aspn23_metadata_beidou_ephemeris_free_members(Aspn23MetadataBeidouEphemeris* self);
-
+ASPN_ASSUME_NONNULL_END
 #ifdef __cplusplus
 }  // extern "C"
 #endif
