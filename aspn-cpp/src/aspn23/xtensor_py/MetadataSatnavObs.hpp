@@ -96,12 +96,16 @@ public:
 	/**
 	 * Start time of the interval over which the deltarange is measured with respect to the
 	 * measurement time. This value must be provided if the deltarange measurement is provided.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_deltarange_interval_start() const;
 
 	/**
 	 * Start time of the interval over which the deltarange is measured with respect to the
 	 * measurement time. This value must be provided if the deltarange measurement is provided.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_deltarange_interval_start(float);
 
@@ -110,6 +114,8 @@ public:
 	 * measurement time. This value must be provided if the deltarange measurement is provided. If
 	 * the deltarange integration period is the same as the measurement time, this value should be
 	 * 0.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_deltarange_interval_stop() const;
 
@@ -118,6 +124,8 @@ public:
 	 * measurement time. This value must be provided if the deltarange measurement is provided. If
 	 * the deltarange integration period is the same as the measurement time, this value should be
 	 * 0.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_deltarange_interval_stop(float);
 

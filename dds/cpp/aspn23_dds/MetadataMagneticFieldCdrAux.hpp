@@ -24,7 +24,7 @@
 
 #include "MetadataMagneticField.h"
 
-constexpr uint32_t aspn23_dds_MetadataMagneticField_max_cdr_typesize {2864UL};
+constexpr uint32_t aspn23_dds_MetadataMagneticField_max_cdr_typesize {2888UL};
 constexpr uint32_t aspn23_dds_MetadataMagneticField_max_key_cdr_typesize {0UL};
 
 

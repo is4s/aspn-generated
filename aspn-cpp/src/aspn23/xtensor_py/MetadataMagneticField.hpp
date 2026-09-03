@@ -130,7 +130,7 @@ public:
 	 * factor, and non-orthogonality as a unitless num_meas x num_meas matrix. Optional, but if
 	 * provided, b must also be provided.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * A matrix of NaNs indicates this optional field is not provided.
 	 */
 	xt::pytensor<double, 2> get_k() const;
 
@@ -139,7 +139,7 @@ public:
 	 * factor, and non-orthogonality as a unitless num_meas x num_meas matrix. Optional, but if
 	 * provided, b must also be provided.
 	 *
-	 * This matrix must contain all real numbers or all NaNs.
+	 * A matrix of NaNs indicates this optional field is not provided.
 	 */
 	void set_k(xt::pytensor<double, 2>);
 
@@ -147,6 +147,8 @@ public:
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	xt::pytensor<double, 1> get_b() const;
 
@@ -154,6 +156,8 @@ public:
 	 * Optional calibration parameter to account for the combined effects of zero-bias and hard iron
 	 * as a num_meas x 1 vector in nanoTesla (nT). Optional, but if provided, K must also be
 	 * provided.
+	 *
+	 * An array of NaNs indicates this optional field is not provided.
 	 */
 	void set_b(xt::pytensor<double, 1>);
 

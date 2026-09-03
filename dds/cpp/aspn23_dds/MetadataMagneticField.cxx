@@ -267,7 +267,7 @@ uint8_t& MetadataMagneticField::num_meas()
  * @param _k New value to be copied in member k
  */
 void MetadataMagneticField::k(
-        const std::vector<double>& _k)
+        const eprosima::fastcdr::optional<std::vector<double>>& _k)
 {
     m_k = _k;
 }
@@ -277,7 +277,7 @@ void MetadataMagneticField::k(
  * @param _k New value to be moved in member k
  */
 void MetadataMagneticField::k(
-        std::vector<double>&& _k)
+        eprosima::fastcdr::optional<std::vector<double>>&& _k)
 {
     m_k = std::move(_k);
 }
@@ -286,7 +286,7 @@ void MetadataMagneticField::k(
  * @brief This function returns a constant reference to member k
  * @return Constant reference to member k
  */
-const std::vector<double>& MetadataMagneticField::k() const
+const eprosima::fastcdr::optional<std::vector<double>>& MetadataMagneticField::k() const
 {
     return m_k;
 }
@@ -295,7 +295,7 @@ const std::vector<double>& MetadataMagneticField::k() const
  * @brief This function returns a reference to member k
  * @return Reference to member k
  */
-std::vector<double>& MetadataMagneticField::k()
+eprosima::fastcdr::optional<std::vector<double>>& MetadataMagneticField::k()
 {
     return m_k;
 }

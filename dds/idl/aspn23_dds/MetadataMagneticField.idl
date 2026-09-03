@@ -17,7 +17,7 @@ module aspn23_dds {
         aspn23_dds::TypeTimestamp time_of_validity;
         aspn23_dds::TypeMounting mounting;
         uint8 num_meas;
-        sequence<double> k;
+        @optional sequence<double> k;
         @optional sequence<double> b;
     };
 };

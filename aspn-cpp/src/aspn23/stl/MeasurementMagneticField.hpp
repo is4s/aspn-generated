@@ -107,31 +107,43 @@ public:
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_x_field_strength() const;
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_x_field_strength(double);
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_y_field_strength() const;
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_y_field_strength(double);
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_z_field_strength() const;
 
 	/**
 	 * Field strength of magnetic field in nanoTesla (nT).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_z_field_strength(double);
 

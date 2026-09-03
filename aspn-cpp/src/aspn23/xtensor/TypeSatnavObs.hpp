@@ -120,11 +120,15 @@ public:
 
 	/**
 	 * Pseudorange measurement
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_pseudorange() const;
 
 	/**
 	 * Pseudorange measurement
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_pseudorange(double);
 
@@ -132,6 +136,8 @@ public:
 	 * Variance of pseudorange measurement noise/multipath. This value must be provided if the
 	 * pseudorange measurement is provided. Note: This is not intended to represent clock,
 	 * atmospheric, or satellite position errors.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_pseudorange_variance() const;
 
@@ -139,6 +145,8 @@ public:
 	 * Variance of pseudorange measurement noise/multipath. This value must be provided if the
 	 * pseudorange measurement is provided. Note: This is not intended to represent clock,
 	 * atmospheric, or satellite position errors.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_pseudorange_variance(float);
 
@@ -154,35 +162,47 @@ public:
 
 	/**
 	 * Measurement of the change in the pseudorange. See pseudorange_rate_type for details.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_pseudorange_rate() const;
 
 	/**
 	 * Measurement of the change in the pseudorange. See pseudorange_rate_type for details.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_pseudorange_rate(double);
 
 	/**
 	 * Variance of pseudorange_rate noise. This value must be provided if the pseudorange_rate
 	 * measurement is provided.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_pseudorange_rate_variance() const;
 
 	/**
 	 * Variance of pseudorange_rate noise. This value must be provided if the pseudorange_rate
 	 * measurement is provided.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_pseudorange_rate_variance(float);
 
 	/**
 	 * Carrier-phase (integrated Doppler) measurement. This measurement has an N cycle ambiguity
 	 * (where N is unknown and arbitrary integer).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	double get_carrier_phase() const;
 
 	/**
 	 * Carrier-phase (integrated Doppler) measurement. This measurement has an N cycle ambiguity
 	 * (where N is unknown and arbitrary integer).
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_carrier_phase(double);
 
@@ -190,6 +210,8 @@ public:
 	 * Variance of carrier-phase noise/multipath. This value must be provided if the carrier-phase
 	 * measurement is provided. Note: This is not intended to represent clock, atmospheric, or
 	 * satellite position errors or the integer N ambiguity.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_carrier_phase_variance() const;
 
@@ -197,16 +219,20 @@ public:
 	 * Variance of carrier-phase noise/multipath. This value must be provided if the carrier-phase
 	 * measurement is provided. Note: This is not intended to represent clock, atmospheric, or
 	 * satellite position errors or the integer N ambiguity.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_carrier_phase_variance(float);
 
 	/**
 	 * Carrier to noise density ratio. C/N0 = 10[log10(S/N0)]
+	 * NaN indicates this optional field is not provided.
 	 */
 	float get_c_n0() const;
 
 	/**
 	 * Carrier to noise density ratio. C/N0 = 10[log10(S/N0)]
+	 * NaN indicates this optional field is not provided.
 	 */
 	void set_c_n0(float);
 

@@ -53,6 +53,8 @@ typedef struct Aspn23TypeIntegrity {
 	/**
 	 * Measurement integrity value to be interpreted based on the definition in the integrity_type
 	 * enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double integrity_value;

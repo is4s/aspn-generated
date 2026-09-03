@@ -105,18 +105,24 @@ typedef struct Aspn23MeasurementDeltaPosition {
 
 	/**
 	 * Delta position over the first dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term1;
 
 	/**
 	 * Delta position over the second dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term2;
 
 	/**
 	 * Delta position over the third dimension specified by the enum.
+	 *
+	 * NaN indicates this optional field is not provided.
 	 */
 
 	double term3;

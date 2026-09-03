@@ -24,7 +24,7 @@
 
 #include "TypeMounting.h"
 
-constexpr uint32_t aspn23_dds_TypeMounting_max_cdr_typesize {912UL};
+constexpr uint32_t aspn23_dds_TypeMounting_max_cdr_typesize {920UL};
 constexpr uint32_t aspn23_dds_TypeMounting_max_key_cdr_typesize {0UL};
 
 
