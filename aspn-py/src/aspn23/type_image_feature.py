@@ -37,7 +37,7 @@ class TypeImageFeature:
     octave - int:
             Octave or pyramid layer from which the detected keypoint was extracted.
 
-    descriptor - NDArray[np.int64]:
+    descriptor - NDArray[np.uint8]:
             Feature descriptor.
     """
 
@@ -46,4 +46,4 @@ class TypeImageFeature:
     size: float
     class_id: int
     octave: int
-    descriptor: NDArray[np.int64]
+    descriptor: NDArray[np.uint8]

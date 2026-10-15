@@ -41,7 +41,7 @@ class MeasurementSatnavSubframe(AspnBase):
     freq_slot_id - int:
             Frequency slot +7 (range from 0-13). Only used for GLONASS.
 
-    data_vector - NDArray[np.int64]:
+    data_vector - NDArray[np.int8]:
             num_bytes sized array of raw subframe message collected by the sensor. The
             underlying type and shape of the data vector is given by satnav_msg_id.
 
@@ -58,5 +58,5 @@ class MeasurementSatnavSubframe(AspnBase):
     prn: int
     satellite_system: TypeSatnavSatelliteSystem
     freq_slot_id: int
-    data_vector: NDArray[np.int64]
+    data_vector: NDArray[np.int8]
     integrity: List[TypeIntegrity]

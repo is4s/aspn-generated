@@ -127,7 +127,7 @@ class TypeSatnavSvData:
             Describes how to interpret group delay terms, because they vary by ephemeris type.
             Descriptions assume zero-indexing.
 
-    group_delay_vector - NDArray[np.float64]:
+    group_delay_vector - NDArray[np.float32]:
             Group delay terms, with interpretation provided by group_delay_enum. (Need to verify
             that four is sufficient for all ephemeris.)
     """
@@ -142,4 +142,4 @@ class TypeSatnavSvData:
     sv_clock_bias: float
     sv_clock_drift: float
     group_delay_enum: TypeSatnavSvDataGroupDelayEnum
-    group_delay_vector: NDArray[np.float64]
+    group_delay_vector: NDArray[np.float32]
