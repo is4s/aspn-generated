@@ -151,7 +151,7 @@ class MeasurementImage(AspnBase):
             byte1 image_data[3] row1 col2 byte2 image_data[4] row2 col1 byte1 image_data[5] row2
             col1 byte2 image_data[6] row2 col2 byte1 image_data[7] row2 col2 byte2
 
-    image_data - NDArray[np.int64]:
+    image_data - NDArray[np.uint8]:
             Stores the encoded image. Interpretation varies based on the image_type.
 
     camera_model - MeasurementImageCameraModel:
@@ -173,7 +173,7 @@ class MeasurementImage(AspnBase):
     width: int
     is_bigendian: bool
     image_type: MeasurementImageImageType
-    image_data: NDArray[np.int64]
+    image_data: NDArray[np.uint8]
     camera_model: MeasurementImageCameraModel
     model_coefficients: NDArray[np.float64]
     integrity: List[TypeIntegrity]

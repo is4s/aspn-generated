@@ -468,7 +468,7 @@ def type_image_feature_to_lcm(old: TypeImageFeature) -> LcmTypeImageFeature:
     msg.class_id = old.class_id
     msg.octave = old.octave
     msg.descriptor_size = len(old.descriptor)
-    msg.descriptor = old.descriptor.tolist()
+    msg.descriptor = old.descriptor.tobytes()
 
     return msg
 
@@ -480,7 +480,7 @@ def lcm_to_type_image_feature(old: LcmTypeImageFeature) -> TypeImageFeature:
         size=old.size,
         class_id=old.class_id,
         octave=old.octave,
-        descriptor=np.array(old.descriptor),
+        descriptor=np.frombuffer(old.descriptor, dtype=np.uint8),
     )
 
 
@@ -1863,7 +1863,7 @@ def measurement_image_to_lcm(old: MeasurementImage) -> LcmMeasurementImage:
     msg.is_bigendian = old.is_bigendian
     msg.image_type = old.image_type.value
     msg.image_data_length = len(old.image_data)
-    msg.image_data = old.image_data.tolist()
+    msg.image_data = old.image_data.tobytes()
     msg.camera_model = old.camera_model.value
     msg.num_model_coefficients = len(old.model_coefficients)
     msg.model_coefficients = old.model_coefficients.tolist()
@@ -1881,7 +1881,7 @@ def lcm_to_measurement_image(old: LcmMeasurementImage) -> MeasurementImage:
         width=old.width,
         is_bigendian=old.is_bigendian,
         image_type=MeasurementImageImageType(old.image_type),
-        image_data=np.array(old.image_data),
+        image_data=np.frombuffer(old.image_data, dtype=np.uint8),
         camera_model=MeasurementImageCameraModel(old.camera_model),
         model_coefficients=np.array(old.model_coefficients),
         integrity=[lcm_to_type_integrity(x) for x in old.integrity],
@@ -2188,7 +2188,7 @@ def measurement_satnav_subframe_to_lcm(
     msg.satellite_system = type_satnav_satellite_system_to_lcm(old.satellite_system)
     msg.freq_slot_id = old.freq_slot_id
     msg.num_bytes = len(old.data_vector)
-    msg.data_vector = old.data_vector.tolist()
+    msg.data_vector = old.data_vector.tobytes()
     msg.num_integrity = len(old.integrity)
     msg.integrity = [type_integrity_to_lcm(x) for x in old.integrity]
 
@@ -2205,7 +2205,7 @@ def lcm_to_measurement_satnav_subframe(
         prn=old.prn,
         satellite_system=lcm_to_type_satnav_satellite_system(old.satellite_system),
         freq_slot_id=old.freq_slot_id,
-        data_vector=np.array(old.data_vector),
+        data_vector=np.frombuffer(old.data_vector, dtype=np.uint8),
         integrity=[lcm_to_type_integrity(x) for x in old.integrity],
     )
 

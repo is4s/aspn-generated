@@ -54,7 +54,7 @@ class MeasurementTime(AspnBase):
             time_of_validity_attosec the same sign. Care should be taken when constructing the
             timestamp components to be sure the summation produces the desired result.
 
-    clock_id - NDArray[np.int64]:
+    clock_id - NDArray[np.uint8]:
             Identifier for clock/timing source for each measurement. See clock_identifiers.md
             for a full description, but the summary is as follows: 0 = ASPN System Time 1 =
             International Atomic Time (TAI) 2 = Universal Coordinated Time (UTC) 3 = GPS System Time
@@ -66,7 +66,7 @@ class MeasurementTime(AspnBase):
             number nanoseconds until each clock's zero epoch. Additionally, the timestamp's digits
             of precision are included as `digits_of_precision`.
 
-    elapsed_attosec - NDArray[np.int64]:
+    elapsed_attosec - NDArray[np.int32]:
             Whole number of attoseconds used to provide additional observation fidelity. This is
             only needed if the observation is known to more precision than 1ns; otherwise, set
             time_of_validity_attosec = 0. Be sure to report the timestamp's digits of precision. The
@@ -109,9 +109,9 @@ class MeasurementTime(AspnBase):
     header: TypeHeader
     time_of_validity: TypeTimestamp
     time_of_validity_attosec: int
-    clock_id: NDArray[np.int64]
+    clock_id: NDArray[np.uint8]
     elapsed_nsec: NDArray[np.int64]
-    elapsed_attosec: NDArray[np.int64]
+    elapsed_attosec: NDArray[np.int32]
     digits_of_precision: int
     covariance: NDArray[np.float64]
     error_model: MeasurementTimeErrorModel
