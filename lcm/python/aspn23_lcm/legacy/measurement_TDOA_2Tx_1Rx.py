@@ -11,7 +11,7 @@ DO NOT hand edit code.  Make any changes required using the firehose repo instea
 from io import BytesIO
 import struct
 
-import aspn23_lcm
+import aspn23_lcm.legacy as aspn23_lcm
 
 class measurement_TDOA_2Tx_1Rx(object):
     """ Time difference of arrival of two signals (Tx) to a sensor (Rx). """

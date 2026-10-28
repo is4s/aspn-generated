@@ -28,6 +28,11 @@ can know which messages' compatibility changed.
 
 # Release Notes
 
+## 2.0.1
+
+Fixed a bug in the legacy submodule where it would import from the top-level module rather than the
+submodule.
+
 ## 2.0.0
 
 This version includes breaking changes to the following ASPN messages, meaning that they have new
