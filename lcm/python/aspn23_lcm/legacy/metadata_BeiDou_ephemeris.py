@@ -11,7 +11,7 @@ DO NOT hand edit code.  Make any changes required using the firehose repo instea
 from io import BytesIO
 import struct
 
-import aspn23_lcm
+import aspn23_lcm.legacy as aspn23_lcm
 
 class metadata_BeiDou_ephemeris(object):
     """

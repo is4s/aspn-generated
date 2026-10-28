@@ -11,7 +11,7 @@ DO NOT hand edit code.  Make any changes required using the firehose repo instea
 from io import BytesIO
 import struct
 
-import aspn23_lcm
+import aspn23_lcm.legacy as aspn23_lcm
 
 class measurement_speed(object):
     """ Speed is the magnitude of the velocity vector with respect to the user-specified reference frame. """

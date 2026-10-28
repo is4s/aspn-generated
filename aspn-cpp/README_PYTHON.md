@@ -17,3 +17,13 @@ However, we make no concrete promises about whether or not a given release will 
 your project downstream. You may experience breaking changes on minor or patch releases. If this is
 an issue for your project, we recommend you pin to a specific version of this project rather than a
 range.
+
+# Release Notes
+
+## 1.0.1
+
+Added experimental Windows support.
+
+## 1.0.0
+
+Initial release.
