@@ -26,9 +26,7 @@ incompatibility with previous versions of this project. In this case, we will in
 version if any fingerprint changes. Additionally, we maintain a table of fingerprint changes so you
 can know which messages' compatibility changed.
 
-# Breaking Changes
-
-Below is a history of breaking changes between the listed version and the previous version.
+# Release Notes
 
 ## 2.0.0
 
@@ -44,6 +42,10 @@ This occurred because certain fields were changed from `int16_t` to `byte` in or
 represent ASPN in LCM. Specifically, this change was made to fields which represented opaque data
 streams (e.g. image data). This change has the benefit of reducing the size of these fields by half,
 which is important since some of these messages can be very large (e.g. images).
+
+## 1.0.0
+
+Initial release.
 
 # Legacy Submodule
 
